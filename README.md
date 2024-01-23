@@ -5,9 +5,9 @@
 
 Wydział Informatyki i Telekomunikacji **Politechnika Wrocławska**
 
-**Temat pracy:** Metody multilateracji w rozproszonej sieci sensorów audio
+**Temat pracy:** Mechanizm multilateracji w rozproszonej sieci sensorów audio
 
-**Thesis topic:** Multilateration methods in wireless audio sensor networks
+**Thesis topic:** Multilateration mechanism in distributed net of audio sensors
 
 ## Zawartość repozytorium
 
