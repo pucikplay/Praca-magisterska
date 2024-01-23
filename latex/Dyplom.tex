@@ -74,7 +74,7 @@
 %%  dla dokumentów klasy memoir 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\headsep}{10pt} 
-\setlength{\headheight}{13.6pt} % wartość baselineskip dla czcionki 11pt tj. \small wynosi 13.6pt
+\setlength{\headheight}{15pt} % wartość baselineskip dla czcionki 11pt tj. \small wynosi 13.6pt
 \setlength{\footskip}{\headsep+\headheight}
 \setlength{\uppermargin}{\headheight+\headsep+1cm}
 \setlength{\textheight}{\paperheight-\uppermargin-\footskip-1.5cm}
@@ -240,7 +240,7 @@ captionpos=t
 \newcommand\JSONnumbervaluestyle{\color{blue}}
 \newcommand\JSONstringvaluestyle{\color{red}}
 
-\newif\ifcolonfoundonthisline
+\newif\ifcolonfoundonthisline{}
 
 \makeatletter
 
@@ -249,7 +249,7 @@ captionpos=t
 	showstringspaces    = false,
 	keywords            = {false,true},
 	alsoletter          = 0123456789.,
-	morestring          = [s]{"}{"},
+	morestring          = [s]{''}{''},
 	stringstyle         = \ifcolonfoundonthisline\JSONstringvaluestyle\fi,
 	MoreSelectCharTable =%
 	\lst@DefSaveDef{`:}\colon@json{\processColon@json},
@@ -356,13 +356,13 @@ captionpos=t
 %%  Pakiety i komendy zastosowane tylko do zamieszczenia informacji o użytych komendach i fontach w tym szablonie.
 %%  Normalnie nie są one potrzebne. Proszę poniższe deklaracje zamarkować podczas redakcji pracy !!!!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{memlays}     % extra layout diagrams, zastosowane w szblonie do 'debuggowania', używa pakietu layouts
+% \usepackage{memlays}     % extra layout diagrams, zastosowane w szblonie do 'debuggowania', używa pakietu layouts
 %\usepackage{layouts}
 \usepackage{printlen} % pakiet do wyświetlania wartości zdefiniowanych długości, stosowany do 'debuggowania'
 \usepackage{enumitem} % pakiet do numerowania 1.1 1.2 w sekcji enumrate
 \uselengthunit{pt}
 \makeatletter
-\newcommand{\showFontSize}{\f@size pt} % makro wypisujące wielkość bieżącej czcionki
+\newcommand{\showFontSize}{\f@size{} pt} % makro wypisujące wielkość bieżącej czcionki
 \makeatother
 % do pokazania ramek można byłoby użyć:
 %\usepackage{showframe} 
@@ -464,16 +464,16 @@ captionpos=t
 % Jeśli metadane zawierają przecinki lub średniki, domyślnie metadane te otaczane są apostrofami.
 % Piszą o tym na stronie: https://tex.stackexchange.com/questions/3708/hyperref-enquotes-metadata
 % Aby pozbyć się tych apostrofów użyto pakietu hyperxmp (ładującego kilka innych pakietów)
-\usepackage{hyperxmp}
 \usepackage{ifpdf}
 %\newif\ifpdf \ifx\pdfoutput\undefined
 %\pdffalse % we are not running PDFLaTeX
 %\else
 %\pdfoutput=1 % we are running PDFLaTeX
 %\pdftrue \fi
-\ifpdf
+\ifpdf{}
  \usepackage{datetime2} % INFO: pakiet potrzeby do uzyskania i sformatowania daty 
  \usepackage[pdftex,bookmarks,breaklinks,unicode]{hyperref}
+ \usepackage{hyperxmp}
  \usepackage[pdftex]{graphicx}
  \DeclareGraphicsExtensions{.pdf,.jpg,.mps,.png} % po zadeklarowaniu rozszerzeń można będzie wstawiać pliki z grafiką bez konieczności podawania tych rozszerzeń w ich nazwach
 \pdfcompresslevel=9
@@ -488,7 +488,7 @@ captionpos=t
 	pdfinfo={
     Title = {\@title},
     Author = {\@author},
-    Subject={Praca dyplomowa \ifMaster magisterska\else inżynierska\fi},  
+    Subject={Praca dyplomowa \ifMaster{} magisterska\else inżynierska\fi},  
     Keywords={\@kvpl}, 
 		Producer={}, 
 	  CreationDate= {}, % należy wstawiać zgodnie ze składnią: {D:yyyymmddhhmmss}, np. D:20210208175600
@@ -506,9 +506,7 @@ captionpos=t
 \sloppy
 
 % INFO: dodane by lepiej łamać urle 
-\def\UrlBreaks{\do\/\do-\do_} 
-% INFO: choć można zadeklarować foldery, w jakich pojawiać się mają pliki z grafiką, zaleca się jednak, by tego nie robić
-%\graphicspath{{rys01/}{rys02/}}  
+\def\UrlBreaks{\do\/\do-\do_}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -666,17 +664,17 @@ Listing \thelstlisting: #1\hfill%\hfill%
 %% Definicje stopek i nagłówków
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \addtopsmarks{headings}{%
-\nouppercaseheads % added at the beginning
+\nouppercaseheads{} % added at the beginning
 }{%
-\createmark{chapter}{both}{shownumber}{}{. \space}
-%\createmark{chapter}{left}{shownumber}{}{. \space}
-\createmark{section}{right}{shownumber}{}{. \space}
+\createmark{chapter}{both}{shownumber}{}{.\ \space}
+%\createmark{chapter}{left}{shownumber}{}{.\ \space}
+\createmark{section}{right}{shownumber}{}{.\ \space}
 }%use the new settings
 
 \makeatletter
 \copypagestyle{outer}{headings}
-\makeoddhead{outer}{}{}{\small\itshape\rightmark}
-\makeevenhead{outer}{\small\itshape\leftmark}{}{}
+\makeoddhead{outer}{}{}{\small\itshape\rightmark\/}
+\makeevenhead{outer}{\small\itshape\leftmark\/}{}{}
 \makeoddfoot{outer}{\small\@author:~\@titleShort}{}{\small\thepage}
 \makeevenfoot{outer}{\small\thepage}{}{\small\@author:~\@title}
 \makeheadrule{outer}{\linewidth}{\normalrulethickness}
@@ -697,8 +695,8 @@ Listing \thelstlisting: #1\hfill%\hfill%
 \makeoddfoot{empty}{}{}{}
 
 % INFO: deklaracja zmiennej logicznej wykorzystywanej do rozróżnienia pracy inżynierskiej i magisterskiej
-\newif\ifMaster
-\Mastertrue
+\newif\ifMaster{}
+\Mastertrue{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Definicja strony tytułowej 
@@ -790,7 +788,7 @@ Kierunek: & {\bfseries \@kierunek}\\
 }
 {\vskip 29pt\centering{\fontsize{24pt}{26pt}\selectfont%
 {\fontsize{26pt}{28pt}\selectfont P}RACA {\fontsize{26pt}{24pt}\selectfont D}YPLOMOWA\\[7pt]
-\ifMaster \selectfont{\fontsize{26pt}{28pt}\selectfont M}AGISTERSKA\\[2.5cm]%
+\ifMaster\selectfont{\fontsize{26pt}{28pt}\selectfont M}AGISTERSKA\\[2.5cm]%
 \else \selectfont{\fontsize{26pt}{28pt}\selectfont I}NŻYNIERSKA\\[2.5cm]\fi
 }}
 	\vfill
@@ -808,8 +806,8 @@ Kierunek: & {\bfseries \@kierunek}\\
 {\fontsize{14pt}{16pt}\selectfont \@date}\\[0cm]
 }
 %\ungaramond
-\normalfont
- \cleardoublepage
+\normalfont{}
+ \cleardoublepage{}
 }
 \makeatother
 
@@ -831,7 +829,7 @@ Kierunek: & {\bfseries \@kierunek}\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\Mastertrue % INFO: odkomentuj, jeśli to praca magisterska
 \title{Mechanizm multilateracji w rozproszonej sieci sensorów audio} % INFO: tytuł pracy w języku polskim 
-\titleShort{Metody multilateracji ...}  % INFO: krótki tytuł pracy (do zamieszczenia w stopce, sklejony z imieniem i nazwiskiem autora nie powinien zająć więcej niż jedną linijkę)
+\titleShort{Metody multilateracji $\ldots$}  % INFO: krótki tytuł pracy (do zamieszczenia w stopce, sklejony z imieniem i nazwiskiem autora nie powinien zająć więcej niż jedną linijkę)
 \titleEN{Multilateration mechanism in distributed net of audio sensors} % INFO: tytuł pracy w języku angielskim
 \author{Gabriel Budziński}  % INFO: imię i nazwisko autora
 \uczelnia{Politechnika Wrocławska} % INFO: nazwa uczelni
@@ -908,11 +906,7 @@ Kierunek: & {\bfseries \@kierunek}\\
 % ROZDZIAŁY (kolejne rozdziały dołączane są z kolejnych plików)
 \chapterstyle{default}
 \input{rozdzial01}
-\input{rozdzial02}
-\input{rozdzial03}
-\input{rozdzial04}
-\input{rozdzial05}
-\input{rozdzial06}
+\input{podsumowanie}
 % LITERATURA (zostanie wygenerowana automatycznie)
 %UWAGA: bibliotekę referencji należy przygotować samemu. Dobrym do tego narzędziem jest JabRef.
 %       JabRef oferuje jednak większą liczbę typów rekordów niż obsługuje BibTeX.
@@ -920,7 +914,7 @@ Kierunek: & {\bfseries \@kierunek}\\
 %       Formatowania wykazu literatury i cytowań odbywać się ma zgodnie z zadeklarowanym stylem.
 %       Zalecane są style produkujące numeryczne cytowania (w postaci [1], [2,3]).
 %       Takim stylem jest np. plabbrv
-\bibliographystyle{plain}
+\bibliographystyle{ieeetr}
 %       Aby zapanować nad odstępami w wykazie literatury można posłużyć się poniższą komendą
 \setlength{\bibitemsep}{2pt} % - zacieśnia wykaz
 %       Pozycja Literatura pojawia się w spisie treści nieco inaczej niż spisy rysunków, tabel itp.
