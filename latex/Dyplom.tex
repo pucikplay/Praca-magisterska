@@ -1,11 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  Zawartość: Główny plik szablonu pracy dyplomowej (magisterskiej/inżynierskiej). 
-%  Opracował: Tomasz Kubik <tomasz.kubik@pwr.edu.pl>
-%  Data: styczeń 2023
-%  Wersja: 0.9
-%  Wymagania: kompilator pdflatex
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \documentclass[a4paper,onecolumn,oneside,12pt,extrafontsizes]{memoir}
 %  W celu przygotowania wydruku do archiwum można:
 %  a) przygotować pdf, w którym dwie strony zostaną wstawione na jedną fizyczną stronę i taki dokument wydrukować dwustronnie (podejście zalecane)
@@ -204,7 +196,7 @@
 	commentstyle=\color{purple}\ttfamily,
 	stringstyle=\color{red}\ttfamily,
 	morestring=[b]',
-	morestring=[b]"
+	morestring=[b]''
 }
 \lstdefinestyle{JavaScriptStyle}{
 	language=JavaScript,
@@ -884,7 +876,7 @@ Kierunek: & {\bfseries \@kierunek}\\
 % Kolejne części dokumentu: streszczenie, spisy, skróty, rozdziały, dodatki
 %\chapterstyle{noNumbered}
 % STRESZCZENIE (proszę zajrzeć do środka na zakomentowane komendy)
-\include{streszczenie}
+\input{streszczenie}
 \pagestyle{outer}
 \clearpage
 % SPIS TREŚCI (zostanie wygenerowany automatycznie)
@@ -912,15 +904,15 @@ Kierunek: & {\bfseries \@kierunek}\\
 \lstlistoflistings*
 \clearpage
 % SKRÓTY (to opcjonalna część pracy)
-\include{skroty} 
+\input{skroty} 
 % ROZDZIAŁY (kolejne rozdziały dołączane są z kolejnych plików)
 \chapterstyle{default}
-\include{rozdzial01}
-\include{rozdzial02}
-\include{rozdzial03}
-\include{rozdzial04}
-\include{rozdzial05}
-\include{rozdzial06}
+\input{rozdzial01}
+\input{rozdzial02}
+\input{rozdzial03}
+\input{rozdzial04}
+\input{rozdzial05}
+\input{rozdzial06}
 % LITERATURA (zostanie wygenerowana automatycznie)
 %UWAGA: bibliotekę referencji należy przygotować samemu. Dobrym do tego narzędziem jest JabRef.
 %       JabRef oferuje jednak większą liczbę typów rekordów niż obsługuje BibTeX.
@@ -928,18 +920,18 @@ Kierunek: & {\bfseries \@kierunek}\\
 %       Formatowania wykazu literatury i cytowań odbywać się ma zgodnie z zadeklarowanym stylem.
 %       Zalecane są style produkujące numeryczne cytowania (w postaci [1], [2,3]).
 %       Takim stylem jest np. plabbrv
-\bibliographystyle{plabbrv}
+\bibliographystyle{plain}
 %       Aby zapanować nad odstępami w wykazie literatury można posłużyć się poniższą komendą
 \setlength{\bibitemsep}{2pt} % - zacieśnia wykaz
 %       Pozycja Literatura pojawia się w spisie treści nieco inaczej niż spisy rysunków, tabel itp.
 %       Aby zachować właściwe odstępy należy użyć poniższej komendy
 \addtocontents{toc}{\addvspace{2pt}} % ustawiamy odstęp w spisie treści przed pozycją Literatura 
 %       Nazwę pliku przygotowanej biblioteki wpisuje się bez rozszerzenia .bib
-%       (linia poniżej załaduje rekordy z pliku "dokumentacja.bib")
-\bibliography{dokumentacja}
+%       (linia poniżej załaduje rekordy z pliku "bibliografia.bib")
+\bibliography{bibliografia}
 \appendix
-\include{dodatekA}
-\include{dodatekB}
+\input{dodatekA}
+\input{dodatekB}
 
 % Jeśli w pracy pojawiać się ma indeks, należy odkomentować poniższe linie
 %%\chapterstyle{noNumbered}
