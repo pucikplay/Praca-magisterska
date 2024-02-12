@@ -47,16 +47,6 @@ def on_message(client, userdata, message):
     else:
         node_times[int(message.topic)] = int(message.payload)
 
-def publish_time(client):
-    topic = 'chronos'
-    msg = f'sync_msg'
-    result = client.publish(topic, msg)
-    status = result[0]
-    if status == 0:
-        print(f"Send {msg} to topic {topic}")
-    else:
-        print(f"Failed to send message to topic {topic}")
-
 def run():
     client = mqtt.Client()             
     client.on_connect = on_connect
