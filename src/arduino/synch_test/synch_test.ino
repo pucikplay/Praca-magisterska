@@ -4,7 +4,9 @@
 #include <stdlib.h>
 
 #define BOARD_ID "3"
-#define TIME_TOPIC "offset"
+#define TOPIC "synch"
+#define NO_MESSAGES 100
+#define PAUSE 50000
 
 const char* ssid = "DECO_E4";
 const char* password = "ADFE9625C9C271143ECEA74A53";
@@ -13,6 +15,7 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 
 unsigned long messageTime = 0;
+unsigned long iter = 0;
 
 void setupWifi() {
   WiFi.mode(WIFI_STA);
@@ -32,25 +35,19 @@ void setupWifi() {
 }
 
 void callback(String topic, byte* message, unsigned int length) {
-//  Serial.print("Message arrived on topic: ");
-//  Serial.print(topic);
-//  Serial.print(". Message: ");
-//  String messageTemp;
-  
-//  for (int i = 0; i < length; i++) {
-//    Serial.print((char)message[i]);
-//    messageTemp += (char)message[i];
-//  }
-//  Serial.println();
-  if (topic == TIME_TOPIC) { messageTime = micros(); }
+  if (topic == TOPIC) {
+    messageTime = micros();
+    Serial.printf("messageTime: %ld", messageTime);
+  }
 }
 
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     if (client.connect(BOARD_ID)) {
-      Serial.println("connected");  
-      client.subscribe(TIME_TOPIC);
+      Serial.println("connected");
+      Serial.printf("BOARD_ID: %s\n", BOARD_ID);
+      client.subscribe(TOPIC);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -70,21 +67,25 @@ void setup(void) {
 
 void loop() {
   if (!client.connected()) { reconnect(); }
-  if (!client.loop()) { client.connect(TIME_TOPIC); }
+  if (!client.loop()) { client.connect(TOPIC); }
   
-  if (messageTime != 0) {
-    if (micros() - messageTime > 100000) {
+  if (messageTime != 0 && iter < NO_MESSAGES) {
+    if (micros() - messageTime > PAUSE * (iter+1)) {
       char T1[sizeof(unsigned long) * 8 + 1];
-      ltoa(messageTime, T1, 10);
+      ltoa(iter, T1, 10);
       char T2[sizeof(unsigned long) * 8 + 1];
-      ltoa(micros(), T2, 10);
+      ltoa((micros() - messageTime), T2, 10);
       char mssg[strlen(T1) + strlen(T2) + 2];
       strcpy(mssg, T1);
       strcat(mssg, " ");
       strcat(mssg, T2);
       client.publish(BOARD_ID, mssg);
       Serial.println(mssg);
-      messageTime = 0;
+      iter++;
     }
+  }
+  else {
+    messageTime = 0;
+    iter = 0;
   }
 }
