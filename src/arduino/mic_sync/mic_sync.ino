@@ -3,9 +3,9 @@
 #include <PubSubClient.h>
 #include <stdlib.h>
 
-#define BUZZ_PIN 0
-#define BOARD_ID "source"
-#define TOPIC "src"
+#define MIC_PIN 0
+#define BOARD_ID "3"
+#define TOPIC "sync"
 
 const char* ssid = "DECO_E4";
 const char* password = "ADFE9625C9C271143ECEA74A53";
@@ -13,9 +13,10 @@ const char* password = "ADFE9625C9C271143ECEA74A53";
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-volatile bool beep = false;
-unsigned long buzzTime = 0;
-unsigned long lastBuzzTime = 0;
+volatile bool sync = false;
+volatile bool micInput = false;
+unsigned long micTime = 0;
+unsigned long lastMicTime = 0;
 
 void setupWifi() {
   WiFi.mode(WIFI_STA);
@@ -45,12 +46,9 @@ void callback(String topic, byte* message, unsigned int length) {
     messageTemp += (char)message[i];
   }
   Serial.println();
-  if (topic == TOPIC) {
-    if ((char)message[0] == '1') {
-      beep = true;
-    } else if ((char)message[0] == '0') {
-      beep = false;
-    }
+  if (topic == TOPIC && (char)message[0] == BOARD_ID[0]) {
+    sync = !sync;
+    Serial.printf("Sync is %d\n", sync);
   }
 }
 
@@ -58,7 +56,8 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     if (client.connect(BOARD_ID)) {
-      Serial.println("connected");  
+      Serial.println("connected");
+      Serial.printf("BOARD_ID: %s\n", BOARD_ID);
       client.subscribe(TOPIC);
     } else {
       Serial.print("failed, rc=");
@@ -69,9 +68,16 @@ void reconnect() {
   }
 }
 
+void ICACHE_RAM_ATTR mic_rising() {
+  if (micros() - lastMicTime > 100000) {
+    lastMicTime = micros();
+    micInput = true;
+  }
+}
+
 void setup(void) {
-  pinMode(BUZZ_PIN, OUTPUT);
-  digitalWrite(BUZZ_PIN, HIGH);
+  pinMode(MIC_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(MIC_PIN), mic_rising, RISING);
   Serial.begin(115200);
   setupWifi();
   IPAddress mqtt_server(192,168,1,48);
@@ -79,23 +85,15 @@ void setup(void) {
   client.setCallback(callback);
 }
 
-void buzz() {
-    digitalWrite(BUZZ_PIN, LOW);
-    delay(10);
-    digitalWrite(BUZZ_PIN, HIGH);
-}
-
 void loop() {
   if (!client.connected()) { reconnect(); }
   if (!client.loop()) { client.connect(TOPIC); }
   
-  if (beep && micros() - lastBuzzTime > 500000) {
-    buzzTime = micros();
-    char buff[sizeof(unsigned long) * 8 + 1];
-    ltoa(buzzTime, buff, 10);
-    client.publish(BOARD_ID, buff);
-    Serial.println(buff);
-    lastBuzzTime = buzzTime;
-    buzz();
+  if (sync && micInput == true) {
+    char mssg[sizeof(unsigned long) * 8 + 1];
+    ltoa(lastMicTime, mssg, 10);
+    client.publish(BOARD_ID, mssg);
+    Serial.println(mssg);
+    micInput = false;
   }
 }
