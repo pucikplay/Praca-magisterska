@@ -1,6 +1,110 @@
 \chapter{Przedstawienie problemu}
 
-\section{Opis problemu}
+Multilateracja jest techniką lokalizacji pozwalającą obliczyć nieznane koordynaty punktu na podstawie odległości od innych, znanych punktów. Weźmy dwuwymiarowy egzemplarz naszego problemu (Rys.~\ref{fig:example}), gdzie $N$ - nadajnik, $O_i$ - odbiorniki, $d_i$ - odległości
+
+\begin{figure}[!h]
+    \centering
+    \begin{tikzpicture}
+        \coordinate (O1) at (0,0);
+        \coordinate (O2) at (3,5);
+        \coordinate (O3) at (8,1);
+        \coordinate (N) at (4,3);
+        \filldraw[black] (O1) circle (2pt) node[left]{$O_1$};
+        \filldraw[black] (O2) circle (2pt) node[right]{$O_2$};
+        \filldraw[black] (O3) circle (2pt) node[right]{$O_3$};
+        \filldraw[black] (N) circle (2pt) node[above right]{$N$};
+        \draw[black, thin] (O1) -- node[above left]{$d_1$} (N);
+        \draw[black, thin] (O2) -- node[left]{$d_2$} (N);
+        \draw[black, thin] (O3) -- node[above]{$d_3$} (N);
+    \end{tikzpicture}
+    \caption[short]{Egzemplarz problemu multilateracji}
+\label{fig:example}
+\end{figure}
+
+Znalezienie koordynatów $(x,y)$ punktu N jest równoważne z rowiązaniem układu równań,
+
+\begin{equation}
+    \begin{dcases}
+        {(x - x_1)}^2 + {(y - y_1)}^2 = {d_1}^2\\
+        {(x - x_2)}^2 + {(y - y_2)}^2 = {d_2}^2\\
+        {(x - x_3)}^2 + {(y - y_3)}^2 = {d_3}^2\\
+    \end{dcases}
+\end{equation}
+
+który może zostać przekształcony do postaci
+
+\begin{equation}
+    \begin{dcases}
+        (x^2 + y^2) - 2x_1x - 2y_1y = d_1^2 - x_1^2 - y_1^2\\
+        (x^2 + y^2) - 2x_2x - 2y_2y = d_2^2 - x_2^2 - y_2^2\\
+        (x^2 + y^2) - 2x_3x - 2y_3y = d_3^2 - x_3^2 - y_3^2\\
+    \end{dcases}
+\end{equation}
+
+lub w reprezenacji macierzowej,
+
+\begin{equation}
+    \left[
+        \begin{matrix}
+            1 & -2x_1 & -2y_1\\
+            1 & -2x_2 & -2y_2\\
+            1 & -2x_3 & -2y_3\\
+        \end{matrix}
+    \right]
+    \left[
+        \begin{matrix}
+            x^2 + y^2\\
+            x\\
+            y\\
+        \end{matrix}
+    \right]
+    =
+    \left[
+        \begin{matrix}
+            d_1^2 - x_1^2 - y_1^2\\
+            d_2^2 - x_2^2 - y_2^2\\
+            d_3^2 - x_3^2 - y_3^2\\
+        \end{matrix}
+    \right]
+\end{equation}
+
+którą można przedstawić jako
+
+\begin{equation}
+    \boldsymbol{A} \cdot \boldsymbol{x} = \boldsymbol{b}
+\end{equation}
+
+Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni $n$-wymiarowej i $m$ odbiorników:
+
+\begin{equation}
+    \left[
+        \begin{matrix}
+            1 & -2\boldsymbol{x^{(1)}}\\
+            1 & -2\boldsymbol{x^{(2)}}\\
+            \vdots & \vdots\\
+            1 & -2\boldsymbol{x^{(m)}}\\
+        \end{matrix}
+    \right]
+    \left[
+        \begin{matrix}
+            \sum_{i=1}^{n}{x_i}^2\\
+            x_1\\
+            \vdots\\
+            x_n
+        \end{matrix}
+    \right]
+    =
+    \left[
+        \begin{matrix}
+            d_1^2 - \sum_{i=1}^{n}{x_i^{(1)}}^2\\
+            d_2^2 - \sum_{i=1}^{n}{x_i^{(2)}}^2\\
+            \vdots\\
+            d_m^2 - \sum_{i=1}^{n}{x_i^{(m)}}^2\\
+        \end{matrix}
+    \right]
+\end{equation}
+
 
 \section{State of the art}
-Przykładowe cytowanie z bibliografii~\cite{norrdine2012algebraic}
+
+Napisać coś o~\cite{murphy1995determination},\cite{norrdine2012algebraic}

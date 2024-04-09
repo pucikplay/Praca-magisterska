@@ -1,4 +1,4 @@
-\documentclass[a4paper,onecolumn,oneside,12pt,extrafontsizes]{memoir}
+\documentclass[a4paper,onecolumn,oneside,11pt,extrafontsizes]{memoir}
 %  W celu przygotowania wydruku do archiwum można:
 %  a) przygotować pdf, w którym dwie strony zostaną wstawione na jedną fizyczną stronę i taki dokument wydrukować dwustronnie (podejście zalecane)
 %
@@ -360,6 +360,7 @@ captionpos=t
 %\usepackage{layouts}
 \usepackage{printlen} % pakiet do wyświetlania wartości zdefiniowanych długości, stosowany do 'debuggowania'
 \usepackage{enumitem} % pakiet do numerowania 1.1 1.2 w sekcji enumrate
+\usepackage{mathtools}
 \uselengthunit{pt}
 \makeatletter
 \newcommand{\showFontSize}{\f@size{} pt} % makro wypisujące wielkość bieżącej czcionki
@@ -475,6 +476,7 @@ captionpos=t
  \usepackage[pdftex,bookmarks,breaklinks,unicode]{hyperref}
  \usepackage{hyperxmp}
  \usepackage[pdftex]{graphicx}
+ \usepackage{tikz}
  \DeclareGraphicsExtensions{.pdf,.jpg,.mps,.png} % po zadeklarowaniu rozszerzeń można będzie wstawiać pliki z grafiką bez konieczności podawania tych rozszerzeń w ich nazwach
 \pdfcompresslevel=9
 \pdfoutput=1
@@ -501,6 +503,7 @@ captionpos=t
 \makeatother
 \else             % jeśli kompilacja jest inna niż pdflatex
 \usepackage{graphicx}
+\usepackage{tikz}
 \DeclareGraphicsExtensions{.eps,.ps,.jpg,.mps,.png}
 \fi
 \sloppy
