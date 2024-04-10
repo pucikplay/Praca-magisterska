@@ -17,12 +17,11 @@ Multilateracja jest techniką lokalizacji pozwalającą obliczyć nieznane koord
         \draw[black, thin] (O2) -- node[left]{$d_2$} (N);
         \draw[black, thin] (O3) -- node[above]{$d_3$} (N);
     \end{tikzpicture}
-    \caption[short]{Egzemplarz problemu multilateracji}
+    \caption{Egzemplarz problemu multilateracji}
 \label{fig:example}
 \end{figure}
 
 Znalezienie koordynatów $(x,y)$ punktu N jest równoważne z rowiązaniem układu równań,
-
 \begin{equation}
     \begin{dcases}
         {(x - x_1)}^2 + {(y - y_1)}^2 = {d_1}^2\\
@@ -30,9 +29,7 @@ Znalezienie koordynatów $(x,y)$ punktu N jest równoważne z rowiązaniem ukła
         {(x - x_3)}^2 + {(y - y_3)}^2 = {d_3}^2\\
     \end{dcases}
 \end{equation}
-
 który może zostać przekształcony do postaci
-
 \begin{equation}
     \begin{dcases}
         (x^2 + y^2) - 2x_1x - 2y_1y = d_1^2 - x_1^2 - y_1^2\\
@@ -40,9 +37,7 @@ który może zostać przekształcony do postaci
         (x^2 + y^2) - 2x_3x - 2y_3y = d_3^2 - x_3^2 - y_3^2\\
     \end{dcases}
 \end{equation}
-
 lub w reprezenacji macierzowej,
-
 \begin{equation}
     \left[
         \begin{matrix}
@@ -67,15 +62,14 @@ lub w reprezenacji macierzowej,
         \end{matrix}
     \right]
 \end{equation}
-
 którą można przedstawić jako
 
 \begin{equation}
     \boldsymbol{A} \cdot \boldsymbol{x} = \boldsymbol{b}
+\label{eq:matrix}
 \end{equation}
 
 Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni $n$-wymiarowej i $m$ odbiorników:
-
 \begin{equation}
     \left[
         \begin{matrix}

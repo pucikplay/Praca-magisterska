@@ -387,6 +387,8 @@ captionpos=t
 \setlist[itemize,3]{label=$\ast$}
 \setlist[itemize,4]{label=$\cdot$}
 \renewlist{itemize}{itemize}{4}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 %%%http://tex.stackexchange.com/questions/29322/how-to-make-enumerate-items-align-at-left-margin
 %\renewenvironment{enumerate}
@@ -477,6 +479,7 @@ captionpos=t
  \usepackage{hyperxmp}
  \usepackage[pdftex]{graphicx}
  \usepackage{tikz}
+ \usetikzlibrary{positioning}
  \DeclareGraphicsExtensions{.pdf,.jpg,.mps,.png} % po zadeklarowaniu rozszerzeń można będzie wstawiać pliki z grafiką bez konieczności podawania tych rozszerzeń w ich nazwach
 \pdfcompresslevel=9
 \pdfoutput=1
@@ -504,6 +507,7 @@ captionpos=t
 \else             % jeśli kompilacja jest inna niż pdflatex
 \usepackage{graphicx}
 \usepackage{tikz}
+\usetikzlibrary{positioning}
 \DeclareGraphicsExtensions{.eps,.ps,.jpg,.mps,.png}
 \fi
 \sloppy

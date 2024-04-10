@@ -1,8 +1,33 @@
 \chapter{Eksperyment zerowy}
 
+Po przygotowaniu komponentów systemu wstępnie zaimplementowano program rozwiązujący problem multilateracji, aby zbadać, czy problem nie jest zbyt trywialny, aby opisać go w pracy, lub przeciwnym razie, na podstawie wyników eksperymentu zastanowić się jakie przeszkody stoją na drodze do rozwiązania o zadowalającej precyzji.
+
 \section{Opis działania}
 
+Program zaimplementowano na podstawie rozwiązania aproksymacyjnego równania \ref{eq:matrix} postaci
+
+\begin{equation}
+    \hat{\boldsymbol{x}} = {\left(A^T A\right)}^{-1} A^T \boldsymbol{b}
+\end{equation}
+zaczerpniętego z artykułu~\cite{norrdine2012algebraic}.
+
 \subsection{Program węzła}
+
+\begin{algorithm}
+\caption{Program nadajnika}\label{alg:source}
+\begin{algorithmic}[1]
+    \State\ $buzz \gets False$
+    \State\ $buzzTime \gets 0$
+    \State\ $lastBuzzTime \gets 0$
+
+    \If{$beep\ \&\&\ micros() - lastBuzzTime > 500000$}
+        \State\ $buzzTime \gets micros()$
+        \State\ $publish(buzzTime)$
+        \State\ $lastBuzzTime \gets buzzTime$
+        \State\ $buzzer()$
+    \EndIf
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{Program serwera}
 

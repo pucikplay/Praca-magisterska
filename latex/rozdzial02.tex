@@ -2,8 +2,46 @@
 
 Znaczna większość prac adresujacych temat multilateracji opiera się na systemach urządzeń działających w zakresie fal elektromagnetycznych (\cite{murphy1995determination},\cite{norrdine2012algebraic},\cite{9254075}). W tej pracy poświęcimy uwagę systemowi działającemu w domenie dźwięku, jak ten aspekt wpływa na skuteczność i dokładność rozwiązania problemu multilateracji.
 
-\section{Węzeł}
+\begin{figure}[!h]
+    \centering
+    \begin{tikzpicture}[circlenode/.style={circle, draw=black}, node distance=3cm, thick]
+        \node[circlenode] (S) {
+            \begin{tikzpicture}[circlenode/.style={circle, draw=black}, node distance=5mm, thick]
+                \node[circlenode] (B) {Broker};
+                \node[circlenode] (P) [left=of B] {Serwer obliczeniowy};
+                \node (T) [above=of P] {\textbf{Host}};
+                \draw[<->,thick] (B) to (P);
+            \end{tikzpicture}
+        };
+        \node[circlenode] (N) [right=of S] {Nadajnik};
+        \node[circlenode] (O1) [above=of N] {Odbiornik 1.};
+        \node[circlenode] (O2) [below=of N] {Odbiornik 2.};
+
+        \draw[<->,thick] (N) to (S);
+        \draw[<->,thick] (O1) to (S);
+        \draw[<->,thick] (O2) to (S);
+    \end{tikzpicture}
+    \caption{Topologia systemu}
+\label{fig:topology}
+\end{figure}
 
 \section{Serwer MQTT}
 
-\section{Serwer obliczniowy}
+Urządzenia systemowe porozumiewają się przy uzyciu protokołu MQTT, każdy z węzłów oraz serwer łączą się z centralnym brokerem (?), który przekierowuje wiadomości do klientów, które zasubskrybowały dany temat.
+
+\section{Węzeł}
+
+Każdy z węzłów oparty jest o mikrokontroler ESP8266 zaprogramowany przy użyciu Arduino IDE. W systemie występują dwa rodzaje węzłów:
+
+\begin{itemize}
+    \item nadajnik,
+    \item odbiornik.
+\end{itemize}
+
+Nadajnik jest wyposażony jest w przełącznik cewkowy sterowany przez mikrokontroler, który służy do kontrolowania brzęczyka zasilanego napięciem $12V$. Wybrano brzęczyk o głośności $90dB$ w celu zmaksymalizowania zasięgu działania systemu.
+
+Odbiornik natomiast wyposażony jest w mikrofon elektretowy dającego binarny sygnał wyjściowy. Czułość mikrofonu dostrajana jest ręcznie poprzez potencjometr.
+
+\section{Serwer obliczeniowy}
+
+Centralnym urządzeniem systemu jest serwer obliczeniowy kumulujący dane otrzymane z sensorów do rozwiązania problemu multilateracji. Serwer hostowany jest na tej samej maszynie co broker MQTT.

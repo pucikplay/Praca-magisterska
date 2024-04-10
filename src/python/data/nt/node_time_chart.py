@@ -28,6 +28,9 @@ def plot_means(data):
     fig, axs = plt.subplots(2,2)
     fig.tight_layout(pad=3)
 
+    for df in data:    
+        df_mean = df.mean()
+        
     fig.suptitle("Node offset means")
     fig.supxlabel("Test no.")
     fig.supylabel("Time [us]")
