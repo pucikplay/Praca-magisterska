@@ -7,9 +7,11 @@ Po przygotowaniu komponentów systemu wstępnie zaimplementowano program rozwią
 Program zaimplementowano na podstawie rozwiązania aproksymacyjnego równania \ref{eq:matrix} postaci
 
 \begin{equation}
+    \label{eq:lls}
     \hat{\boldsymbol{x}} = {\left(A^T A\right)}^{-1} A^T \boldsymbol{b}
 \end{equation}
-zaczerpniętego z artykułu~\cite{norrdine2012algebraic}.
+
+za pomocą metody najmniejszych kwadratów zaczerpniętej z artykułu~\cite{norrdine2012algebraic}.
 
 \subsection{Program węzła}
 
@@ -19,19 +21,93 @@ zaczerpniętego z artykułu~\cite{norrdine2012algebraic}.
     \State\ $buzz \gets False$
     \State\ $buzzTime \gets 0$
     \State\ $lastBuzzTime \gets 0$
+    \State\ $syncTime \gets 0$
 
-    \If{$beep\ \&\&\ micros() - lastBuzzTime > 500000$}
-        \State\ $buzzTime \gets micros()$
-        \State\ $publish(buzzTime)$
-        \State\ $lastBuzzTime \gets buzzTime$
-        \State\ $buzzer()$
-    \EndIf
+    \Function{onMessage}{$message, topic$}
+        \If{$topic$ is $TOPIC$}
+            \State\ $buzz \gets message$
+        \EndIf
+        \If{$topic$ is $TIME\_TOPIC$}
+            \State\ $syncTime \gets micros()$
+        \EndIf
+    \EndFunction
+
+    \Loop
+        \If{$buzz$ and $micros() - lastBuzzTime > BUZZ\_INTERVAL$}
+            \State\ $buzzTime \gets micros() - syncTime$
+            \State\ $publish(buzzTime)$
+            \State\ $lastBuzzTime \gets buzzTime$
+            \State\ $buzzer()$
+        \EndIf
+    \EndLoop
 \end{algorithmic}
 \end{algorithm}
 
+\begin{algorithm}
+\caption{Program odbiornika}\label{alg:sink}
+\begin{algorithmic}[1]
+    \State\ $micState \gets LOW$
+    \State\ $micTime \gets False$
+    \State\ $lastMicTime \gets 0$
+    \State\ $syncTime \gets 0$
+
+    \Function{onMessage}{$topic$}
+        \If{$topic$ is $TIME\_TOPIC$}
+            \State\ $syncTime \gets micros()$
+        \EndIf
+    \EndFunction
+
+    \Function{micInterrupt}{}
+        \State\ $micState \gets HIGH$
+    \EndFunction
+
+    \Loop
+        \If{$micState$ is $HIGH$ and $micros() - lastMicTime > MIC\_INTERVAL$}
+            \State\ $micTime \gets micros() - syncTime$
+            \State\ $publish(micTime)$
+            \State\ $lastMicTime \gets micTime$
+            \State\ $micState \gets LOW$
+        \EndIf
+    \EndLoop
+\end{algorithmic}
+\end{algorithm}
+
+\begin{itemize}
+    \item $micros()$ {-} funkcja zwracająca liczbę mikrosekund od uruchomienia urządzenia,
+    \item $TOPIC$ {-} nazwa kanału MQTT korespondującego do danego węzła,
+    \item $TIME\_TOPIC$ {-} nazwa kanału MQTT służącego do przesyłania wiadomości o synchronizacji czasu.
+\end{itemize}
+
 \subsection{Program serwera}
 
+\begin{algorithm}
+\caption{Program serwera}\label{alg:server}
+\begin{algorithmic}[1]
+    \State\ $M \gets {\left(A^T A\right)}^{-1} A^T$
+    \Function{$calc\_position$}{}
+        \For{$node$ in $NODES$}
+            \State\ $d \gets (SS / 10^{6}) \cdot time(node) - time(source)$
+            \State\ $b_{node} \gets d - \sum{coords(node)^2}$
+        \EndFor
+        \State\ return $M \cdot b$
+    \EndFunction
+    \Loop
+        \State\ $sleep(t)$
+        \State\ $calc\_position()$
+    \EndLoop
+\end{algorithmic}
+\end{algorithm}
+
+\begin{itemize}
+    \item $SS$ {-} prędkość dźwięku $\left[\frac{m}{s}\right]$,
+    \item $time()$ {-} czas dostarczony w ostatniej wiadomości od węzła,
+    \item $coords()$ {-} współrzędne węzła.
+    \item $t$ {-} czas pomiędzy obliczeniami pozycji
+\end{itemize}
+
 \subsection{Opis algorytmu}
+
+W programie serwera zaimplementowano funkcję rozwiązującą równość~\ref{eq:lls} przy pomocy funkcji bibliotecznych dostępnych w pakiecie \texttt{numpy}. Jak łatwo zauważyć pierwsza część lewej strony równości zależy jedynie od macierzy $A$, która nie zawiera zmiennych związanych z węzłem źródłowym, co pozwala na wcześniejsze i jednorazowe przeprowadzenie kosztownych przekształceń tej macierzy. W tej sytuacji jednorazowe wywołanie funkcji wymaga jedynie obliczenia wektora $b$ oraz iloczynu skalarnego. Wywołania następują co interwał $t$.
 
 \section{Ewaluacja działania systemu}
 
