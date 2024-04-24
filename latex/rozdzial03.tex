@@ -91,18 +91,24 @@ za pomocą metody najmniejszych kwadratów zaczerpniętej z artykułu~\cite{norr
         \EndFor
         \State\ return $M \cdot b$
     \EndFunction
-    \Loop
-        \State\ $sleep(t)$
+    \Loop{ $main$}
+        \State\ $sleep(t_1)$
         \State\ $calc\_position()$
+    \EndLoop
+    \Loop{ $sync\_clock$}{}
+        \State\ $publish(TIME\_TOPIC)$
+        \State\ $sleep(t_2)$
     \EndLoop
 \end{algorithmic}
 \end{algorithm}
 
 \begin{itemize}
+    \item $A$ - macierz zawierająca współrzędne obiorników z równania \ref{eq:matrix}
     \item $SS$ {-} prędkość dźwięku $\left[\frac{m}{s}\right]$,
     \item $time()$ {-} czas dostarczony w ostatniej wiadomości od węzła,
-    \item $coords()$ {-} współrzędne węzła.
-    \item $t$ {-} czas pomiędzy obliczeniami pozycji
+    \item $coords()$ {-} współrzędne węzła,
+    \item $t_1$ {-} czas pomiędzy obliczeniami pozycji,
+    \item $t_2$ {-} czas pomiędzy wiadomościami synchronizującymi zegary.
 \end{itemize}
 
 \subsection{Opis algorytmu}
@@ -110,5 +116,21 @@ za pomocą metody najmniejszych kwadratów zaczerpniętej z artykułu~\cite{norr
 W programie serwera zaimplementowano funkcję rozwiązującą równość~\ref{eq:lls} przy pomocy funkcji bibliotecznych dostępnych w pakiecie \texttt{numpy}. Jak łatwo zauważyć pierwsza część lewej strony równości zależy jedynie od macierzy $A$, która nie zawiera zmiennych związanych z węzłem źródłowym, co pozwala na wcześniejsze i jednorazowe przeprowadzenie kosztownych przekształceń tej macierzy. W tej sytuacji jednorazowe wywołanie funkcji wymaga jedynie obliczenia wektora $b$ oraz iloczynu skalarnego. Wywołania następują co interwał $t$.
 
 \section{Ewaluacja działania systemu}
+
+\subsection{Struktura systemu testowego}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[circlenode/.style={circle, draw=black}, node distance=3cm, thick]
+        \node[circlenode] (N) {Nadajnik};
+        \node[circlenode] (O1) [left=of N] {Odbiornik 1.};
+        \node[circlenode] (O2) [right=of N] {Odbiornik 2.};
+        \draw[-, thin, dotted] (O1) to (O2);
+    \end{tikzpicture}
+    \caption{Układ systemu testowego}
+\label{fig:test_setup}
+\end{figure}
+
+Pierwsze testy przeprowadzone zostały na systemie operującym w jednym wymiarze (to jest wszystkie węzły są współliniowe) w celu jak największego uproszczenia, pozwalającego na szybsze wykrywanie i rektyfikację błędów.
 
 \section{Interpretacja wyników i wnioski}

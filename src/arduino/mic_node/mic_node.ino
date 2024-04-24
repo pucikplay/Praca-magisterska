@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 #define MIC_PIN 0
-#define BOARD_ID "3"
+#define BOARD_ID "1"
 #define TIME_SYNC_TOPIC "chronos"
 
 const char* ssid = "DECO_E4";
@@ -98,7 +98,7 @@ void loop() {
   if (!client.connected()) { reconnect(); }
   if (!client.loop()) { client.connect(TIME_SYNC_TOPIC); }
   
-  if (mic_state == HIGH) {
+  if (mic_state == HIGH && micros() - lastMicTime > 500000) {
     micTime = micros() - syncTime;
     char buff[sizeof(unsigned long) * 8 + 1];
     ltoa(micTime, buff, 10);
