@@ -5,7 +5,7 @@
 
 #define MIC_PIN 0
 #define BOARD_ID "3"
-#define TOPIC "sync"
+#define TOPIC "active"
 
 const char* ssid = "DECO_E4";
 const char* password = "ADFE9625C9C271143ECEA74A53";
@@ -13,10 +13,11 @@ const char* password = "ADFE9625C9C271143ECEA74A53";
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-volatile bool sync = false;
+volatile bool active = false;
 volatile bool micInput = false;
 unsigned long micTime = 0;
 unsigned long lastMicTime = 0;
+unsigned long currTime = 0;
 
 void setupWifi() {
   WiFi.mode(WIFI_STA);
@@ -47,8 +48,8 @@ void callback(String topic, byte* message, unsigned int length) {
   }
   Serial.println();
   if (topic == TOPIC && (char)message[0] == BOARD_ID[0]) {
-    sync = !sync;
-    Serial.printf("Sync is %d\n", sync);
+    active = !active;
+    Serial.printf("Active is %d\n", active);
   }
 }
 
@@ -69,8 +70,9 @@ void reconnect() {
 }
 
 void ICACHE_RAM_ATTR mic_rising() {
-  if (micros() - lastMicTime > 100000) {
-    lastMicTime = micros();
+  currTime = micros();
+  if (currTime - lastMicTime > 200000) {
+    lastMicTime = currTime;
     micInput = true;
   }
 }
@@ -89,7 +91,7 @@ void loop() {
   if (!client.connected()) { reconnect(); }
   if (!client.loop()) { client.connect(TOPIC); }
   
-  if (sync && micInput == true) {
+  if (active && micInput == true) {
     char mssg[sizeof(unsigned long) * 8 + 1];
     ltoa(lastMicTime, mssg, 10);
     client.publish(BOARD_ID, mssg);

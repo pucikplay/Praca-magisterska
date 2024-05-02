@@ -49,6 +49,7 @@ if __name__ == "__main__":
         df_std = df.std()
         # df_mean = df.mean()
         threshold_z = 2
+        print(df)
         print(df.mean())
         for node in range(NODES_NO):
             z = np.abs(stats.zscore(df[str(node)]))
