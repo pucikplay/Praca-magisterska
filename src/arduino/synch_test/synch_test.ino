@@ -5,7 +5,7 @@
 
 #define BOARD_ID "3"
 #define TOPIC "synch"
-#define NO_MESSAGES 100
+#define NO_MESSAGES 200
 #define PAUSE 50000
 
 const char* ssid = "DECO_E4";

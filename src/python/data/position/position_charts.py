@@ -26,7 +26,7 @@ def plot_charts(n):
         plt.title(f'Test {i}, pozycja odbiornika')
         fig.set_size_inches(8,6)
         fig.set_dpi(600)
-        fig.savefig(f'position_{i}.png')
+        fig.savefig(f'../../charts/position/position_{i}.png')
 
 if __name__ == '__main__':
     plot_charts(5)

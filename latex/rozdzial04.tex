@@ -20,7 +20,7 @@ Dodatkowym wnioskiem przedstawionym w powyższej pracy jest własność prawdziw
 
 Jak łatwo zauważyć im krótszy jest czas propagacji tym lepsze przybliżenie dostajemy.
 
-\begin{figure}
+\begin{figure}[h]
     \includegraphics[width=\textwidth]{pics/ntp.png}
 \caption{Pomiar opóźnienia transmisji i przesunięcia zegara}
 \label{fig:ntp}
@@ -28,10 +28,68 @@ Jak łatwo zauważyć im krótszy jest czas propagacji tym lepsze przybliżenie 
 
 Na postawie tych informacji podjęto próbę synchronizacji programowej zegarów węzłów w systemie multilateracyjnym.
 
-\subsection{Pomiar różnic zegarów}
+\subsection{Eksperymenty NTP}
 
+Przy użyciu czterech węzłów przeprowadzono eksperymenty mające na celu próbę ustalenia przesunięć zegarów każdego z urządzeń względem centralnego serwera. Opisany wyżej schemat wymiany czterech wiadomości powtarzano $n$ razy wspólnie dla wszystkich węzłów zapisując obliczone przesunięcia oraz czasy propagacji.
 
+W celu poprawy czytelności wyniki przesunięć zostały znormalizowane poprzez przesunięcie o wartość pierwszego przesunięcia.
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=.49\textwidth]{pics/ntp_sync/offsets.png}
+    \includegraphics[width=.49\textwidth]{pics/ntp_sync/offsets_close.png}
+\caption{Wyniki pomiarów przesunięć zegarów}
+\label{pic:offsets_ntp}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=.49\textwidth]{pics/ntp_sync/prop_times.png}
+    \includegraphics[width=.49\textwidth]{pics/ntp_sync/prop_times_close.png}
+\caption{Wyniki pomiarów czasów propagacji}
+\label{pic:prop_times}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=.49\textwidth]{pics/ntp_sync/stddev_offsets.png}
+    \includegraphics[width=.49\textwidth]{pics/ntp_sync/stddev_prop.png}
+\caption{Odchylenia standardowe pomiarów}
+\label{pic:stddev_ntp}
+\end{figure}
+
+Na podstawie otrzymanych wykresów łatwo zauważyć, że czas propagacji wiadomości w systemie jest nieprzewidywalny i zmienia sie znacząco z pomiaru na pomiar. Interesującą nas statystyką są jednak zaobserwowane przesunięcia zegarów, bez których nie jesteśmy w stanie poprawnie ocenić odległości od źródła dźwięku. Tutaj wartości wyglądają na bardziej skoncentrowane, na wykresach widać wyraźne tendencje koncentracji wokół pewnych wartości średnich dla każdego z węzłów. Niestety, zaobserwowane odchylenia standardowe $\sigma_i,\ i \in \{0,1,2,3\}$ wielkości $\approx 7000 \mu s$ jest nieakceptowalne, ponieważ w takim czasie dźwięk w powietrzu pokonuje $\frac{7000}{1000000}s \cdot 343\frac{m}{s} = 2.401m$. Możliwe jest, że wielokrotne powtarzanie pomiarów da zadowalającą wartość średnią, pozwalającą na centymetrową precyzję obliczanych odległości.
+
+\subsection{Bezpośredni pomiar przesunięć zegarów}
+
+Biorąc pod uwagę zauważoną nieprzewidywalność i rozrzut czasów propagacji (spowodowanych najprawdopodobniej użyciem protokołu MQTT do przesyłu wiadomości pomiędzy urządzeniami) następnym pomysłem schematu synchronizacji jest bezpośrednie badanie względnego przesunięcia zegarów. Węzeł wysyła $n$ wiadomości zawierających aktualną wartość zegara, która po odebraniu przez serwer jest porównywana z zegarem w nim dostępnym.
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=.49\textwidth]{pics/time_deltas/time_deltas.png}
+    \includegraphics[width=.49\textwidth]{pics/time_deltas/time_deltas_close.png}
+\caption{Wyniki pomiarów przesunięć zegarów}
+\label{pic:offsets_ntp}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=.49\textwidth]{pics/time_deltas/stddev.png}
+\caption{Odchylenia standardowe pomiarów}
+\label{pic:stddev_deltas}
+\end{figure}
+
+Wykresy przesunięć wygenerowane na podstawie tych testów na pierwszy rzut oka nie są tak dobrze skoncentrowane jak poprzednie, jednakże odchylenie standardowe są prawie dwukrotnie mniejsze niż uprzednio, co daje nadzieje na bardziej wiarygodne wyniki.
 
 \section{Synchronizacja sprzętowa}
+
+Innym pomysłem na synchronizację zegarów w węzłach było użycie mikrofonów, w które i tak węzły odbiorcze są wyposażone. Potrzebujmy znać jedynie przesunięcie względem zegara w węźle nadawczym dlatego wystarczającym będzie porównanie czasu nadania i odebrania sygnału dźwiękowego. Ponadto ten rodzaj synchronizacji w przeciwieństwie do synchronizacji programowej, która uzgadniała ze sobą jedynie zegary na podstawie wymienianych wiadomości, wlicza w czas transmisji wszelkie nie wzięte wcześniej pod uwagę opóźnienia, takie jak:
+
+\begin{itemize}
+    \item Czas pomiędzy wysłaniem wiadomości o nadaniu sygnału a zamknięciem kontaktora i poruszeniem membraną brzęczyka,
+    \item Czas pomiędzy odebraniem sygnału przez mikrofon a zmianą stanu zmiennej na to wskazującej.
+\end{itemize}
+
+
 
 \subsection{Synchronizacja z użyciem mikrofonów}
