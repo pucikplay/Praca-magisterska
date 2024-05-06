@@ -12,7 +12,7 @@ def plot_offsets(df, name, ylim, normalize):
         ax.set_ylim(ylim)
 
     if normalize:
-        df[labels] -= df['0'][0]
+        df[labels] -= df[labels].mean()
 
     for i in range(NODES_NO):
         df.plot(x='row_number', y=labels[i], color=colors[i], label=f"Węzeł {i}", kind='scatter', s=5, ax=ax)
@@ -22,6 +22,7 @@ def plot_offsets(df, name, ylim, normalize):
     plt.legend()
     plt.tight_layout()
     plt.savefig(f'../../charts/ntp_sync/{name}.png', dpi=300)
+    plt.close()
 
 def plot_prop_times(df, name, ylim):
     fig, ax = plt.subplots()
@@ -36,6 +37,7 @@ def plot_prop_times(df, name, ylim):
     plt.legend()
     plt.tight_layout()
     plt.savefig(f'../../charts/ntp_sync/{name}.png', dpi=300)
+    plt.close()
 
 def plot_stddevs(df_offsets, df_prop):
     stddevs_offsets = {x: df_offsets.std()[x] for x in labels}
@@ -55,6 +57,7 @@ def plot_stddevs(df_offsets, df_prop):
     plt.ylabel("Odchylenie [us]")
     plt.tight_layout()
     plt.savefig(f'../../charts/ntp_sync/stddev_prop.png', dpi=300)
+    plt.close()
 
 if __name__ == "__main__":
     df_offsets = pd.read_csv('clock_offsets.csv')
@@ -64,6 +67,6 @@ if __name__ == "__main__":
 
     plot_offsets(df_offsets, 'offsets', None, True)
     plot_prop_times(df_prop, 'prop_times', None)
-    plot_offsets(df_offsets, 'offsets_close', (-30000,-10000), True)
+    plot_offsets(df_offsets, 'offsets_close', (-5000,5000), True)
     plot_prop_times(df_prop, 'prop_times_close', (207500, 217500))
     plot_stddevs(df_offsets, df_prop)

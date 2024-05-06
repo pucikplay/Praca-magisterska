@@ -76,7 +76,7 @@ if __name__ == "__main__":
     df = pd.read_csv(f'time_deltas.csv')
     df = df.assign(row_number=range(len(df)))
 
-    df[labels] -= df['0'][0]
+    df[labels] -= df[labels].mean()
 
     plot_offsets(df, 'time_deltas', None)
     plot_offsets(df, 'time_deltas_close', (-2000,2000))
