@@ -21,6 +21,7 @@ def plot_offsets(df, name, ylim):
     plt.legend()
     plt.tight_layout()
     plt.savefig(f'../../charts/mic_sync/{name}.png', dpi=300)
+    plt.close()
 
 def plot_stddevs(df):
     stddevs = {x: df.std()[x] for x in labels}
@@ -35,10 +36,12 @@ def plot_stddevs(df):
 
 if __name__ == "__main__":
     df = pd.read_csv('mic_sync.csv')
+    df = df.drop([0])
+    df.reset_index(drop=True, inplace=True)
     df = df.assign(row_number=range(len(df)))
 
-    df[labels] -= df['0'][0]
+    df[labels] -= df[labels].mean()
 
     plot_offsets(df, 'offsets', None)
-    # plot_offsets(df_offsets, 'offsets_close', (-30000,-10000), True)
+    plot_offsets(df, 'offsets_close', (-200, 200))
     plot_stddevs(df)
