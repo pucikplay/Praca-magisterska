@@ -83,25 +83,26 @@ Wykresy przesunięć wygenerowane na podstawie tych testów na pierwszy rzut oka
 
 \subsection{Synchronizacja z użyciem mikrofonów}
 
-Innym pomysłem na synchronizację zegarów w węzłach było użycie mikrofonów, w które i tak węzły odbiorcze są wyposażone. Potrzebujmy znać jedynie przesunięcie względem zegara w węźle nadawczym dlatego wystarczającym będzie porównanie czasu nadania i odebrania sygnału dźwiękowego. Ponadto ten rodzaj synchronizacji w przeciwieństwie do synchronizacji programowej, która uzgadniała ze sobą jedynie zegary na podstawie wymienianych wiadomości, wlicza w czas transmisji wszelkie nie wzięte wcześniej pod uwagę opóźnienia, takie jak:
+Innym pomysłem na synchronizację zegarów w węzłach było użycie mikrofonów, w które węzły odbiorcze są wyposażone. Potrzebujmy znać jedynie przesunięcie naszego zegara względem zegara w węźle nadawczym dlatego wystarczającym będzie porównanie czasu nadania i odebrania sygnału dźwiękowego. Ponadto ten rodzaj synchronizacji w przeciwieństwie do synchronizacji programowej, która uzgadniała ze sobą jedynie zegary na podstawie wymienianych wiadomości, wlicza w czas transmisji wszelkie nie wzięte wcześniej pod uwagę opóźnienia, takie jak:
 
 \begin{itemize}
     \item Czas pomiędzy wysłaniem wiadomości o nadaniu sygnału a zamknięciem kontaktora i poruszeniem membraną brzęczyka,
     \item Czas pomiędzy odebraniem sygnału przez mikrofon a zmianą stanu zmiennej na to wskazującej.
 \end{itemize}
 
+Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na wykresach~\ref{pic:mic_sync}. W celu zwiększenia czytelności odrzucono pierwszy z pomiarów oraz przesunięto wyniki o wartość średnią.
 
 \begin{figure}[h]
 \centering
     \includegraphics[width=.49\textwidth]{pics/mic_sync/offsets.png}
-    \includegraphics[width=.49\textwidth]{pics/mic_sync/offsets_close.png}
+    \includegraphics[width=.49\textwidth]{pics/mic_sync/stddev_offsets.png}
 \caption{Wyniki pomiarów przesunięć zegarów}
-\label{pic:offsets_mic}
+\label{pic:mic_sync}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-    \includegraphics[width=.49\textwidth]{pics/mic_sync/stddev_offsets.png}
-\caption{Odchylenia standardowe pomiarów}
-\label{pic:stddev_mic}
-\end{figure}
+Łatwo zauważyć, ża udało się zmniejszyć odchylenia obliczonych przesunięć zegara aż o dwa rzędy wielkości. Taka dokładność daje znacznie lepsze przybliżenie rzeczywistej odległości między węzłami, ponieważ w czasie $40 \mu s$ dźwięk pokona jedynie $\frac{40}{10000000}s \cdot 343 \frac{m}{s} \approx 0,014m$. Mając tak dokładne odległości będziemy mogli wprowadzić je do modelu multilateracyjnego.
+
+\subsection{Porównanie metod}
+
+Porównajmy teraz dokładność obliczanych odległości na podstawie interwału czasowego pomiędzy nadaniem dźwięku a jego odbiorem w różnych wariantach synchronizacji zegarów.
+
