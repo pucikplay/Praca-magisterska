@@ -6,7 +6,7 @@ Synchronizacja czasu jest jednym z podstawowych problemów systemów opartych o 
 
 Pierwszym podejściem do rozwiązania problemu synchronizacji zegarów było zastosowanie synchronizacji programowej~\cite{6066334}, w której urządzenie-host utrzymuje wysokiej rozdzielczości licznik czasowy i wysyła sygnały o jego wartości pozostałym węzłom w sieci. Na podstawie tych informacji każdy z węzłów oblicza różnicę w zegarach i wprowadza odpowiednie przesunięcie własnego licznika.
 
-\subsection{Algorytm synchronizacji NTP}
+\subsection{Algorytm synchronizacji NTP}\label{sec:ntp_sync}
 
 Jednym z najbardziej rozpowszechnionych protokołów synchronizacji programowej jest \textit{Network Time Protocol} opisany w pracy~\cite{103043}. Zachowując oznaczenia w niej zastosowane opiszmy w skrócie zasadę działania tego protokołu.
 
@@ -56,7 +56,7 @@ W celu poprawy czytelności wyniki przesunięć zostały znormalizowane poprzez 
 
 Na podstawie otrzymanych wykresów łatwo zauważyć, że czas propagacji wiadomości w systemie jest nieprzewidywalny i zmienia sie znacząco z pomiaru na pomiar. Interesującą nas statystyką są jednak zaobserwowane przesunięcia zegarów, bez których nie jesteśmy w stanie poprawnie ocenić odległości od źródła dźwięku. Tutaj wartości wyglądają na bardziej skoncentrowane, jednak nie widać wyraźnych tendencji koncentracji wokół wartości średnich dla żadnego z węzłów. Ponadto zaobserwowane odchylenia standardowe $\sigma_i,\ i \in \{0,1,2,3\}$ wielkości $\approx 7000 \mu s$ są nieakceptowalne, ponieważ w takim czasie dźwięk w powietrzu pokonuje $\frac{7000}{1000000}s \cdot 343\frac{m}{s} = 2.401m$. Możliwe jest, że wielokrotne powtarzanie pomiarów da zadowalającą wartość średnią, pozwalającą na centymetrową precyzję obliczanych odległości. W porównaniu z pozostałymi sposobami brane będą pod uwagę wartości uśrednione.
 
-\subsection{Bezpośredni pomiar przesunięć zegarów}
+\subsection{Bezpośredni pomiar przesunięć zegarów}\label{sec:time_deltas_sync}
 
 Biorąc pod uwagę zauważoną nieprzewidywalność i rozrzut czasów propagacji (spowodowanych najprawdopodobniej użyciem protokołu MQTT do przesyłu wiadomości pomiędzy urządzeniami) następnym pomysłem schematu synchronizacji jest bezpośrednie badanie względnego przesunięcia zegarów. Węzeł wysyła $n$ wiadomości zawierających aktualną wartość zegara, która po odebraniu przez serwer jest porównywana z zegarem w nim dostępnym.
 
@@ -81,7 +81,7 @@ Wykresy przesunięć wygenerowane na podstawie tych testów na pierwszy rzut oka
 
 
 
-\subsection{Synchronizacja z użyciem mikrofonów}
+\subsection{Synchronizacja z użyciem mikrofonów}\label{sec:mic_sync}
 
 Innym pomysłem na synchronizację zegarów w węzłach było użycie mikrofonów, w które węzły odbiorcze są wyposażone. Potrzebujmy znać jedynie przesunięcie naszego zegara względem zegara w węźle nadawczym dlatego wystarczającym będzie porównanie czasu nadania i odebrania sygnału dźwiękowego. Ponadto ten rodzaj synchronizacji w przeciwieństwie do synchronizacji programowej, która uzgadniała ze sobą jedynie zegary na podstawie wymienianych wiadomości, wlicza w czas transmisji wszelkie nie wzięte wcześniej pod uwagę opóźnienia, takie jak:
 
@@ -104,5 +104,30 @@ Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na 
 
 \subsection{Porównanie metod}
 
-Porównajmy teraz dokładność obliczanych odległości na podstawie interwału czasowego pomiędzy nadaniem dźwięku a jego odbiorem w różnych wariantach synchronizacji zegarów.
+Porównajmy teraz dokładność obliczanych odległości na podstawie interwału czasowego pomiędzy nadaniem dźwięku a jego odbiorem w różnych wariantach synchronizacji zegarów. Wykresy uzyskane przy zastosowaniu synchronizacji czasowej zostały przedstawione przed i po znormalizowaniu poprzez przesunięcie tak, by średnia pomiarów rozpoczynała się od 0. Pomiary oparte o synchronizację z użyciem mikrofonów nie wymagały tego dodatkowego kroku.
 
+\begin{figure}[h]
+\centering
+    \includegraphics[width=.49\textwidth]{pics/ntp_sync_dist/dists.png}
+    \includegraphics[width=.49\textwidth]{pics/ntp_sync_dist/dists_close.png}
+\caption{Wyniki pomiarów odległości z użyciem synchronizacji~\ref{sec:ntp_sync}}
+\label{pic:ntp_sync_dist}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=.49\textwidth]{pics/time_deltas_dist/dists.png}
+    \includegraphics[width=.49\textwidth]{pics/time_deltas_dist/dists_close.png}
+\caption{Wyniki pomiarów odległości z użyciem synchronizacji~\ref{sec:time_deltas_sync}}
+\label{pic:time_deltas_dist}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists.png}
+    \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists_close.png}
+\caption{Wyniki pomiarów odległości z użyciem synchronizacji~\ref{sec:mic_sync}}
+\label{pic:mic_sync_dist}
+\end{figure}
+
+Na wykresach widać, że wszystkie trzy algorytmy synchronizacji po normalizacji dają wyniki o podobnej dokładności adekwatnej do użycia w danych wejściowych multilateracji. Ciekawą jest natomiast obserwacja skalowania obliczonych odległości. Widzimy, że w przypadku~\ref{pic:ntp_sync_dist} oraz~\ref{pic:mic_sync_dist} otrzymane wartości leżą blisko trzykrotności rzeczywistej badanej odległości, natomiast w~\ref{pic:time_deltas_dist} blisko dwukrotności. W kolejnym rozdziale pochylimy się nad możliwymi przyczynami i rozwiązaniem tego zachowania.
