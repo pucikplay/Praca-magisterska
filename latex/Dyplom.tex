@@ -25,6 +25,7 @@
 \usepackage[utf8]{inputenc} % Proszę użyć zamiast powyższego, jeśli kodowanie edytowanych plików to UTF8
 \usepackage[T1]{fontenc}
 \usepackage[english,polish]{babel} % Tutaj ważna jest kolejność atrybutów (dla pracy po polsku polish powinno być na końcu)
+\usepackage{polski}
 %\DisemulatePackage{setspace}
 \usepackage{setspace}
 \usepackage{color,calc}
@@ -909,9 +910,10 @@ Kierunek: & {\bfseries \@kierunek}\\
 % \lstlistoflistings*
 % \clearpage
 % SKRÓTY (to opcjonalna część pracy)
-\input{skroty} 
+% \input{skroty} 
 % ROZDZIAŁY (kolejne rozdziały dołączane są z kolejnych plików)
 \chapterstyle{default}
+\input{wstep}
 \input{rozdzial01}
 \input{rozdzial02}
 \input{rozdzial03}
