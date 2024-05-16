@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import statsmodels.api as sm
 
 def plot_dists(df, name, ylim, slope):
     fig, ax = plt.subplots()
@@ -20,7 +21,7 @@ def plot_dists(df, name, ylim, slope):
     for y in range(df_T.shape[1]-3):
         df_T.plot(x='index', y=y, color='red', kind='scatter', s=10, ax=ax)
 
-    plt.title("Obliczone odległości")
+    # plt.title("Obliczone odległości")
     plt.xlabel("Rzeczywista odległość")
     plt.ylabel("Obliczona odległość")
     ax.get_legend().remove()
@@ -39,18 +40,22 @@ if __name__ == '__main__':
 
     for i in range(4):
         df = pd.read_csv(f'mic_sync_dist_{i}.csv')
-        df = df.assign(row_number=range(len(df)))
 
         plot_dists(df, f'dists_{i}', None, None)
         plot_dists(df, f'dists_close_{i}', (-.1, 3.5), 3)
 
-        if i < 3:
-            df = pd.read_csv(f'mic_sync_dist_long_{i}.csv')
-            df = df.assign(row_number=range(len(df)))
+        df = pd.read_csv(f'mic_sync_dist_long_{i}.csv')
 
-            plot_dists(df, f'dists_long_{i}', None, None)
-            plot_dists(df, f'dists_close_long_{i}', (-.1, 6.5), 2.5)
+        plot_dists(df, f'dists_long_{i}', None, None)
+        plot_dists(df, f'dists_close_long_{i}', (-.1, 6.5), None)
 
-            df = clean(df)
+        df = clean(df)
+        data = pd.DataFrame(df)
 
-            plot_dists(df, f'dists_close_long_{i}_mean', (-.1, 6.5), 2.5)
+        X = list(map(float, data.index.to_list()))
+        Y = data[0].values
+        model = sm.OLS(Y,X)
+        result = model.fit()
+        slope = round(result.params[0], 3)
+
+        plot_dists(df, f'dists_close_long_{i}_mean', (-.1, 6.5), slope)
