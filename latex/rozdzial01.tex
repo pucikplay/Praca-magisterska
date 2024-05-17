@@ -1,21 +1,24 @@
 \chapter{Przedstawienie problemu}\label{chap:problem}
 
-Multilateracja jest techniką lokalizacji pozwalającą obliczyć nieznane koordynaty punktu na podstawie odległości od innych, znanych punktów. Weźmy dwuwymiarowy egzemplarz naszego problemu (Rys.~\ref{fig:example}), gdzie $N$ - nadajnik, $O_i$ - odbiorniki, $d_i$ - odległości
+Multilateracja jest techniką lokalizacji pozwalającą obliczyć nieznane koordynaty punktu na podstawie odległości od innych, znanych punktów. Weźmy trójwymiarowy egzemplarz naszego problemu (Rys.~\ref{fig:example}), gdzie $N$ - nadajnik, $O_i$ - odbiorniki, $d_i$ - odległości. Przedstawienie problemu zostało zaczerpnięte z pracy~\cite{norrdine2012algebraic}.
 
 \begin{figure}[!h]
     \centering
     \begin{tikzpicture}
-        \coordinate (O1) at (0,0);
-        \coordinate (O2) at (3,5);
-        \coordinate (O3) at (8,1);
-        \coordinate (N) at (4,3);
+        \coordinate (O1) at (0,2);
+        \coordinate (O2) at (2,0);
+        \coordinate (O3) at (8,3);
+        \coordinate (N) at (3,5);
         \filldraw[black] (O1) circle (2pt) node[left]{$O_1$};
-        \filldraw[black] (O2) circle (2pt) node[right]{$O_2$};
+        \filldraw[black] (O2) circle (2pt) node[below]{$O_2$};
         \filldraw[black] (O3) circle (2pt) node[right]{$O_3$};
         \filldraw[black] (N) circle (2pt) node[above right]{$N$};
-        \draw[black, thin] (O1) -- node[above left]{$d_1$} (N);
-        \draw[black, thin] (O2) -- node[left]{$d_2$} (N);
-        \draw[black, thin] (O3) -- node[above]{$d_3$} (N);
+        \draw[black] (O1) -- node[above left]{$d_1$} (N);
+        \draw[black] (O2) -- node[left]{$d_2$} (N);
+        \draw[black] (O3) -- node[above]{$d_3$} (N);
+        \draw[loosely dashed, thin] (O1) -- (O2);
+        \draw[loosely dashed, thin] (O1) -- (O3);
+        \draw[loosely dashed, thin] (O2) -- (O3);
     \end{tikzpicture}
     \caption{Egzemplarz problemu multilateracji}
 \label{fig:example}
@@ -24,26 +27,26 @@ Multilateracja jest techniką lokalizacji pozwalającą obliczyć nieznane koord
 Znalezienie koordynatów $(x,y)$ punktu N jest równoważne z rowiązaniem układu równań,
 \begin{equation}
     \begin{dcases}
-        {(x - x_1)}^2 + {(y - y_1)}^2 = {d_1}^2\\
-        {(x - x_2)}^2 + {(y - y_2)}^2 = {d_2}^2\\
-        {(x - x_3)}^2 + {(y - y_3)}^2 = {d_3}^2\\
+        {(x - x_1)}^2 + {(y - y_1)}^2 + {(z - z_1)}^2 = {d_1}^2\\
+        {(x - x_2)}^2 + {(y - y_2)}^2 + {(z - z_2)}^2 = {d_2}^2\\
+        {(x - x_3)}^2 + {(y - y_3)}^2 + {(z - z_3)}^2 = {d_3}^2\\
     \end{dcases}
 \end{equation}
 który może zostać przekształcony do postaci
 \begin{equation}
     \begin{dcases}
-        (x^2 + y^2) - 2x_1x - 2y_1y = d_1^2 - x_1^2 - y_1^2\\
-        (x^2 + y^2) - 2x_2x - 2y_2y = d_2^2 - x_2^2 - y_2^2\\
-        (x^2 + y^2) - 2x_3x - 2y_3y = d_3^2 - x_3^2 - y_3^2\\
+        (x^2 + y^2 + z^2) - 2x_1x - 2y_1y - 2z_1z = d_1^2 - x_1^2 - y_1^2 - z_1^2\\
+        (x^2 + y^2 + z^2) - 2x_2x - 2y_2y - 2z_2z = d_2^2 - x_2^2 - y_2^2 - z_2^2\\
+        (x^2 + y^2 + z^2) - 2x_3x - 2y_3y - 2z_3z = d_3^2 - x_3^2 - y_3^2 - z_3^2\\
     \end{dcases}
 \end{equation}
 lub w reprezenacji macierzowej,
 \begin{equation}
     \left[
         \begin{matrix}
-            1 & -2x_1 & -2y_1\\
-            1 & -2x_2 & -2y_2\\
-            1 & -2x_3 & -2y_3\\
+            1 & -2x_1 & -2y_1 & -2z_1\\
+            1 & -2x_2 & -2y_2 & -2z_2\\
+            1 & -2x_3 & -2y_3 & -2z_3\\
         \end{matrix}
     \right]
     \left[
@@ -51,32 +54,33 @@ lub w reprezenacji macierzowej,
             x^2 + y^2\\
             x\\
             y\\
+            z\\
         \end{matrix}
     \right]
     =
     \left[
         \begin{matrix}
-            d_1^2 - x_1^2 - y_1^2\\
-            d_2^2 - x_2^2 - y_2^2\\
-            d_3^2 - x_3^2 - y_3^2\\
+            d_1^2 - x_1^2 - y_1^2 - z_1^2\\
+            d_2^2 - x_2^2 - y_2^2 - z_2^2\\
+            d_3^2 - x_3^2 - y_3^2 - z_3^2\\
         \end{matrix}
     \right]
 \end{equation}
 którą można przedstawić jako
-
 \begin{equation}
-    \boldsymbol{A} \cdot \boldsymbol{x} = \boldsymbol{b}
+    \mathbf{A} \cdot \mathbf{x} = \mathbf{b}
 \label{eq:matrix}
 \end{equation}
+przy założeniu, że $\mathbf{x} \in E$, gdzie $E = \left\{(x_0, x_1, x_2, x_3)^T \in {\mathbb{R}}^4\ |\ x_0 = {x_1}^2 + {x_2}^2 + {x_3}^2\right\}$.
 
 Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni $n$-wymiarowej i $m$ odbiorników:
 \begin{equation}
     \left[
         \begin{matrix}
-            1 & -2\boldsymbol{x^{(1)}}\\
-            1 & -2\boldsymbol{x^{(2)}}\\
+            1 & -2\mathbf{x^{(1)}}\\
+            1 & -2\mathbf{x^{(2)}}\\
             \vdots & \vdots\\
-            1 & -2\boldsymbol{x^{(m)}}\\
+            1 & -2\mathbf{x^{(m)}}\\
         \end{matrix}
     \right]
     \left[
@@ -99,6 +103,16 @@ Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni
 \end{equation}
 
 
+
+% \subsubsection*{Rozwiązanie równania~\ref{eq:matrix}}
+
+% \textit{Przypadek A:\ $O_1$, $O_2$ i $O_3$ nie są współliniowe.}
+% Wtedy $\text{rank}(\mathbf{A}) = 3$ oraz $\text{dim}(\text{ker}(\mathbf{A})) = 1$. Ogólnym rozwiązaniem układu~\ref{eq:matrix} jest
+% \begin{equation}
+%     \mathbf{x} = \mathbf{x}_p + t \cdot \mathbf{x}_h
+% \end{equation}
+% o rzeczywistym parametrze $t$. $\mathbf{x}_p$ jest pewnym rozwiązaniem~\ref{eq:matrix}, a $\mathbf{x}_h$ jest bazą $\text{kern}(\mathbf{A})$.
+% Wektory
 \section{Aktualny stan wiedzy}
 
 W dostępnej literaturze obejmującą temat multilateracji i systemów multilateracyjnych opisanych jest wiele podejść do tego problemu:
@@ -111,17 +125,17 @@ W dostępnej literaturze obejmującą temat multilateracji i systemów multilate
 \end{itemize}
 Na szczególną uwagę zasługuje praca~\cite{murphy1995determination}, w której przeprowadzono eksperymenty porównawcze wyżej wymienionych metod.
 
-\begin{table}[h]
-\centering
-\label{tab:murphy}
-\begin{tabular}{|l|c|}\hline
-    Metoda & \vtop{\hbox{\strut Liczba lokalizacji na 1000 obliczona z dokładności}\hbox{\strut powyżej 5 stóp na podstawie przybliżonych odległości}}\\\hline
-    Układ równań & 919\\\hline
-    Liniowe najmniejsze kwadraty & 856\\\hline
-    Nieliniowe najmniejsze kwadraty & 81\\\hline
-\end{tabular}
-\caption{Porównanie wyników z pracy~\cite{murphy1995determination}}
-\end{table}
+% \begin{table}[h]
+% \centering
+% \label{tab:murphy}
+% \begin{tabular}{|l|c|}\hline
+%     Metoda & \vtop{\hbox{\strut Liczba lokalizacji na 1000 obliczona z dokładności}\hbox{\strut powyżej 5 stóp na podstawie przybliżonych odległości}}\\\hline
+%     Układ równań & 919\\\hline
+%     Liniowe najmniejsze kwadraty & 856\\\hline
+%     Nieliniowe najmniejsze kwadraty & 81\\\hline
+% \end{tabular}
+% \caption{Porównanie wyników z pracy~\cite{murphy1995determination}}
+% \end{table}
 
 Motywacją tej pracy jest brak dostępnych prac obejmujących to zagadnienie w spektrum fal dźwiękowych, w przeciwieństwie do fal elektromagnetycznych, an których opierają się systemy opisane w pozycjach bibliograficznych. Pytania, które zostały postawione:
 
