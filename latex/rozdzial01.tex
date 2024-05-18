@@ -25,22 +25,39 @@ Multilateracja jest techniką lokalizacji pozwalającą obliczyć nieznane koord
 \end{figure}
 
 Znalezienie koordynatów $(x,y)$ punktu N jest równoważne z rowiązaniem układu równań,
-\begin{equation}
+\begin{equation}\label{eq:base}
     \begin{dcases}
         {(x - x_1)}^2 + {(y - y_1)}^2 + {(z - z_1)}^2 = {d_1}^2\\
         {(x - x_2)}^2 + {(y - y_2)}^2 + {(z - z_2)}^2 = {d_2}^2\\
         {(x - x_3)}^2 + {(y - y_3)}^2 + {(z - z_3)}^2 = {d_3}^2\\
     \end{dcases}
 \end{equation}
-który może zostać przekształcony do postaci
+
+\section{Aktualny stan wiedzy}
+
+W dostępnej literaturze obejmującą temat multilateracji i systemów multilateracyjnych opisanych jest wiele podejść do tego problemu:
+
+\begin{itemize}
+    \item układ równań liniowych\cite{murphy1995determination},
+    \item metoda najmniejszej sumy kwadratów\cite{murphy1995determination},\cite{norrdine2012algebraic},
+    \item nieliniowa metoda najmniejszej sumy kwadratów\cite{murphy1995determination},
+    \item rozkład według wartości szczególnych\cite{murphy1995determination}.
+\end{itemize}
+Na szczególną uwagę zasługuje praca~\cite{murphy1995determination}, w której przeprowadzono eksperymenty porównawcze wyżej wymienionych metod.
+
+Motywacją tej pracy jest brak dostępnych prac obejmujących to zagadnienie w spektrum fal dźwiękowych, w przeciwieństwie do fal elektromagnetycznych, an których opierają się systemy opisane w pozycjach bibliograficznych. Pytania, które zostały postawione:
+
+\subsection{Obrane rozwiązanie}
+
+W pracy wybrano rozwiązanie przedstawione w pracy~\cite{norrdine2012algebraic}. Przekształćmy podstawowy układ równań~\ref{eq:base} do postaci
 \begin{equation}
     \begin{dcases}
         (x^2 + y^2 + z^2) - 2x_1x - 2y_1y - 2z_1z = d_1^2 - x_1^2 - y_1^2 - z_1^2\\
         (x^2 + y^2 + z^2) - 2x_2x - 2y_2y - 2z_2z = d_2^2 - x_2^2 - y_2^2 - z_2^2\\
         (x^2 + y^2 + z^2) - 2x_3x - 2y_3y - 2z_3z = d_3^2 - x_3^2 - y_3^2 - z_3^2\\
     \end{dcases}
-\end{equation}
-lub w reprezenacji macierzowej,
+\end{equation},
+a następnie do reprezenacji macierzowej,
 \begin{equation}
     \left[
         \begin{matrix}
@@ -65,13 +82,15 @@ lub w reprezenacji macierzowej,
             d_3^2 - x_3^2 - y_3^2 - z_3^2\\
         \end{matrix}
     \right]
-\end{equation}
+\end{equation},
 którą można przedstawić jako
 \begin{equation}
     \mathbf{A} \cdot \mathbf{x} = \mathbf{b}
 \label{eq:matrix}
 \end{equation}
 przy założeniu, że $\mathbf{x} \in E$, gdzie $E = \left\{(x_0, x_1, x_2, x_3)^T \in {\mathbb{R}}^4\ |\ x_0 = {x_1}^2 + {x_2}^2 + {x_3}^2\right\}$.
+
+\subsection*{Rozwiązanie ogólne}
 
 Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni $n$-wymiarowej i $m$ odbiorników:
 \begin{equation}
@@ -101,43 +120,13 @@ Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni
         \end{matrix}
     \right]
 \end{equation}
+z analogicznym ograniczeniem $\mathbf{x} \in E$. Zachowując oznaczenia z równania~\ref{eq:matrix} rozwiązanie aproksymacyjne $\hat{\mathbf{x}}$ w sensie metody najmniejszych kwadratów ma postać
 
+\begin{equation}\label{eq:lls}
+    \hat{\mathbf{x}} = {\left(\mathbf{A}^T\mathbf{A}\right)}^{-1}\mathbf{A}^T\mathbf{b}
+\end{equation}
 
-
-% \subsubsection*{Rozwiązanie równania~\ref{eq:matrix}}
-
-% \textit{Przypadek A:\ $O_1$, $O_2$ i $O_3$ nie są współliniowe.}
-% Wtedy $\text{rank}(\mathbf{A}) = 3$ oraz $\text{dim}(\text{ker}(\mathbf{A})) = 1$. Ogólnym rozwiązaniem układu~\ref{eq:matrix} jest
-% \begin{equation}
-%     \mathbf{x} = \mathbf{x}_p + t \cdot \mathbf{x}_h
-% \end{equation}
-% o rzeczywistym parametrze $t$. $\mathbf{x}_p$ jest pewnym rozwiązaniem~\ref{eq:matrix}, a $\mathbf{x}_h$ jest bazą $\text{kern}(\mathbf{A})$.
-% Wektory
-\section{Aktualny stan wiedzy}
-
-W dostępnej literaturze obejmującą temat multilateracji i systemów multilateracyjnych opisanych jest wiele podejść do tego problemu:
-
-\begin{itemize}
-    \item układ równań liniowych\cite{murphy1995determination},
-    \item metoda najmniejszej sumy kwadratów\cite{murphy1995determination},\cite{norrdine2012algebraic},
-    \item nieliniowa metoda najmniejszej sumy kwadratów\cite{murphy1995determination},
-    \item rozkład według wartości szczególnych\cite{murphy1995determination}.
-\end{itemize}
-Na szczególną uwagę zasługuje praca~\cite{murphy1995determination}, w której przeprowadzono eksperymenty porównawcze wyżej wymienionych metod.
-
-% \begin{table}[h]
-% \centering
-% \label{tab:murphy}
-% \begin{tabular}{|l|c|}\hline
-%     Metoda & \vtop{\hbox{\strut Liczba lokalizacji na 1000 obliczona z dokładności}\hbox{\strut powyżej 5 stóp na podstawie przybliżonych odległości}}\\\hline
-%     Układ równań & 919\\\hline
-%     Liniowe najmniejsze kwadraty & 856\\\hline
-%     Nieliniowe najmniejsze kwadraty & 81\\\hline
-% \end{tabular}
-% \caption{Porównanie wyników z pracy~\cite{murphy1995determination}}
-% \end{table}
-
-Motywacją tej pracy jest brak dostępnych prac obejmujących to zagadnienie w spektrum fal dźwiękowych, w przeciwieństwie do fal elektromagnetycznych, an których opierają się systemy opisane w pozycjach bibliograficznych. Pytania, które zostały postawione:
+Jak łatwo zauważyć pierwsza część lewej strony równości zależy jedynie od macierzy $\mathbf{A}$, która nie zawiera zmiennych związanych z węzłem źródłowym, co pozwala, przy założeniu stacjonarności odbiorników, na wcześniejsze i jednorazowe przeprowadzenie kosztownych przekształceń tej macierzy. W tej sytuacji jednorazowe obliczenie rozwiązania wymaga jedynie obliczenia wektora $\mathbf{b}$ oraz iloczynu skalarnego.
 
 \begin{itemize}
     \item 

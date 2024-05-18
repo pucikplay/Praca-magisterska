@@ -4,14 +4,14 @@ Po przygotowaniu komponentów systemu wstępnie zaimplementowano program rozwią
 
 \section{Opis działania}
 
-Program zaimplementowano na podstawie rozwiązania aproksymacyjnego równania \ref{eq:matrix} postaci
+Program zaimplementowano na podstawie rozwiązania aproksymacyjnego \ref{eq:lls} postaci
 
 \begin{equation}
     \label{eq:lls}
     \hat{\boldsymbol{x}} = {\left(A^T A\right)}^{-1} A^T \boldsymbol{b}
 \end{equation}
 
-za pomocą metody najmniejszych kwadratów zaczerpniętej z artykułu~\cite{norrdine2012algebraic}. Współrzędne odbiorników są znane.
+Współrzędne odbiorników są znane.
 
 \subsection{Program węzła}
 
@@ -114,7 +114,7 @@ za pomocą metody najmniejszych kwadratów zaczerpniętej z artykułu~\cite{norr
 
 \subsection{Opis algorytmu}
 
-W programie serwera zaimplementowano funkcję rozwiązującą równość~\ref{eq:lls} przy pomocy funkcji bibliotecznych dostępnych w pakiecie \texttt{numpy}. Jak łatwo zauważyć pierwsza część lewej strony równości zależy jedynie od macierzy $A$, która nie zawiera zmiennych związanych z węzłem źródłowym, co pozwala na wcześniejsze i jednorazowe przeprowadzenie kosztownych przekształceń tej macierzy. W tej sytuacji jednorazowe wywołanie funkcji wymaga jedynie obliczenia wektora $b$ oraz iloczynu skalarnego. Wywołania następują co interwał $t_1$. Co interwał $t_2$ serwer wysyła wiadomość synchronizującą z założeniem, że węzły odbierają ją równocześnie i w ten sposób synchronizują zegary.
+W programie serwera zaimplementowano funkcję rozwiązującą równanie~\ref{eq:lls} przy pomocy funkcji bibliotecznych dostępnych w pakiecie \texttt{numpy}. Wywołania następują co interwał $t_1$. Co interwał $t_2$ serwer wysyła wiadomość synchronizującą z założeniem, że węzły odbierają ją równocześnie i w ten sposób synchronizują zegary.
 
 \section{Ewaluacja działania systemu}
 
