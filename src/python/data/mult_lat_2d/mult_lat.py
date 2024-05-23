@@ -3,6 +3,8 @@ import numpy as np
 import os
 import re
 import pandas as pd
+import colorsys
+import matplotlib.colors as mc
 
 def plot_charts(df, point, nodes, lims):
     fig, ax = plt.subplots()
@@ -25,6 +27,14 @@ def plot_charts(df, point, nodes, lims):
 def get_cmap(n, name='hsv'):
     return plt.cm.get_cmap(name, n)
 
+def lighten_color(color, amount=0.5):
+    try:
+        c = mc.cnames[color]
+    except:
+        c = color
+    c = colorsys.rgb_to_hls(*mc.to_rgb(c))
+    return colorsys.hls_to_rgb(c[0], 1 - amount * (1 - c[1]), c[2])
+
 def plot_multiple(df_dict, lims, num, mean=False):
     fig, ax = plt.subplots()
     if lims is not None:
@@ -34,9 +44,11 @@ def plot_multiple(df_dict, lims, num, mean=False):
     cmap = get_cmap(len(df_dict)+1)
 
     for i, (point, df) in enumerate(df_dict.items()):
+        x, y = float(point[1:point.rfind(',')]), float(point[point.rfind(',')+1:-1])
         if mean:
             df_mean = pd.DataFrame(df.mean()).T
             df_mean.plot(x='x', y='y', kind='scatter', s=100, ax=ax, label=point, color=cmap(i))
+            ax.scatter(x, y, color=lighten_color(cmap(i), 0.4))
         else:
             df.plot(x='x', y='y', kind='scatter', s=10, ax=ax, label=point, color=cmap(i))
         
@@ -91,8 +103,8 @@ if __name__ == '__main__':
                                                   '[0.15, -0.15]']}
 
     plot_multiple(dict_1, {'xlim': (-0.4, 0.9), 'ylim': (-0.8, 0.4)}, 1)
-    plot_multiple(dict_2, {'xlim': (0, 0.5), 'ylim': (-0.6, 0.1)}, 2)
+    plot_multiple(dict_2, {'xlim': (-0.4, 0.5), 'ylim': (-0.6, 0.4)}, 2)
     plot_multiple(dict_3, {'xlim': (-0.8, 0.4), 'ylim': (-0.9, 0.3)}, 3)
     plot_multiple(dict_1, {'xlim': (-0.4, 0.9), 'ylim': (-0.8, 0.4)}, 1, mean=True)
-    plot_multiple(dict_2, {'xlim': (0, 0.5), 'ylim': (-0.6, 0.1)}, 2, mean=True)
+    plot_multiple(dict_2, {'xlim': (-0.4, 0.5), 'ylim': (-0.6, 0.4)}, 2, mean=True)
     plot_multiple(dict_3, {'xlim': (-0.8, 0.4), 'ylim': (-0.9, 0.3)}, 3, mean=True)
