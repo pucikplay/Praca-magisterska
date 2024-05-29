@@ -16,12 +16,30 @@ Na rysunku~\ref{fig:ntp} przestawiono schemat działania protokołu NTP. Urządz
 
 Dodatkowym wnioskiem przedstawionym w powyższej pracy jest własność prawdziwego przesunięcia względem aktualnie obliczonego:
 
-\[\theta_i - \frac{\delta_i}{2} \leq \theta \leq \theta_i + \frac{\delta_i}{2}\]
+\[\theta_i - \frac{\delta_i}{2} \leqslant \theta \leqslant \theta_i + \frac{\delta_i}{2}\]
 
 Jak łatwo zauważyć im krótszy jest czas propagacji tym lepsze przybliżenie dostajemy.
 
 \begin{figure}[h]
-    \includegraphics[width=\textwidth]{pics/ntp.png}
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{tikzpicture}
+    \tikzstyle{every node}=[font=\Huge]
+    \draw [line width=1pt] (10,24.25) -- (36.25,24.25);
+    \draw [line width=1pt] (10,15.5) -- (36.25,15.5);
+    \draw [line width=1pt, ->] (12.5,15.5) -- (18.75,24.25);
+    \draw [line width=1pt, ->] (27.5,24.25) -- (33.75,15.5);
+    \draw [line width=1pt] (20,15.5) -- (20,21.75);
+    \draw [line width=1pt] (26.25,24.25) -- (26.25,18);
+    \draw [line width=1pt, <->] (20,19.75) -- (26.25,19.75)node[pos=0.5, fill=white]{$\theta$};
+    \node [font=\Huge] at (12.5,14.75) {$T_{i-3}$};
+    \node [font=\Huge] at (18.75,25) {$T_{i-2}$};
+    \node [font=\Huge] at (27.5,24.75) {$T_{i-1}$};
+    \node [font=\Huge] at (34,14.75) {$T_i$};
+    \node [font=\Huge] at (23,24.75) {$B$};
+    \node [font=\Huge] at (23,14.75) {$A$};
+\end{tikzpicture}
+}%
 \caption{Pomiar opóźnienia transmisji i przesunięcia zegara}
 \label{fig:ntp}
 \end{figure}

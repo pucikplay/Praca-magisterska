@@ -1,6 +1,170 @@
-\chapter{Przedstawienie problemu}\label{chap:problem}
+\chapter{Sformułowanie problemu}\label{chap:problem}
 
-Multilateracja jest techniką lokalizacji pozwalającą obliczyć nieznane koordynaty punktu na podstawie odległości od innych, znanych punktów. Weźmy trójwymiarowy egzemplarz naszego problemu (Rys.~\ref{fig:example}), gdzie $N$ - nadajnik, $O_i$ - odbiorniki, $d_i$ - odległości. Przedstawienie problemu zostało zaczerpnięte z pracy~\cite{norrdine2012algebraic}.
+Weźmy punkt $(x, y, z) \in \mathbb{R}^3$ i oznaczmy go $N$, ponadto weźmy zbiór $n$ punktów $\left\{(x_i, y_i, z_i): i \in [n]\right\} \subset \mathbb{R}^3$, który oznaczmy $\mathcal{O}$, a punkty należące do zbioru odpowiednio $O_i$. Niech $d_i$ będzie odległością $d(N, O_i)$. Znając współrzędne punktów $O_i$ oraz odległości $d_i$ chcemy znaleźć $(x, y, z)$. Można to osiągnąć rozwiązując układ równań
+
+\begin{equation}\label{eq:base}
+    \begin{dcases}
+        {(x - x_1)}^2 + {(y - y_1)}^2 + {(z - z_1)}^2 = {d_1}^2\\
+        {(x - x_2)}^2 + {(y - y_2)}^2 + {(z - z_2)}^2 = {d_2}^2\\
+        \mspace{150mu}\vdots\\
+        {(x - x_n)}^2 + {(y - y_n)}^2 + {(z - z_n)}^2 = {d_n}^2\,.
+    \end{dcases}
+\end{equation}
+
+\section{Aktualny stan wiedzy}
+
+W dostępnej literaturze obejmującą temat multilateracji i systemów multilateracyjnych opisane są trzy główne podejścia:
+
+\begin{itemize}
+    \item iteracyjne,
+    \item algebraiczne,
+    \item liniowe.
+\end{itemize}
+
+Metoda iteracyjna dąży do minimalizacji błędu przybliżonego rozwiązania układu równań~\ref{eq:base}. Typowymi narzędziami w niej wykorzystywanymi są: metoda najszybszego spadku~\cite{doi:10.1137/0111030}, metoda Newtona oraz szereg Taylora~\cite{4101619}. Praca~\cite{4101619} zasuguje na szczególną uwagę ze względu na skupienie się na zastosowaniu metody do użytków lokalizacyjnych, w przeciwieństwie do ogólnego podejścia do problemu optymalizacyjnego. Największymi problemami metod iteracyjnych są niepewność zbiegania do rozwiązania optymalnego a także złożoność obliczeniowa, która wpływa negatywnie na czas działania.
+
+Metoda algebraiczna zaproponowana w pracy~\cite{4104017}, w której pochylono się na algebraicznym rozwiązaniu układów równań w systemie GPS, ma znaczącą przewagę nad metodami iteracyjnymi otrzymywania dwóch możliwych rozwiązań natychmiastowo, z ktorych można następnie wybrać bardziej odpowiadające. Dodatkowo ta metoda daje możliwość operowania na pomiarach z arbitralnej liczby punktów, w przeciwieństwie do metod y zaproponowanej w pracy~\cite{article}, w której skupiono się na implementacji modelu VHDL pozycjonującego na postawie odczytów z czterech satelitów.
+
+Wyżej wymienione metody, choć są wciąż używane, nie pojawiają się w pracach z ostatnich lat. Większość rozwiązań prezentowanych w ostatnich dekadach opiera się na układzie równań liniowych z dodatkową zmienną ze względu na nieliniowość problemu. Pierwsze tego typu rozwiązanie zaprezentowano w pracy~\cite{301830}, w którym zmienna nieliniowa była niwelowana przez odejmowanie od siebie kolejnych równań. Inny wariant przestawiono w pracy~\cite{1018778}, który zredagowano w czytelniejszej formie w pracy~\cite{norrdine2012algebraic}. Właśnie ta praca była inspiracją do niniejszej pracy.
+
+Opis aktualnego stanu wiedzy zaczerpnięto z niedawnej pracy przeglądowej~\cite{10419087}.
+
+
+\section{Obrane rozwiązanie}
+
+W pracy wybrano rozwiązanie przedstawione w pracy~\cite{norrdine2012algebraic}. Przekształćmy wyjściowy układ równań~\ref{eq:base} do postaci
+\begin{equation}
+    \begin{dcases}
+        (x^2 + y^2 + z^2) - 2x_1x - 2y_1y - 2z_1z = d_1^2 - x_1^2 - y_1^2 - z_1^2\\
+        (x^2 + y^2 + z^2) - 2x_2x - 2y_2y - 2z_2z = d_2^2 - x_2^2 - y_2^2 - z_2^2\\
+        \mspace{220mu}\vdots\\
+        (x^2 + y^2 + z^2) - 2x_n x - 2y_n y - 2z_n z = d_n^2 - x_n^2 - y_n^2 - z_n^2\,,
+    \end{dcases}
+\end{equation}
+a następnie do reprezentacji macierzowej
+\begin{equation}
+    \left[
+        \begin{matrix}
+            1 & -2x_1 & -2y_1 & -2z_1\\
+            1 & -2x_2 & -2y_2 & -2z_2\\
+            \multicolumn{4}{c}{\vdots}\\
+            1 & -2x_n & -2y_n & -2z_n\\
+        \end{matrix}
+    \right]
+    \left[
+        \begin{matrix}
+            x^2 + y^2 + z^2\\
+            x\\
+            y\\
+            z\\
+        \end{matrix}
+    \right]
+    =
+    \left[
+        \begin{matrix}
+            d_1^2 - x_1^2 - y_1^2 - z_1^2\\
+            d_2^2 - x_2^2 - y_2^2 - z_2^2\\
+            \vdots\\
+            d_n^2 - x_n^2 - y_n^2 - z_n^2\\
+        \end{matrix}
+    \right]\,,
+\end{equation}
+którą można przedstawić jako
+\begin{equation}
+    \mathbf{A} \cdot \mathbf{x} = \mathbf{b}\,,
+\label{eq:matrix}
+\end{equation}
+gdzie
+\begin{equation}
+    \mathbf{A} =
+    \left[
+        \begin{matrix}
+            1 & -2x_1 & -2y_1 & -2z_1\\
+            1 & -2x_2 & -2y_2 & -2z_2\\
+            \multicolumn{4}{c}{\vdots}\\
+            1 & -2x_n & -2y_n & -2z_n\\
+        \end{matrix}
+    \right]\,,
+\end{equation}
+\begin{equation}
+    \mathbf{x} =
+    \left[
+        \begin{matrix}
+            x^2 + y^2 + z^2\\
+            x\\
+            y\\
+            z\\
+        \end{matrix}
+    \right]\,,
+\end{equation}
+\begin{equation}
+    \mathbf{b} =
+    \left[
+        \begin{matrix}
+            d_1^2 - x_1^2 - y_1^2 - z_1^2\\
+            d_2^2 - x_2^2 - y_2^2 - z_2^2\\
+            \vdots\\
+            d_n^2 - x_n^2 - y_n^2 - z_n^2\\
+        \end{matrix}
+    \right]
+\end{equation}
+
+przy założeniu, że $\mathbf{x} \in E$, gdzie $E = \left\{(x_0, x_1, x_2, x_3)^T \in {\mathbb{R}}^4\ |\ x_0 = {x_1}^2 + {x_2}^2 + {x_3}^2\right\}$.
+
+\subsection{Liniowa metoda najmniejszych kwadratów}
+
+Aby rozwiązać powyższe równanie liniowe obrano liniową metodę najmniejszych kwadratów. Z definicji rozwiązaniem równania
+\begin{equation}
+    \mathbf{A} \cdot \mathbf{x} = \mathbf{b}\,,
+\end{equation}
+gdzie $\mathbf{A} \in \mathbb{R}^{n\times m}$, $\mathbf{b} \in \mathbb{R}^n$ są znane będzie taki $\mathbf{x} \in \mathbb{R}^m$, który minimalizuje
+\begin{equation}
+    \sum_{i=1}^{n}{\left|\sum_{j=1}^{m}{A_{ij}x_j} - b_i\right|^2} = ||\mathbf{A}\mathbf{x} - \mathbf{b}||^2
+\end{equation}
+Taki $\mathbf{x}$ obliczamy przy użyciu powszechnie znanego w kontekście najmniejszych kwadratów \textit{równania normalnego} postaci
+\begin{equation}
+    \mathbf{A}^T\mathbf{A}\hat{\mathbf{x}} = \mathbf{A}^T\mathbf{b}
+\end{equation}
+lub po przekształceniu
+\begin{equation}\label{eq:lls}
+    \hat{\mathbf{x}} = {\left(\mathbf{A}^T\mathbf{A}\right)}^{-1}\mathbf{A}^T\mathbf{b}
+\end{equation}
+
+Jeśli żadna trójka odbiorników nie jest współliniowa ($\rank\mathbf{A} = m$) oraz pomiarów jest więcej niż wymiarów $(n > m)$ możemy zagwarantować odwracalność $\mathbf{A}$, a co za tym idzie istnienie $\hat{\mathbf{x}}$.
+
+\subsubsection{Rozwiązanie ogólne}
+
+Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni $m$-wymiarowej i $n$ odbiorników:
+\begin{equation}
+    \left[
+        \begin{matrix}
+            1 & -2\mathbf{x^{(1)}}\\
+            1 & -2\mathbf{x^{(2)}}\\
+            \vdots & \vdots\\
+            1 & -2\mathbf{x^{(n)}}\\
+        \end{matrix}
+    \right]
+    \left[
+        \begin{matrix}
+            \sum_{i=1}^{m}{x_i}^2\\
+            x_1\\
+            \vdots\\
+            x_m
+        \end{matrix}
+    \right]
+    =
+    \left[
+        \begin{matrix}
+            d_1^2 - \sum_{i=1}^{m}{x_i^{(1)}}^2\\
+            d_2^2 - \sum_{i=1}^{m}{x_i^{(2)}}^2\\
+            \vdots\\
+            d_n^2 - \sum_{i=1}^{m}{x_i^{(n)}}^2\\
+        \end{matrix}
+    \right]
+\end{equation}
+z analogicznym ograniczeniem $\mathbf{x} \in E$.
+
+\section{Przykładowy egzemplarz problemu}
 
 \begin{figure}[!h]
     \centering
@@ -24,110 +188,6 @@ Multilateracja jest techniką lokalizacji pozwalającą obliczyć nieznane koord
 \label{fig:example}
 \end{figure}
 
-Znalezienie koordynatów $(x,y,z)$ punktu N jest równoważne z rowiązaniem układu równań,
-\begin{equation}\label{eq:base}
-    \begin{dcases}
-        {(x - x_1)}^2 + {(y - y_1)}^2 + {(z - z_1)}^2 = {d_1}^2\\
-        {(x - x_2)}^2 + {(y - y_2)}^2 + {(z - z_2)}^2 = {d_2}^2\\
-        {(x - x_3)}^2 + {(y - y_3)}^2 + {(z - z_3)}^2 = {d_3}^2\\
-    \end{dcases}
-\end{equation}
-
-\section{Aktualny stan wiedzy}
-
-W dostępnej literaturze obejmującą temat multilateracji i systemów multilateracyjnych opisanych jest wiele podejść do tego problemu:
-
-\begin{itemize}
-    \item układ równań liniowych\cite{murphy1995determination},
-    \item metoda najmniejszej sumy kwadratów\cite{murphy1995determination},\cite{norrdine2012algebraic},
-    \item nieliniowa metoda najmniejszej sumy kwadratów\cite{murphy1995determination},
-    \item rozkład według wartości szczególnych\cite{murphy1995determination}.
-\end{itemize}
-Na szczególną uwagę zasługuje praca~\cite{murphy1995determination}, w której przeprowadzono eksperymenty porównawcze wyżej wymienionych metod.
-
-Motywacją tej pracy jest brak dostępnych prac obejmujących to zagadnienie w spektrum fal dźwiękowych, w przeciwieństwie do fal elektromagnetycznych, an których opierają się systemy opisane w pozycjach bibliograficznych. Pytania, które zostały postawione:
-
-\subsection{Obrane rozwiązanie}
-
-W pracy wybrano rozwiązanie przedstawione w pracy~\cite{norrdine2012algebraic}. Przekształćmy podstawowy układ równań~\ref{eq:base} do postaci
-\begin{equation}
-    \begin{dcases}
-        (x^2 + y^2 + z^2) - 2x_1x - 2y_1y - 2z_1z = d_1^2 - x_1^2 - y_1^2 - z_1^2\\
-        (x^2 + y^2 + z^2) - 2x_2x - 2y_2y - 2z_2z = d_2^2 - x_2^2 - y_2^2 - z_2^2\\
-        (x^2 + y^2 + z^2) - 2x_3x - 2y_3y - 2z_3z = d_3^2 - x_3^2 - y_3^2 - z_3^2\\
-    \end{dcases}
-\end{equation},
-a następnie do reprezenacji macierzowej,
-\begin{equation}
-    \left[
-        \begin{matrix}
-            1 & -2x_1 & -2y_1 & -2z_1\\
-            1 & -2x_2 & -2y_2 & -2z_2\\
-            1 & -2x_3 & -2y_3 & -2z_3\\
-        \end{matrix}
-    \right]
-    \left[
-        \begin{matrix}
-            x^2 + y^2 + z^2\\
-            x\\
-            y\\
-            z\\
-        \end{matrix}
-    \right]
-    =
-    \left[
-        \begin{matrix}
-            d_1^2 - x_1^2 - y_1^2 - z_1^2\\
-            d_2^2 - x_2^2 - y_2^2 - z_2^2\\
-            d_3^2 - x_3^2 - y_3^2 - z_3^2\\
-        \end{matrix}
-    \right]
-\end{equation},
-którą można przedstawić jako
-\begin{equation}
-    \mathbf{A} \cdot \mathbf{x} = \mathbf{b}
-\label{eq:matrix}
-\end{equation}
-przy założeniu, że $\mathbf{x} \in E$, gdzie $E = \left\{(x_0, x_1, x_2, x_3)^T \in {\mathbb{R}}^4\ |\ x_0 = {x_1}^2 + {x_2}^2 + {x_3}^2\right\}$.
-
-\subsection*{Rozwiązanie ogólne}
-
-Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni $n$-wymiarowej i $m$ odbiorników:
-\begin{equation}
-    \left[
-        \begin{matrix}
-            1 & -2\mathbf{x^{(1)}}\\
-            1 & -2\mathbf{x^{(2)}}\\
-            \vdots & \vdots\\
-            1 & -2\mathbf{x^{(m)}}\\
-        \end{matrix}
-    \right]
-    \left[
-        \begin{matrix}
-            \sum_{i=1}^{n}{x_i}^2\\
-            x_1\\
-            \vdots\\
-            x_n
-        \end{matrix}
-    \right]
-    =
-    \left[
-        \begin{matrix}
-            d_1^2 - \sum_{i=1}^{n}{x_i^{(1)}}^2\\
-            d_2^2 - \sum_{i=1}^{n}{x_i^{(2)}}^2\\
-            \vdots\\
-            d_m^2 - \sum_{i=1}^{n}{x_i^{(m)}}^2\\
-        \end{matrix}
-    \right]
-\end{equation}
-z analogicznym ograniczeniem $\mathbf{x} \in E$. Zachowując oznaczenia z równania~\ref{eq:matrix} rozwiązanie aproksymacyjne $\hat{\mathbf{x}}$ w sensie metody najmniejszych kwadratów ma postać
-
-\begin{equation}\label{eq:lls}
-    \hat{\mathbf{x}} = {\left(\mathbf{A}^T\mathbf{A}\right)}^{-1}\mathbf{A}^T\mathbf{b}
-\end{equation}
+Staramy się ustalić pozycję punktu $N$ na postawie współrzędnych punktów $O_1, O_2, O_3$ oraz odległości $d_1, d_2, d_3$. Wykorzystując równanie~\ref{eq:lls} podstawiamy znane wartości otrzymując $\mathbf{x}$ zawierający szukane współrzędne. 
 
 Jak łatwo zauważyć pierwsza część lewej strony równości zależy jedynie od macierzy $\mathbf{A}$, która nie zawiera zmiennych związanych z węzłem źródłowym, co pozwala, przy założeniu stacjonarności odbiorników, na wcześniejsze i jednorazowe przeprowadzenie kosztownych przekształceń tej macierzy. W tej sytuacji jednorazowe obliczenie rozwiązania wymaga jedynie obliczenia wektora $\mathbf{b}$ oraz iloczynu skalarnego.
-
-\begin{itemize}
-    \item 
-\end{itemize}
