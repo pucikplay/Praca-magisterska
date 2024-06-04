@@ -1,47 +1,50 @@
 \chapter{Sprzęt systemowy}\label{chap:hardware}
 
-Znaczna większość prac adresujacych temat multilateracji opiera się na systemach urządzeń działających w zakresie fal elektromagnetycznych (\cite{murphy1995determination},\cite{norrdine2012algebraic},\cite{9254075}). W tej pracy poświęcimy uwagę systemowi działającemu w domenie dźwięku, jak ten aspekt wpływa na skuteczność i dokładność rozwiązania problemu multilateracji.
+Niemal wszystkie prace adresujace temat multilateracji opierają się na systemach urządzeń działających w zakresie fal elektromagnetycznych. W tej pracy poświęcimy uwagę systemowi działającemu w domenie fal dźwiękowych, jak ten aspekt wpływa na skuteczność i dokładność rozwiązania problemu multilateracji.
 
-\begin{figure}[!h]
-    \centering
-    \begin{tikzpicture}[circlenode/.style={circle, draw=black}, node distance=3cm, thick]
-        \node[circlenode] (S) {
-            \begin{tikzpicture}[circlenode/.style={circle, draw=black}, node distance=5mm, thick]
-                \node[circlenode] (B) {Broker};
-                \node[circlenode] (P) [left=of B] {Serwer obliczeniowy};
-                \node (T) [above=of P] {\textbf{Host}};
-                \draw[<->,thick] (B) to (P);
-            \end{tikzpicture}
-        };
-        \node[circlenode] (N) [right=of S] {Nadajnik};
-        \node[circlenode] (O1) [above=of N] {Odbiornik 1.};
-        \node[circlenode] (O2) [below=of N] {Odbiornik 2.};
+\begin{center}
+\begin{tikzpicture}
+  % Styles for nodes
+  \tikzstyle{server}=[draw, rectangle, minimum width=8cm, minimum height=3cm, fill=blue!10]
+  \tikzstyle{inner}=[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, fill=green!10]
+  \tikzstyle{node}=[draw, ellipse, minimum width=2cm, minimum height=1cm, fill=red!10]
+  \tikzstyle{line}=[draw, -]
 
-        \draw[<->,thick] (N) to (S);
-        \draw[<->,thick] (O1) to (S);
-        \draw[<->,thick] (O2) to (S);
-    \end{tikzpicture}
-    \caption{Topologia systemu}
-\label{fig:topology}
-\end{figure}
+  % Main server
+  \node[server] (server) at (0, 0) {};
+  \node at (0, 1.1) {Sewer}; % Server label moved above the server node
 
-\section{Serwer MQTT}
+  % Inner nodes
+  \node[inner] (calc) at (-1.8, -.2) {Serwer obliczeniowy};
+  \node[inner] (broker) at (2.2, -.2) {Broker};
 
-Urządzenia systemowe porozumiewają się przy uzyciu protokołu MQTT, każdy z węzłów oraz serwer łączą się z centralnym brokerem (?), który przekierowuje wiadomości do klientów, które zasubskrybowały dany temat.
+  % Connect inner nodes
+  \path[line] (calc) -- (broker);
+
+  % External nodes
+  \node[node] (sender) at (-7, 1.5) {Nadajnik};
+  \node[node] (receiver) at (-7, -1.5) {Odbiornik};
+
+  % Connect external nodes to server
+  \path[line] (sender) -- node[above]{wifi} (server);
+  \path[line] (server) -- node[above]{wifi} (receiver);
+
+\end{tikzpicture}
+\end{center}
+
+\section{Broker MQTT}
+
+Urządzenia systemowe porozumiewają się przy uzyciu protokołu MQTT. Każdy z węzłów oraz serwer łączą się z centralnym brokerem, który przekierowuje wiadomości opatrzone tematem do klientów subsrybujących dany temat. Broker jest oparty o otwarty projekt \textit{Mosquitto}.
+
+\section{Serwer obliczeniowy}
+
+Centralnym urządzeniem systemu jest serwer obliczeniowy kumulujący dane otrzymane z sensorów do rozwiązania problemu multilateracji. Do implementacji serwera zdecydowano się użyć języka \texttt{python} ze względu na dostępność bibiotek oferujących narzędzia potrzebne do działania serwera, takie jak pakiet \texttt{paho} oferujący klienta MQTT czy pakiet matematyczny \texttt{numpy}. Ponadto prostota składni tego języka pozwoliła na szybkie wdrażanie modyfikacji działania kolejnych aspektów serwera. Serwer hostowany jest na tej samej maszynie co broker MQTT.
 
 \section{Węzeł}
 
-Każdy z węzłów oparty jest o mikrokontroler ESP8266 zaprogramowany przy użyciu Arduino IDE. W systemie występują dwa rodzaje węzłów:
-
+Każdy z węzłów oparty jest o mikrokontroler ESP8266-01s zaprogramowany przy użyciu Arduino IDE w języku \texttt{C++}. W systemie występują dwa rodzaje węzłów:
 \begin{itemize}
     \item nadajnik,
     \item odbiornik.
 \end{itemize}
-
-Nadajnik jest wyposażony jest w przełącznik cewkowy sterowany przez mikrokontroler, który służy do kontrolowania brzęczyka zasilanego napięciem $12V$. Wybrano brzęczyk o głośności $90dB$ w celu zmaksymalizowania zasięgu działania systemu.
-
-Odbiornik natomiast wyposażony jest w mikrofon elektretowy dającego binarny sygnał wyjściowy. Czułość mikrofonu dostrajana jest ręcznie poprzez potencjometr.
-
-\section{Serwer obliczeniowy}
-
-Centralnym urządzeniem systemu jest serwer obliczeniowy kumulujący dane otrzymane z sensorów do rozwiązania problemu multilateracji. Serwer hostowany jest na tej samej maszynie co broker MQTT.
+Nadajnik jest wyposażony jest w przełącznik cewkowy sterowany przez mikrokontroler, który służy do kontrolowania brzęczyka zasilanego napięciem $12V$. Wybrano brzęczyk o głośności $90dB$ w celu zmaksymalizowania zasięgu działania systemu. Odbiornik jest natomiast wyposażony w mikrofon elektretowy, którego sygnał wzmacniany jest przez wzmacniacz operacyjny. Sygnał analogowy jest ostatecznie zmieniany na sygnał binarny na podstawie odniesienia to określonego poziomu napięcia. Czułość mikrofonu dostrajana jest ręcznie poprzez potencjometr.

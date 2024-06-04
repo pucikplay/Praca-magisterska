@@ -1,19 +1,16 @@
 \chapter{Eksperyment zerowy}\label{chap:experiment_zero}
 
-Po przygotowaniu komponentów systemu wstępnie zaimplementowano program rozwiązujący problem multilateracji, aby zbadać, czy problem nie jest zbyt trywialny, aby opisać go w pracy, lub przeciwnym razie, na podstawie wyników eksperymentu zastanowić się jakie przeszkody stoją na drodze do rozwiązania o zadowalającej precyzji.
+Po przygotowaniu komponentów systemu wstępnie zaimplementowano program rozwiązujący problem multilateracji, aby zbadać czy problem nie jest zbyt trywialny, aby opisać go w pracy, lub przeciwnym razie, na podstawie wyników eksperymentu, zastanowić się jakie przeszkody stoją na drodze do rozwiązania o zadowalającej precyzji.
 
 \section{Opis działania}
 
 Program zaimplementowano na podstawie rozwiązania aproksymacyjnego \ref{eq:lls} postaci
-
 \begin{equation}
-    \label{eq:lls}
-    \hat{\boldsymbol{x}} = {\left(A^T A\right)}^{-1} A^T \boldsymbol{b}
+    \hat{\mathbf{x}} = {\left(\mathbf{A}^T\mathbf{A}\right)}^{-1}\mathbf{A}^T\mathbf{b}
 \end{equation}
-
 Współrzędne odbiorników są znane.
 
-\subsection{Program węzła}
+\subsection{Programy węzłów}
 
 \begin{algorithm}
 \caption{Program nadajnika}\label{alg:source}
