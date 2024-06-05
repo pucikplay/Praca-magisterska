@@ -54,7 +54,7 @@ def plot_multiple(df_dict, lims, nodes, mean=False):
         
     ax.set_xlabel('x')
     ax.set_ylabel('y')
-    plt.title(f'Pozycje odbiornika')
+    # plt.title(f'Pozycje odbiornika')
     fig.set_size_inches(8,6)
     fig.set_dpi(600)
     if mean:

@@ -54,7 +54,7 @@ def plot_multiple(df_dict, lims, num, mean=False):
         
     ax.set_xlabel('x')
     ax.set_ylabel('y')
-    plt.title(f'Pozycje odbiornika')
+    # plt.title(f'Pozycje odbiornika')
     fig.set_size_inches(8,6)
     fig.set_dpi(600)
     if mean:
@@ -102,9 +102,9 @@ if __name__ == '__main__':
                                                   '[-0.15, -0.15]',
                                                   '[0.15, -0.15]']}
 
-    plot_multiple(dict_1, {'xlim': (-0.4, 0.9), 'ylim': (-0.8, 0.4)}, 1)
-    plot_multiple(dict_2, {'xlim': (-0.4, 0.5), 'ylim': (-0.6, 0.4)}, 2)
-    plot_multiple(dict_3, {'xlim': (-0.8, 0.4), 'ylim': (-0.9, 0.3)}, 3)
-    plot_multiple(dict_1, {'xlim': (-0.4, 0.9), 'ylim': (-0.8, 0.4)}, 1, mean=True)
-    plot_multiple(dict_2, {'xlim': (-0.4, 0.5), 'ylim': (-0.6, 0.4)}, 2, mean=True)
-    plot_multiple(dict_3, {'xlim': (-0.8, 0.4), 'ylim': (-0.9, 0.3)}, 3, mean=True)
+    plot_multiple(dict_1, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 1)
+    plot_multiple(dict_2, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 2)
+    plot_multiple(dict_3, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 3)
+    plot_multiple(dict_1, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 1, mean=True)
+    plot_multiple(dict_2, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 2, mean=True)
+    plot_multiple(dict_3, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 3, mean=True)

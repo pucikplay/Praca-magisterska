@@ -54,7 +54,7 @@ def plot_multiple(df_dict, lims, angle, mean=False):
         
     ax.set_xlabel('x')
     ax.set_ylabel('y')
-    plt.title(f'Pozycje odbiornika')
+    # plt.title(f'Pozycje odbiornika')
     fig.set_size_inches(8,6)
     fig.set_dpi(600)
     if mean:
@@ -84,5 +84,5 @@ if __name__ == '__main__':
             df_dict[angle][point] = df
 
     for angle in angles:
-        plot_multiple(df_dict[angle], {'xlim': (-0.5, 0.8), 'ylim': (-1, 0.7)}, angle)
-        plot_multiple(df_dict[angle], {'xlim': (-0.5, 0.8), 'ylim': (-1, 0.7)}, angle, mean=True)
+        plot_multiple(df_dict[angle], {'xlim': (-1, 1), 'ylim': (-1, 1)}, angle)
+        plot_multiple(df_dict[angle], {'xlim': (-1, 1), 'ylim': (-1, 1)}, angle, mean=True)
