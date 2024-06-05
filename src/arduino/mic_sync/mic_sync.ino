@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #define MIC_PIN 0
-#define BOARD_ID "3"
+#define BOARD_ID "7"
 #define TOPIC "active"
 
 const char* ssid = "DECO_E4";
