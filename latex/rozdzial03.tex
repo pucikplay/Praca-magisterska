@@ -72,8 +72,10 @@ Współrzędne odbiorników są znane.
 \begin{itemize}
     \item $micros()$ {-} funkcja zwracająca liczbę mikrosekund od uruchomienia urządzenia,
     \item $TOPIC$ {-} nazwa kanału MQTT korespondującego do danego węzła,
-    \item $TIME\_TOPIC$ {-} nazwa kanału MQTT służącego do przesyłania wiadomości o synchronizacji czasu.
-    \item $publish()$ {-} funkcja publikująca wiadomość na zadanym kanale MQTT
+    \item $TIME\_TOPIC$ {-} nazwa kanału MQTT służącego do przesyłania wiadomości o synchronizacji czasu,
+    \item $BUZZ\_INTERVAL$ {-} interwał czasowy pomiędzy sygnałami brzęczyka,
+    \item $ MIC\_INTERVAL$ {-} interwał czasowy pomiędzy dwoma oddzielnymi rejestracjami sygnału wysokiego na mikrofonie,
+    \item $publish()$ {-} funkcja publikująca wiadomość na zadanym kanale MQTT.
 \end{itemize}
 
 \subsection{Program serwera}
@@ -84,8 +86,8 @@ Współrzędne odbiorników są znane.
     \State\ $M \gets {\left(A^T A\right)}^{-1} A^T$
     \Function{$calc\_position$}{}
         \For{$node$ in $NODES$}
-            \State\ $d \gets (SS / 10^{6}) \cdot time(node) - time(source)$
-            \State\ $b_{node} \gets d - \sum{coords(node)^2}$
+            \State\ $d \gets (SS / 10^{6}) \cdot time[node] - time[source]$
+            \State\ $b_{node} \gets d - \sum_{x \in coords[node]}{x^2}$
         \EndFor
         \State\ return $M \cdot b$
     \EndFunction
@@ -103,8 +105,8 @@ Współrzędne odbiorników są znane.
 \begin{itemize}
     \item $A$ - macierz zawierająca współrzędne obiorników z równania \ref{eq:matrix}
     \item $SS$ {-} prędkość dźwięku $\left[\frac{m}{s}\right]$,
-    \item $time()$ {-} czas dostarczony w ostatniej wiadomości od węzła,
-    \item $coords()$ {-} współrzędne węzła,
+    \item $time$ {-} czasy dostarczone w ostatniej wiadomości od węzła,
+    \item $coords$ {-} współrzędne węzłów,
     \item $t_1$ {-} czas pomiędzy obliczeniami pozycji,
     \item $t_2$ {-} czas pomiędzy wiadomościami synchronizującymi zegary.
 \end{itemize}

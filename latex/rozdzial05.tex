@@ -63,49 +63,129 @@ Na wykresach można zauważyć trendy związane ze zmniejszającą się czułoś
 
 Podobne efekty zaobserwowano kiedy brzęczyk nie był kierowany bezpośrednio w kierunku odbiornika.
 
-
-
 \section{Ewaluacja działania systemu}
 
+W celu ewaluacji działania przeprowadzono szereg eksperymentów testujących działanie systemu multilateracyjnego w zaproponowanych scenariuszach. Bazując na uprzednich obserwacjach rozszerzono program serwera obliczeniowego tak, aby bezpośrednio przed multilateracją przeprowadzone były synchronizacja czasu oraz korekcja odległości. Zasada działania obu typów węzłów pozostała niezmieniona.
+
+\subsection{Wyniki}
+
+Wyniki eksperymentów przedstawiono na wykresach. Mniejsze punkty o wyblakłym kolorze reprezentują badane punkty, w których umieszczony był węzeł nadawczy, natomiast większe, nasyconym kolorze odpowiadające im punkty będące uśrednionym wynikiem 25 powtórzeń polecenia lokalizacji w systemie. Wykresy należące do tej samej grupy zachowują skalę w celu łatwiejszego porównania.
+
+\subsubsection{Eksperymeny jednowymiarowe}
+
+Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jednowymiarowego, aby sprawdzić czy dokładność i stabilność pomiarów w systemie została poprawiona.
+
+
+
 \begin{figure}[h]
 \centering
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_1d/positions_2_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_1d/positions_4_mean.png}
-\caption{Średnie obliczonych odległości}
-% \label{pic:slope_test_mean}
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_1d/positions_2_mean.png}
+\caption{2 węzły}
+\label{pic:1d_2_mult}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_1d/positions_4_mean.png}
+    \caption{4 węzły}
+\label{pic:1d_4_mult}
+\end{subfigure}
+\caption{Średnie obliczonych pozycji, wariant 1D}
+\label{pic:1d_mult}
+\end{figure}
+
+\subsubsection{Eksperymeny dwuwymiarowe}
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d/positions_1_mean.png}
+\caption{zestaw punktów 1.}
+\label{pic:2d_1_mult}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d/positions_2_mean.png}
+\caption{zestaw punktów 2.}
+\label{pic:2d_2_mult}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d/positions_3_mean.png}
+\caption{zestaw punktów 3.}
+\label{pic:2d_3_mult}
+\end{subfigure}
+\caption{Średnie obliczonych pozycji, wariant 2D}
+\label{pic:2d_mult}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d/positions_1_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d/positions_2_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d/positions_3_mean.png}
-\caption{Średnie obliczonych odległości}
-% \label{pic:slope_test_mean}
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_angle/positions_0_mean.png}
+\caption{rotacja $0^{\circ}$}
+\label{pic:2d_0_angle_mult}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_angle/positions_45_mean.png}
+\caption{rotacja $45^{\circ}$}
+\label{pic:2d_45_angle_mult}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_angle/positions_90_mean.png}
+\caption{rotacja $90^{\circ}$}
+\label{pic:2d_90_angle_mult}
+\end{subfigure}
+\caption{Średnie obliczonych pozycji, wariant 2D z rotacją}
+\label{pic:2d_angle_mult}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d_angle/positions_0_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d_angle/positions_45_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d_angle/positions_90_mean.png}
-\caption{Średnie obliczonych odległości}
-% \label{pic:slope_test_mean}
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+\caption{3 węzły}
+\label{pic:2d_3_num_mult}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+\caption{4 węzły}
+\label{pic:2d_4_num_mult}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+\caption{5 węzłów}
+\label{pic:2d_5_num_mult}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+\caption{6 węzłów}
+\label{pic:2d_6_num_mult}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+\caption{7 węzłów}
+\label{pic:2d_7_num_mult}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+\caption{8 węzłów}
+\label{pic:2d_8_num_mult}
+\end{subfigure}
+\caption{Średnie obliczonych pozycji, wariant 2D ze zmienną liczbą węzłów}
+\label{pic:2d_num_mult}
 \end{figure}
-
-\begin{figure}[h]
-\centering
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d_num/positions_3_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d_num/positions_4_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d_num/positions_5_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d_num/positions_6_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d_num/positions_7_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mult_lat_2d_num/positions_8_mean.png}
-\caption{Średnie obliczonych odległości}
-% \label{pic:slope_test_mean}
-\end{figure}
-
-\section{Wyniki}
 
 \subsection{Interpretacja}
 
