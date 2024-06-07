@@ -73,9 +73,7 @@ Wyniki eksperymentów przedstawiono na wykresach. Mniejsze punkty o wyblakłym k
 
 \subsubsection{Eksperymeny jednowymiarowe}
 
-Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jednowymiarowego, aby sprawdzić czy dokładność i stabilność pomiarów w systemie została poprawiona.
-
-
+Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jednowymiarowego, aby sprawdzić czy dokładność i stabilność pomiarów w systemie została poprawiona. Tak samo jak pierwotnie nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0.5)$ i $(0.5)$, wszystkie węzły były stacjonarne. Nadajnik co $0.5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0.5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Następnie powtórzono eksperyment z użyciem dwóch dodatkowych węzłów umiejscowionych w punktach $(-0.25)$ i $(0.25)$. Wyniki przedstawiono na wykresach~\ref{pic:1d_mult}.
 
 \begin{figure}[h]
 \centering
@@ -96,6 +94,14 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
 \end{figure}
 
 \subsubsection{Eksperymeny dwuwymiarowe}
+
+Następnie sprawdzono system w wariancie dwuwymiarowym. Zby zachować podobną maksymalną odległość pomiędzy odbiornikami zdecydowano na umiejscowienie czterech węzłów na wierzchołkach kwadratu o boku $0.6$ symetrycznego względem puntu $(0,0)$, a więc na punktach o współrzędnych $(\pm0.3, \pm0.3)$. Zbadano dokładność lokalizacji w trzech grupach punktów:
+\begin{itemize}
+    \item $\{(0,0), (0.3,0.3), (-0.3,0.3), (-0.3,-0.3), (0.3,-0.3)\}$
+    \item $\{(0,0), (0,0.3), (0,-0.3), (-0.3,0), (0.3,0)\}$
+    \item $\{(0,0), (0.15,0.15), (-0.15,0.15), (-0.15,-0.15), (0.15,-0.15)\}$
+\end{itemize}
+Wyniki przedstawiono na wykresach~\ref{pic:2d_mult}.
 
 \begin{figure}[h]
 \centering
@@ -121,6 +127,8 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
 \label{pic:2d_mult}
 \end{figure}
 
+Następnie w celu ewaluacji wpływu charakterystyki otoczenia na działanie systemu przeprowadzono trzy następujące bezpośrednio po sobie eksperymenty zachowując ustaloną na początku synchronizację zegarów i stałe korekcji odległości. Sprawdzono dokładność estymacji tego samego zbioru punktów wyjściowo oraz po rotacji całego układu o $45^{\circ}$ i $90^{\circ}$ zgodnie z ruchem wskazówek zegara. Wyniki przedstawiono na wykresach~\ref{pic:2d_angle_mult}. 
+
 \begin{figure}[h]
 \centering
 \begin{subfigure}{.5\textwidth}
@@ -145,6 +153,8 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
 \label{pic:2d_angle_mult}
 \end{figure}
 
+Ostatecznie sprawdzono zachowanie systemu wraz ze zmianą liczby węzłów odbiorczych od minimalnej liczby trzech aż do ośmiu. Węzły umiejscowiono na punktach ze zbioru $\{(0,0), (0.3,0.3), (-0.3,0.3), (-0.3,-0.3), (0.3,-0.3), (0, 0.425), (-0.425, 0), (0, -0.425), (0.425, 0)\}$ oraz dodawano je zgodnie z tą kolejnością. Wyniki przedstawiono na wykresach~\ref{pic:2d_num_mult}. 
+
 \begin{figure}[h]
 \centering
 \begin{subfigure}{.5\textwidth}
@@ -155,31 +165,31 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_4_mean.png}
 \caption{4 węzły}
 \label{pic:2d_4_num_mult}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_5_mean.png}
 \caption{5 węzłów}
 \label{pic:2d_5_num_mult}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_6_mean.png}
 \caption{6 węzłów}
 \label{pic:2d_6_num_mult}
 \end{subfigure}
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_7_mean.png}
 \caption{7 węzłów}
 \label{pic:2d_7_num_mult}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_8_mean.png}
 \caption{8 węzłów}
 \label{pic:2d_8_num_mult}
 \end{subfigure}
@@ -187,6 +197,4 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
 \label{pic:2d_num_mult}
 \end{figure}
 
-\subsection{Interpretacja}
-
-\subsection{Wnioski}
+\section{Interpretacja i wnioski}
