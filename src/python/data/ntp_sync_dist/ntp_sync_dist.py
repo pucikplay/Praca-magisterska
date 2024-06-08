@@ -19,7 +19,7 @@ def plot_dists(df, name, ylim, slope):
     for y in range(10):
         df_T.plot(x='index', y=y, color='red', kind='scatter', s=10, ax=ax)
 
-    plt.title("Obliczone odległości")
+    # plt.title("Obliczone odległości")
     plt.xlabel("Rzeczywista odległość")
     plt.ylabel("Obliczona odległość")
     ax.get_legend().remove()

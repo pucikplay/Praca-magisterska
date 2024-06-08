@@ -38,8 +38,10 @@ Współrzędne odbiorników są znane.
         \EndIf
     \EndLoop
 \end{algorithmic}
+\vspace{5pt}
+\hrule
 \end{center}
-\newpage
+%\newpage
 \begin{center}
 \captionof{algorithm}{Program odbiornika}\label{alg:sink}
 \begin{algorithmic}[1]
@@ -67,6 +69,8 @@ Współrzędne odbiorników są znane.
         \EndIf
     \EndLoop
 \end{algorithmic}
+\vspace{5pt}
+\hrule
 \end{center}
 
 \begin{itemize}
@@ -74,7 +78,7 @@ Współrzędne odbiorników są znane.
     \item $TOPIC$ {-} nazwa kanału MQTT korespondującego do danego węzła,
     \item $TIME\_TOPIC$ {-} nazwa kanału MQTT służącego do przesyłania wiadomości o synchronizacji czasu,
     \item $BUZZ\_INTERVAL$ {-} interwał czasowy pomiędzy sygnałami brzęczyka,
-    \item $ MIC\_INTERVAL$ {-} interwał czasowy pomiędzy dwoma oddzielnymi rejestracjami sygnału wysokiego na mikrofonie,
+    \item $MIC\_INTERVAL$ {-} interwał czasowy pomiędzy dwoma oddzielnymi rejestracjami sygnału wysokiego na mikrofonie,
     \item $publish()$ {-} funkcja publikująca wiadomość na zadanym kanale MQTT.
 \end{itemize}
 
@@ -86,8 +90,8 @@ Współrzędne odbiorników są znane.
     \State\ $M \gets {\left(A^T A\right)}^{-1} A^T$
     \Function{$calc\_position$}{}
         \For{$node$ in $NODES$}
-            \State\ $d \gets (SS / 10^{6}) \cdot time[node] - time[source]$
-            \State\ $b_{node} \gets d - \sum_{x \in coords[node]}{x^2}$
+            \State\ $d \gets (SS / 10^{6}) \cdot time_{node} - time_{source}$
+            \State\ $b_{node} \gets d - \sum_{x \in coords_{node}}{x^2}$
         \EndFor
         \State\ return $M \cdot b$
     \EndFunction
@@ -100,13 +104,15 @@ Współrzędne odbiorników są znane.
         \State\ $sleep(t_2)$
     \EndLoop
 \end{algorithmic}
+\vspace{5pt}
+\hrule
 \end{center}
 
 \begin{itemize}
     \item $A$ - macierz zawierająca współrzędne obiorników z równania \ref{eq:matrix}
     \item $SS$ {-} prędkość dźwięku $\left[\frac{m}{s}\right]$,
-    \item $time$ {-} czasy dostarczone w ostatniej wiadomości od węzła,
-    \item $coords$ {-} współrzędne węzłów,
+    \item $time$ {-} czas dostarczony w ostatniej wiadomości od węzła,
+    \item $coords$ {-} współrzędne węzłów nadawczych,
     \item $t_1$ {-} czas pomiędzy obliczeniami pozycji,
     \item $t_2$ {-} czas pomiędzy wiadomościami synchronizującymi zegary.
 \end{itemize}
@@ -141,33 +147,40 @@ Pierwsze testy przeprowadzone zostały na systemie operującym w jednym wymiarze
 
 Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0.5)$ i $(0.5)$, wszystkie węzły były stacjonarne. Nadajnik co $0.5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0.5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Wykonano 5 następujących bezpośrednio po sobie eksprymentów, poniżej przedstawiono wyniki trzech pierwszych, ponieważ są wystarczające do ukazania zachodzącego trendu.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-    \includegraphics[scale=0.6]{pics/position/position_0.png}
-\caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
-\label{fig:position_0}
-\end{figure}
-
-\begin{figure}[h]
+\begin{subfigure}{\textwidth}\label{fig:position_0}
 \centering
-    \includegraphics[scale=0.6]{pics/position/position_1.png}
-\caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
-\label{fig:position_1}
+    \includegraphics[width=\linewidth]{pics/position/position_0.png}
+\caption{Test 1.}
+\end{subfigure}
 \end{figure}
-
-\begin{figure}[h]
+\begin{figure}[H]
+\ContinuedFloat\centering
+\begin{subfigure}{\textwidth}\label{fig:position_1}
 \centering
-    \includegraphics[scale=0.6]{pics/position/position_2.png}
-\caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
-\label{fig:position_2}
+    \includegraphics[width=\linewidth]{pics/position/position_1.png}
+\caption{Test 2.}
+\end{subfigure}
 \end{figure}
-
-% \begin{figure}[h]
-% \centering
-%     \includegraphics[scale=0.6]{pics/position/position_3.png}
-% \caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
-% \label{fig:position_2}
-% \end{figure}
+\begin{figure}[H]
+\ContinuedFloat\centering
+\begin{subfigure}{\textwidth}\label{fig:position_2}
+\centering
+    \includegraphics[width=\linewidth]{pics/position/position_2.png}
+\caption{Test 3.}
+\end{subfigure}
+\end{figure}
+\begin{figure}[H]
+\ContinuedFloat\centering
+\begin{subfigure}{\textwidth}\label{fig:position_3}
+\centering
+    \includegraphics[width=\linewidth]{pics/position/position_3.png}
+\caption{Test 4.}
+\end{subfigure}
+\caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
+\label{fig:position}
+\end{figure}
 
 \section{Interpretacja wyników i wnioski}
 
@@ -180,7 +193,6 @@ Na niską dokładność i stabilność wyników może mieć wpływ wiele czynnik
     \item niepoprawna kalibracja czułości mikrofonów,
     \item fałszywe odczyty wynikające z odbić fali dźwiękowej,
     \item niska jakość rozwiązania aproksymacyjnego.
-    \item TODO
 \end{itemize}
 
 Obserwując skoki pomiędzy sąsiadującymi obserwacjami położenia rozdzielającymi okresy względnej stabilności i mając na uwadze statyczność otoczenia systemu możemy śmiało wysnuć wniosek, że tak nagła zmiana średniej obliczanej wartości może wynikać najprawdopodobniej z błędnej synchronizacji czasu. Wygląda na to, że sygnał wysyłany przez serwer obliczeniowy nie jest odbierany we wszystkich węzłach równocześnie. Następny rozdział będzie poświęcony badaniu i tworzeniu algorytmu synchronizacji zegarów w węzłach.

@@ -20,7 +20,7 @@ Dodatkowym wnioskiem przedstawionym w powyższej pracy jest własność prawdziw
 
 Jak łatwo zauważyć im krótszy jest czas propagacji tym lepsze przybliżenie dostajemy.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \resizebox{1\textwidth}{!}{%
 \begin{tikzpicture}
@@ -48,23 +48,21 @@ Na postawie tych informacji podjęto próbę synchronizacji programowej zegarów
 
 W celu poprawy czytelności wyniki przesunięć zostały znormalizowane poprzez przesunięcie o wartość średnią dla każdego z węzłów.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-    \includegraphics[width=.49\textwidth]{pics/ntp_sync/offsets.png}
-    \includegraphics[width=.49\textwidth]{pics/ntp_sync/offsets_close.png}
+    \includegraphics[width=\textwidth]{pics/ntp_sync/offsets.png}
 \caption{Wyniki pomiarów przesunięć zegarów}
 \label{pic:offsets_ntp}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-    \includegraphics[width=.49\textwidth]{pics/ntp_sync/prop_times.png}
-    \includegraphics[width=.49\textwidth]{pics/ntp_sync/prop_times_close.png}
+    \includegraphics[width=\textwidth]{pics/ntp_sync/prop_times.png}
 \caption{Wyniki pomiarów czasów propagacji}
 \label{pic:prop_times}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
     \includegraphics[width=.49\textwidth]{pics/ntp_sync/stddev_offsets.png}
     \includegraphics[width=.49\textwidth]{pics/ntp_sync/stddev_prop.png}
@@ -78,15 +76,14 @@ Na podstawie otrzymanych wykresów łatwo zauważyć, że czas propagacji wiadom
 
 Biorąc pod uwagę zauważoną nieprzewidywalność i rozrzut czasów propagacji (spowodowanych najprawdopodobniej użyciem protokołu MQTT do przesyłu wiadomości pomiędzy urządzeniami) następnym pomysłem schematu synchronizacji jest bezpośrednie badanie względnego przesunięcia zegarów. Węzeł wysyła $n$ wiadomości zawierających aktualną wartość zegara, która po odebraniu przez serwer jest porównywana z zegarem w nim dostępnym.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-    \includegraphics[width=.49\textwidth]{pics/time_deltas/time_deltas.png}
-    \includegraphics[width=.49\textwidth]{pics/time_deltas/time_deltas_close.png}
+    \includegraphics[width=\textwidth]{pics/time_deltas/time_deltas.png}
 \caption{Wyniki pomiarów przesunięć zegarów}
 \label{pic:offsets_deltas}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
     \includegraphics[width=.49\textwidth]{pics/time_deltas/stddev.png}
 \caption{Odchylenia standardowe pomiarów}
@@ -110,7 +107,7 @@ Innym pomysłem na synchronizację zegarów w węzłach było użycie mikrofonó
 
 Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na wykresach~\ref{pic:mic_sync}. W celu zwiększenia czytelności odrzucono pierwszy z pomiarów oraz przesunięto wyniki o wartość średnią.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
     \includegraphics[width=.49\textwidth]{pics/mic_sync/offsets.png}
     \includegraphics[width=.49\textwidth]{pics/mic_sync/stddev_offsets.png}
@@ -124,7 +121,7 @@ Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na 
 
 Porównajmy teraz dokładność obliczanych odległości na podstawie interwału czasowego pomiędzy nadaniem dźwięku a jego odbiorem w różnych wariantach synchronizacji zegarów. Wykresy uzyskane przy zastosowaniu synchronizacji czasowej zostały przedstawione przed i po znormalizowaniu poprzez przesunięcie tak, by średnia pomiarów rozpoczynała się od 0. Pomiary oparte o synchronizację z użyciem mikrofonów nie wymagały tego dodatkowego kroku.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
     \includegraphics[width=.49\textwidth]{pics/ntp_sync_dist/dists.png}
     \includegraphics[width=.49\textwidth]{pics/ntp_sync_dist/dists_close.png}
@@ -132,7 +129,7 @@ Porównajmy teraz dokładność obliczanych odległości na podstawie interwału
 \label{pic:ntp_sync_dist}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
     \includegraphics[width=.49\textwidth]{pics/time_deltas_dist/dists.png}
     \includegraphics[width=.49\textwidth]{pics/time_deltas_dist/dists_close.png}
@@ -140,7 +137,7 @@ Porównajmy teraz dokładność obliczanych odległości na podstawie interwału
 \label{pic:time_deltas_dist}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
     \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists.png}
     \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists_close.png}

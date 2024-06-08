@@ -23,8 +23,8 @@ def plot_charts(n):
         ax2.set_xlabel('Czas [s]')
         ax1.set_ylabel('Obliczona pozycja nadajnika [m]')
         # fig.suptitle(f'Test {i}, pozycja')
-        plt.title(f'Test {i}, pozycja odbiornika')
-        fig.set_size_inches(8,6)
+        # plt.title(f'Test {i}, pozycja odbiornika')
+        fig.set_size_inches(10,4)
         fig.set_dpi(600)
         fig.savefig(f'../../charts/position/position_{i}.png')
 
