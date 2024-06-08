@@ -54,9 +54,11 @@ def plot_multiple(df_dict, lims, nodes, mean=False):
         
     ax.set_xlabel('x')
     ax.set_ylabel('y')
+    ax.set_aspect('equal', adjustable='box')
     # plt.title(f'Pozycje odbiornika')
-    fig.set_size_inches(8,6)
+    fig.set_size_inches(6,6)
     fig.set_dpi(600)
+    fig.tight_layout()
     if mean:
         fig.savefig(f'../../charts/mult_lat_2d_num/positions_{nodes}_mean.png')
     else:
@@ -82,6 +84,8 @@ if __name__ == '__main__':
             nodes = filename[filename.rfind('_')+1:-4]
             df_dict[nodes][point] = df
 
+    size = 0.75
+
     for num in nodes_num:
-        plot_multiple(df_dict[num], {'xlim': (-0.7, 0.7), 'ylim': (-0.7, 0.7)}, num)
-        plot_multiple(df_dict[num], {'xlim': (-0.7, 0.7), 'ylim': (-0.7, 0.7)}, num, mean=True)
+        plot_multiple(df_dict[num], {'xlim': (-size, size), 'ylim': (-size, size)}, num)
+        plot_multiple(df_dict[num], {'xlim': (-size, size), 'ylim': (-size, size)}, num, mean=True)

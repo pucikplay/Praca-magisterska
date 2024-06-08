@@ -54,9 +54,11 @@ def plot_multiple(df_dict, lims, angle, mean=False):
         
     ax.set_xlabel('x')
     ax.set_ylabel('y')
+    ax.set_aspect('equal', adjustable='box')
     # plt.title(f'Pozycje odbiornika')
-    fig.set_size_inches(8,6)
+    fig.set_size_inches(6,6)
     fig.set_dpi(600)
+    fig.tight_layout()
     if mean:
         fig.savefig(f'../../charts/mult_lat_2d_angle/positions_{angle}_mean.png')
     else:

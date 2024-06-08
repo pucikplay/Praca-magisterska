@@ -54,9 +54,11 @@ def plot_multiple(df_dict, lims, num, mean=False):
         
     ax.set_xlabel('x')
     ax.set_ylabel('y')
+    ax.set_aspect('equal', adjustable='box')
     # plt.title(f'Pozycje odbiornika')
-    fig.set_size_inches(8,6)
+    fig.set_size_inches(6,6)
     fig.set_dpi(600)
+    fig.tight_layout()
     if mean:
         fig.savefig(f'../../charts/mult_lat_2d/positions_{num}_mean.png')
     else:
@@ -102,9 +104,11 @@ if __name__ == '__main__':
                                                   '[-0.15, -0.15]',
                                                   '[0.15, -0.15]']}
 
-    plot_multiple(dict_1, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 1)
-    plot_multiple(dict_2, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 2)
-    plot_multiple(dict_3, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 3)
-    plot_multiple(dict_1, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 1, mean=True)
-    plot_multiple(dict_2, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 2, mean=True)
-    plot_multiple(dict_3, {'xlim': (-1, 1), 'ylim': (-1, 1)}, 3, mean=True)
+    size = 0.85
+
+    plot_multiple(dict_1, {'xlim': (-size, size), 'ylim': (-size, size)}, 1)
+    plot_multiple(dict_2, {'xlim': (-size, size), 'ylim': (-size, size)}, 2)
+    plot_multiple(dict_3, {'xlim': (-size, size), 'ylim': (-size, size)}, 3)
+    plot_multiple(dict_1, {'xlim': (-size, size), 'ylim': (-size, size)}, 1, mean=True)
+    plot_multiple(dict_2, {'xlim': (-size, size), 'ylim': (-size, size)}, 2, mean=True)
+    plot_multiple(dict_3, {'xlim': (-size, size), 'ylim': (-size, size)}, 3, mean=True)

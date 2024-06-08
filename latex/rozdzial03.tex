@@ -12,8 +12,8 @@ Współrzędne odbiorników są znane.
 
 \subsection{Programy węzłów}
 
-\begin{algorithm}
-\caption{Program nadajnika}\label{alg:source}
+\begin{center}
+\captionof{algorithm}{Program nadajnika}\label{alg:source}
 \begin{algorithmic}[1]
     \State\ $buzz \gets False$
     \State\ $buzzTime \gets 0$
@@ -38,10 +38,10 @@ Współrzędne odbiorników są znane.
         \EndIf
     \EndLoop
 \end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
-\caption{Program odbiornika}\label{alg:sink}
+\end{center}
+\newpage
+\begin{center}
+\captionof{algorithm}{Program odbiornika}\label{alg:sink}
 \begin{algorithmic}[1]
     \State\ $micState \gets LOW$
     \State\ $micTime \gets False$
@@ -67,7 +67,7 @@ Współrzędne odbiorników są znane.
         \EndIf
     \EndLoop
 \end{algorithmic}
-\end{algorithm}
+\end{center}
 
 \begin{itemize}
     \item $micros()$ {-} funkcja zwracająca liczbę mikrosekund od uruchomienia urządzenia,
@@ -80,8 +80,8 @@ Współrzędne odbiorników są znane.
 
 \subsection{Program serwera}
 
-\begin{algorithm}
-\caption{Program serwera}\label{alg:server}
+\begin{center}
+\captionof{algorithm}{Program serwera}\label{alg:server}
 \begin{algorithmic}[1]
     \State\ $M \gets {\left(A^T A\right)}^{-1} A^T$
     \Function{$calc\_position$}{}
@@ -100,7 +100,7 @@ Współrzędne odbiorników są znane.
         \State\ $sleep(t_2)$
     \EndLoop
 \end{algorithmic}
-\end{algorithm}
+\end{center}
 
 \begin{itemize}
     \item $A$ - macierz zawierająca współrzędne obiorników z równania \ref{eq:matrix}

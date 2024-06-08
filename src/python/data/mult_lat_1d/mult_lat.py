@@ -62,12 +62,16 @@ def plot_multiple(df_dict, lims, nodes, mean=False):
         else:
             df['y'] = 0
             df.plot(x='x', y='y', kind='scatter', s=10, ax=ax, label=point, color=cmap(i))
-        
+    
+    ax.legend(loc="upper left", ncol=(len(df_dict)+1)//2)
     ax.set_xlabel('x')
-    ax.set_ylabel('y')
+    ax.set_ylabel('')
+    ax.set_yticklabels([])
+    ax.set_yticks([])
     # plt.title(f'Pozycje odbiornika')
-    fig.set_size_inches(8,6)
+    fig.set_size_inches(6,3)
     fig.set_dpi(600)
+    fig.tight_layout()
     if mean:
         fig.savefig(f'../../charts/mult_lat_1d/positions_{nodes}_mean.png')
     else:
