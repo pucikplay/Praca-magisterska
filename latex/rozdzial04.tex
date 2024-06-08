@@ -109,10 +109,16 @@ Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na 
 
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.49\textwidth]{pics/mic_sync/offsets.png}
-    \includegraphics[width=.49\textwidth]{pics/mic_sync/stddev_offsets.png}
+    \includegraphics[width=\textwidth]{pics/mic_sync/offsets.png}
 \caption{Wyniki pomiarów przesunięć zegarów}
 \label{pic:mic_sync}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.49\textwidth]{pics/mic_sync/stddev_offsets.png}
+\caption{Odchylenia standardowe pomiarów}
+\label{pic:stddev_mic}
 \end{figure}
 
 Łatwo zauważyć, ża udało się zmniejszyć odchylenia obliczonych przesunięć zegara aż o dwa rzędy wielkości. Taka dokładność daje znacznie lepsze przybliżenie rzeczywistej odległości między węzłami, ponieważ w czasie $40 \mu s$ dźwięk pokona jedynie $\frac{40}{10000000}s \cdot 343 \frac{m}{s} \approx 0,014m$. Mając tak dokładne odległości będziemy mogli wprowadzić je do modelu multilateracyjnego.
