@@ -21,27 +21,27 @@ Dodatkowym wnioskiem przedstawionym w powyższej pracy jest własność prawdziw
 Jak łatwo zauważyć im krótszy jest czas propagacji tym lepsze przybliżenie dostajemy.
 
 \begin{figure}[H]
-\centering
-\resizebox{1\textwidth}{!}{%
-\begin{tikzpicture}
-    \tikzstyle{every node}=[font=\Huge]
-    \draw [line width=1pt] (10,24.25) -- (36.25,24.25);
-    \draw [line width=1pt] (10,15.5) -- (36.25,15.5);
-    \draw [line width=1pt, ->] (12.5,15.5) -- (18.75,24.25);
-    \draw [line width=1pt, ->] (27.5,24.25) -- (33.75,15.5);
-    \draw [line width=1pt] (20,15.5) -- (20,21.75);
-    \draw [line width=1pt] (26.25,24.25) -- (26.25,18);
-    \draw [line width=1pt, <->] (20,19.75) -- (26.25,19.75)node[pos=0.5, fill=white]{$\theta$};
-    \node [font=\Huge] at (12.5,14.75) {$T_{i-3}$};
-    \node [font=\Huge] at (18.75,25) {$T_{i-2}$};
-    \node [font=\Huge] at (27.5,24.75) {$T_{i-1}$};
-    \node [font=\Huge] at (34,14.75) {$T_i$};
-    \node [font=\Huge] at (23,24.75) {$B$};
-    \node [font=\Huge] at (23,14.75) {$A$};
-\end{tikzpicture}
-}%
-\caption{Pomiar opóźnienia transmisji i przesunięcia zegara}
-\label{fig:ntp}
+    \centering
+    \resizebox{1\textwidth}{!}{%
+    \begin{tikzpicture}
+        \tikzstyle{every node}=[font=\Huge]
+        \draw [line width=1pt] (10,24.25) -- (36.25,24.25);
+        \draw [line width=1pt] (10,15.5) -- (36.25,15.5);
+        \draw [line width=1pt, ->] (12.5,15.5) -- (18.75,24.25);
+        \draw [line width=1pt, ->] (27.5,24.25) -- (33.75,15.5);
+        \draw [line width=1pt] (20,15.5) -- (20,21.75);
+        \draw [line width=1pt] (26.25,24.25) -- (26.25,18);
+        \draw [line width=1pt, <->] (20,19.75) -- (26.25,19.75)node[pos=0.5, fill=white]{$\theta$};
+        \node [font=\Huge] at (12.5,14.75) {$T_{i-3}$};
+        \node [font=\Huge] at (18.75,25) {$T_{i-2}$};
+        \node [font=\Huge] at (27.5,24.75) {$T_{i-1}$};
+        \node [font=\Huge] at (34,14.75) {$T_i$};
+        \node [font=\Huge] at (23,24.75) {$B$};
+        \node [font=\Huge] at (23,14.75) {$A$};
+    \end{tikzpicture}
+    }%
+    \caption{Pomiar opóźnienia transmisji i przesunięcia zegara}
+    \label{fig:ntp}
 \end{figure}
 
 Na postawie tych informacji podjęto próbę synchronizacji programowej zegarów węzłów w systemie multilateracyjnym. Przy użyciu czterech węzłów przeprowadzono eksperymenty mające na celu próbę ustalenia przesunięć zegarów każdego z urządzeń względem centralnego serwera. Opisany wyżej schemat wymiany czterech wiadomości powtarzano $n$ razy wspólnie dla wszystkich węzłów zapisując obliczone przesunięcia oraz czasy propagacji.
@@ -49,25 +49,35 @@ Na postawie tych informacji podjęto próbę synchronizacji programowej zegarów
 W celu poprawy czytelności wyniki przesunięć zostały znormalizowane poprzez przesunięcie o wartość średnią dla każdego z węzłów.
 
 \begin{figure}[H]
-\centering
+    \centering
     \includegraphics[width=\textwidth]{pics/ntp_sync/offsets.png}
-\caption{Wyniki pomiarów przesunięć zegarów}
-\label{pic:offsets_ntp}
+    \caption{Wyniki pomiarów przesunięć zegarów}
+    \label{pic:offsets_ntp}
 \end{figure}
 
 \begin{figure}[H]
-\centering
+    \centering
     \includegraphics[width=\textwidth]{pics/ntp_sync/prop_times.png}
-\caption{Wyniki pomiarów czasów propagacji}
-\label{pic:prop_times}
+    \caption{Wyniki pomiarów czasów propagacji}
+    \label{pic:prop_times}
 \end{figure}
 
 \begin{figure}[H]
-\centering
-    \includegraphics[width=.49\textwidth]{pics/ntp_sync/stddev_offsets.png}
-    \includegraphics[width=.49\textwidth]{pics/ntp_sync/stddev_prop.png}
-\caption{Odchylenia standardowe pomiarów}
-\label{pic:stddev_ntp}
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/ntp_sync/stddev_offsets.png}
+        \caption{Odchylenia standardowe przesunięć zegarów}
+        \label{pic:stddev_ntp_offsets}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/ntp_sync/stddev_prop.png}
+        \caption{Odchylenia standardowe czasu propagacji}
+        \label{pic:stddev_ntp_prop}
+    \end{subfigure}
+    \caption{Odchylenia standardowe pomiarów}
+    \label{fig:stddev_ntp}
 \end{figure}
 
 Na podstawie otrzymanych wykresów łatwo zauważyć, że czas propagacji wiadomości w systemie jest nieprzewidywalny i zmienia sie znacząco z pomiaru na pomiar. Interesującą nas statystyką są jednak zaobserwowane przesunięcia zegarów, bez których nie jesteśmy w stanie poprawnie ocenić odległości od źródła dźwięku. Tutaj wartości wyglądają na bardziej skoncentrowane, jednak nie widać wyraźnych tendencji koncentracji wokół wartości średnich dla żadnego z węzłów. Ponadto zaobserwowane odchylenia standardowe $\sigma_i,\ i \in \{0,1,2,3\}$ wielkości $\approx 7000 \mu s$ są nieakceptowalne, ponieważ w takim czasie dźwięk w powietrzu pokonuje $\frac{7000}{1000000}s \cdot 343\frac{m}{s} = 2.401m$. Możliwe jest, że wielokrotne powtarzanie pomiarów da zadowalającą wartość średnią, pozwalającą na centymetrową precyzję obliczanych odległości. W porównaniu z pozostałymi sposobami brane będą pod uwagę wartości uśrednione.
@@ -77,24 +87,24 @@ Na podstawie otrzymanych wykresów łatwo zauważyć, że czas propagacji wiadom
 Biorąc pod uwagę zauważoną nieprzewidywalność i rozrzut czasów propagacji (spowodowanych najprawdopodobniej użyciem protokołu MQTT do przesyłu wiadomości pomiędzy urządzeniami) następnym pomysłem schematu synchronizacji jest bezpośrednie badanie względnego przesunięcia zegarów. Węzeł wysyła $n$ wiadomości zawierających aktualną wartość zegara, która po odebraniu przez serwer jest porównywana z zegarem w nim dostępnym.
 
 \begin{figure}[H]
-\centering
+    \centering
     \includegraphics[width=\textwidth]{pics/time_deltas/time_deltas.png}
-\caption{Wyniki pomiarów przesunięć zegarów}
-\label{pic:offsets_deltas}
+    \caption{Wyniki pomiarów przesunięć zegarów}
+    \label{pic:offsets_deltas}
 \end{figure}
 
 \begin{figure}[H]
-\centering
+    \centering
     \includegraphics[width=.49\textwidth]{pics/time_deltas/stddev.png}
-\caption{Odchylenia standardowe pomiarów}
-\label{pic:stddev_deltas}
+    \caption{Odchylenia standardowe pomiarów}
+    \label{pic:stddev_deltas}
 \end{figure}
 
 Wykresy przesunięć wygenerowane na podstawie tych testów na pierwszy rzut oka są skoncentrowane podobnie jak poprzednie, jednakże odchylenie standardowe są prawie dwukrotnie mniejsze niż uprzednio, co daje nadzieje na bardziej wiarygodne wyniki. W porównaniu z pozostałymi sposobami brane będą pod uwagę wartości uśrednione.
 
 \section{Synchronizacja sprzętowa}
 
-
+TODO
 
 \subsection{Synchronizacja z użyciem mikrofonów}\label{sec:mic_sync}
 
@@ -108,17 +118,17 @@ Innym pomysłem na synchronizację zegarów w węzłach było użycie mikrofonó
 Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na wykresach~\ref{pic:mic_sync}. W celu zwiększenia czytelności odrzucono pierwszy z pomiarów oraz przesunięto wyniki o wartość średnią.
 
 \begin{figure}[H]
-\centering
+    \centering
     \includegraphics[width=\textwidth]{pics/mic_sync/offsets.png}
-\caption{Wyniki pomiarów przesunięć zegarów}
-\label{pic:mic_sync}
+    \caption{Wyniki pomiarów przesunięć zegarów}
+    \label{pic:mic_sync}
 \end{figure}
 
 \begin{figure}[H]
-\centering
+    \centering
     \includegraphics[width=.49\textwidth]{pics/mic_sync/stddev_offsets.png}
-\caption{Odchylenia standardowe pomiarów}
-\label{pic:stddev_mic}
+    \caption{Odchylenia standardowe pomiarów}
+    \label{pic:stddev_mic}
 \end{figure}
 
 Łatwo zauważyć, ża udało się zmniejszyć odchylenia obliczonych przesunięć zegara aż o dwa rzędy wielkości. Taka dokładność daje znacznie lepsze przybliżenie rzeczywistej odległości między węzłami, ponieważ w czasie $40 \mu s$ dźwięk pokona jedynie $\frac{40}{10000000}s \cdot 343 \frac{m}{s} \approx 0,014m$. Mając tak dokładne odległości będziemy mogli wprowadzić je do modelu multilateracyjnego.
@@ -128,27 +138,36 @@ Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na 
 Porównajmy teraz dokładność obliczanych odległości na podstawie interwału czasowego pomiędzy nadaniem dźwięku a jego odbiorem w różnych wariantach synchronizacji zegarów. Wykresy uzyskane przy zastosowaniu synchronizacji czasowej zostały przedstawione przed i po znormalizowaniu poprzez przesunięcie tak, by średnia pomiarów rozpoczynała się od 0. Pomiary oparte o synchronizację z użyciem mikrofonów nie wymagały tego dodatkowego kroku.
 
 \begin{figure}[H]
-\centering
-    \includegraphics[width=.49\textwidth]{pics/ntp_sync_dist/dists.png}
-    \includegraphics[width=.49\textwidth]{pics/ntp_sync_dist/dists_close.png}
-\caption{Wyniki pomiarów odległości z użyciem synchronizacji~\ref{sec:ntp_sync}}
-\label{pic:ntp_sync_dist}
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.49\textwidth]{pics/ntp_sync_dist/dists.png}
+        \includegraphics[width=0.49\textwidth]{pics/ntp_sync_dist/dists_close.png}
+        \caption{synchronizacja NTP~\ref{sec:ntp_sync}}
+        \label{pic:ntp_sync_dist}
+    \end{subfigure}
 \end{figure}
-
 \begin{figure}[H]
-\centering
-    \includegraphics[width=.49\textwidth]{pics/time_deltas_dist/dists.png}
-    \includegraphics[width=.49\textwidth]{pics/time_deltas_dist/dists_close.png}
-\caption{Wyniki pomiarów odległości z użyciem synchronizacji~\ref{sec:time_deltas_sync}}
-\label{pic:time_deltas_dist}
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.49\textwidth]{pics/time_deltas_dist/dists.png}
+        \includegraphics[width=0.49\textwidth]{pics/time_deltas_dist/dists_close.png}
+        \caption{synchronizacja pomiaru przesunięć~\ref{sec:time_deltas_sync}}
+        \label{pic:time_deltas_dist}
+    \end{subfigure}
 \end{figure}
-
 \begin{figure}[H]
-\centering
-    \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists.png}
-    \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists_close.png}
-\caption{Wyniki pomiarów odległości z użyciem synchronizacji~\ref{sec:mic_sync}}
-\label{pic:mic_sync_dist}
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.49\textwidth]{pics/mic_sync_dist/dists.png}
+        \includegraphics[width=0.49\textwidth]{pics/mic_sync_dist/dists_close.png}
+        \caption{synchronizacja mikrofonowa~\ref{sec:mic_sync}}
+        \label{pic:mic_sync_dist}
+    \end{subfigure}
+    \caption{Wyniki pomiarów odległości z użyciem rozpatrywanych synchronizacji}
+    \label{fig:sync_test}
 \end{figure}
 
 Na wykresach widać, że wszystkie trzy algorytmy synchronizacji po normalizacji dają wyniki o podobnej dokładności adekwatnej do użycia w danych wejściowych multilateracji. Ciekawą jest natomiast obserwacja skalowania obliczonych odległości. Widzimy, że w przypadku~\ref{pic:ntp_sync_dist} oraz~\ref{pic:mic_sync_dist} otrzymane wartości leżą blisko trzykrotności rzeczywistej badanej odległości, natomiast w~\ref{pic:time_deltas_dist} blisko dwukrotności. W kolejnym rozdziale pochylimy się nad możliwymi przyczynami i rozwiązaniem tego zachowania.

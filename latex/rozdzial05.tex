@@ -10,44 +10,78 @@ W wynikach eksperymentów porównawczych metod synchronizacji czasu węzłów pr
 
 Prawdopodobnym powodem skalowania obliczanych odległości może być odczyt zmiany sygnału mikrofonowego odczytywanego przez mikrokontroler. Poniższe wykresy są wynikiem czterech kolejnych eksperymentów, w których jedyną zmienną była czułość zintegrowanego wzmacniacza mikrofonu. Wzmacniacz ten nie pozwala na precyzyjną regulację, a jedynie na zmianę rezystancji wbudowanego potencjometru. Ponieważ przedział czułości odpowiadający wykrywaniu sygnału węzła nadającego przy jednoczesnym zminimalizowaniu fałszywych aktywacji jest niewielki (około $\frac{1}{8}$ obrotu potencjometru) cztery zbadane przypadki nie dzielą równo badanego zakresu. Rozpoczynając od największej możliwej czułości przy każdym kolejnym eksperymencie zmniejszano ją póki pozwalała wciąż na wykrywanie sygnału z badanych odległości.
 
-\begin{figure}[h]
-\centering
-    \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_long_0.png}
-\caption{Pomiar obliczanych odległości 1.}
-\label{pic:slope_test_0}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_long_0.png}
+        \caption{pomiar 1.}
+        \label{pic:slope_test_0}
+    \end{subfigure}
 \end{figure}
-
-\begin{figure}[h]
-\centering
-    \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_long_1.png}
-\caption{Pomiar obliczanych odległości 2.}
-\label{pic:slope_test_1}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_long_1.png}
+        \caption{pomiar 2.}
+        \label{pic:slope_test_1}
+    \end{subfigure}
 \end{figure}
-
-\begin{figure}[h]
-\centering
-    \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_long_2.png}
-\caption{Pomiar obliczanych odległości 3.}
-\label{pic:slope_test_2}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_long_2.png}
+        \caption{pomiar 3.}
+        \label{pic:slope_test_2}
+    \end{subfigure}
 \end{figure}
-
-\begin{figure}[h]
-\centering
-    \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_long_3.png}
-\caption{Pomiar obliczanych odległości 4.}
-\label{pic:slope_test_3}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_long_3.png}
+        \caption{pomiar 4.}
+        \label{pic:slope_test_3}
+    \end{subfigure}
+    \caption{Pomiar obliczanych odległości}
+    \label{fig:slope_test}
 \end{figure}
 
 Aby lepiej odczytać informacje z wykresu uśrednijmy pomiary dla każdej z badanych odległości i dodajmy do nich funkcje liniowe o współczynniku otrzymanym przy pomocy regresji liniowej z tychże uśrednionych punktów.
 
-\begin{figure}[h]
-\centering
-    \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists_close_long_0_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists_close_long_1_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists_close_long_2_mean.png}
-    \includegraphics[width=.49\textwidth]{pics/mic_sync_dist/dists_close_long_3_mean.png}
-\caption{Średnie obliczonych odległości}
-\label{pic:slope_test_mean}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_close_long_0_mean.png}
+        \caption{pomiar 1.}
+        \label{pic:slope_test_mean_0}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_close_long_1_mean.png}
+        \caption{pomiar 2.}
+        \label{pic:slope_test_mean_1}
+    \end{subfigure}
+\end{figure}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_close_long_2_mean.png}
+        \caption{pomiar 3.}
+        \label{pic:slope_test_mean_2}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/mic_sync_dist/dists_close_long_3_mean.png}
+        \caption{pomiar 4.}
+        \label{pic:slope_test_mean_3}
+    \end{subfigure}
+    \caption{Średnie obliczonych odległości}
+    \label{fig:slope_test_mean}
 \end{figure}
 
 Na wykresach można zauważyć trendy związane ze zmniejszającą się czułością wzmacniacza mikrofonu:
@@ -65,28 +99,85 @@ W celu ewaluacji działania przeprowadzono szereg eksperymentów testujących dz
 
 \subsection{Wyniki}
 
-Wyniki eksperymentów przedstawiono na wykresach. Mniejsze punkty o wyblakłym kolorze reprezentują badane punkty, w których umieszczony był węzeł nadawczy, natomiast większe, nasyconym kolorze odpowiadające im punkty będące uśrednionym wynikiem 25 powtórzeń polecenia lokalizacji w systemie. Wykresy należące do tej samej grupy zachowują skalę w celu łatwiejszego porównania.
+Wyniki eksperymentów przedstawiono na  poniższych wykresach. Mniejsze punkty o wyblakłym kolorze reprezentują badane punkty, w których umieszczony był węzeł nadawczy, natomiast większe, nasyconym kolorze odpowiadające im punkty będące uśrednionym wynikiem 25 powtórzeń polecenia lokalizacji w systemie. Wykresy należące do tej samej grupy zachowują skalę w celu łatwiejszego porównania. Dodatkowo, dla przypadku jednowymiarowego, dołączono wybrane wykresy zawierające osobne pomiary każdego z punktów, które składały się na wynik uśredniony.
 
 \subsubsection{Eksperymeny jednowymiarowe}
 
-Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jednowymiarowego, aby sprawdzić czy dokładność i stabilność pomiarów w systemie została poprawiona. Tak samo jak pierwotnie nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0.5)$ i $(0.5)$, wszystkie węzły były stacjonarne. Nadajnik co $0.5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0.5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Następnie powtórzono eksperyment z użyciem dwóch dodatkowych węzłów umiejscowionych w punktach $(-0.25)$ i $(0.25)$. Wyniki przedstawiono na wykresach~\ref{pic:1d_mult}.
+Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jednowymiarowego, aby sprawdzić czy dokładność i stabilność pomiarów w systemie została poprawiona. Tak samo jak pierwotnie nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0.5)$ i $(0.5)$, wszystkie węzły były stacjonarne. Nadajnik co $0.5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0.5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Następnie zbadano dokładność aproksymacji dla punktów ze zbioru $\{(-0.5, -0.25, 0.25, 0.5)\}$, jak również powtórzono wszystkie pomiary z użyciem dwóch dodatkowych węzłów umiejscowionych w punktach $(-0.25)$ i $(0.25)$. Wyniki przedstawiono na wykresach~\ref{fig:1d_mult_separate} oraz~\ref{fig:1d_mult}.
 
 \begin{figure}[H]
-\centering
-\begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_1d/positions_2_mean.png}
-\caption{2 węzły}
-\label{pic:1d_2_mult}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0]_2.png}
+        \caption{punkt (0), 2 węzły}
+        \label{pic:1d_mult_[0]_2}
+    \end{subfigure}
+\end{figure}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0]_4.png}
+        \caption{punkt (0), 4 węzły}
+        \label{pic:1d_mult_[0]_4}
+    \end{subfigure}
+\end{figure}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0.25]_2.png}
+        \caption{punkt (0.25), 2 węzły}
+        \label{pic:1d_mult_[0.25]_2}
+    \end{subfigure}
+\end{figure}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0.25]_4.png}
+        \caption{punkt (0.25), 4 węzły}
+        \label{pic:1d_mult_[0.25]_4}
+    \end{subfigure}
+\end{figure}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[-0.5]_2.png}
+        \caption{punkt (-0.5), 2 węzły}
+        \label{pic:1d_mult_[-0.5]_2}
+    \end{subfigure}
+\end{figure}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[-0.5]_4.png}
+        \caption{punkt (-0.5), 4 węzły}
+        \label{pic:1d_mult_[-0.5]_4}
+    \end{subfigure}
+    \caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
+    \label{fig:1d_mult_separate}
+\end{figure}
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_1d/positions_4_mean.png}
-\caption{4 węzły}
-\label{pic:1d_4_mult}
-\end{subfigure}
-\caption{Średnie obliczonych pozycji, wariant 1D}
-\label{pic:1d_mult}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_1d/positions_2_mean.png}
+        \caption{2 węzły}
+        \label{pic:1d_2_mult}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_1d/positions_4_mean.png}
+        \caption{4 węzły}
+        \label{pic:1d_4_mult}
+    \end{subfigure}
+    \caption{Średnie obliczonych pozycji, wariant 1D}
+    \label{fig:1d_mult}
 \end{figure}
 
 \subsubsection{Eksperymeny dwuwymiarowe}
@@ -100,110 +191,109 @@ Następnie sprawdzono system w wariancie dwuwymiarowym. Zby zachować podobną m
 Wyniki przedstawiono na wykresach~\ref{pic:2d_mult}.
 
 \begin{figure}[H]
-\centering
-\begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d/positions_1_mean.png}
-\caption{zestaw punktów 1.}
-\label{pic:2d_1_mult}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d/positions_2_mean.png}
-\caption{zestaw punktów 2.}
-\label{pic:2d_2_mult}
-\end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d/positions_1_mean.png}
+        \caption{zestaw punktów 1.}
+        \label{pic:2d_1_mult}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d/positions_2_mean.png}
+        \caption{zestaw punktów 2.}
+        \label{pic:2d_2_mult}
+    \end{subfigure}
 \end{figure}
 \begin{figure}[H]
-\ContinuedFloat\centering
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d/positions_3_mean.png}
-\caption{zestaw punktów 3.}
-\label{pic:2d_3_mult}
-\end{subfigure}
-\caption{Średnie obliczonych pozycji, wariant 2D}
-\label{pic:2d_mult}
+    \ContinuedFloat\centering
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d/positions_3_mean.png}
+        \caption{zestaw punktów 3.}
+        \label{pic:2d_3_mult}
+    \end{subfigure}
+    \caption{Średnie obliczonych pozycji, wariant 2D}
+    \label{pic:2d_mult}
 \end{figure}
 
 Następnie w celu ewaluacji wpływu charakterystyki otoczenia na działanie systemu przeprowadzono trzy następujące bezpośrednio po sobie eksperymenty zachowując ustaloną na początku synchronizację zegarów i stałe korekcji odległości. Sprawdzono dokładność estymacji tego samego zbioru punktów wyjściowo oraz po rotacji całego układu o $45^{\circ}$ i $90^{\circ}$ zgodnie z ruchem wskazówek zegara. Wyniki przedstawiono na wykresach~\ref{pic:2d_angle_mult}. 
 
 \begin{figure}[H]
-\centering
-\begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_angle/positions_0_mean.png}
-\caption{rotacja $0^{\circ}$}
-\label{pic:2d_0_angle_mult}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_angle/positions_45_mean.png}
-\caption{rotacja $45^{\circ}$}
-\label{pic:2d_45_angle_mult}
-\end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d_angle/positions_0_mean.png}
+        \caption{rotacja $0^{\circ}$}
+        \label{pic:2d_0_angle_mult}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d_angle/positions_45_mean.png}
+        \caption{rotacja $45^{\circ}$}
+        \label{pic:2d_45_angle_mult}
+        \end{subfigure}
 \end{figure}
 \begin{figure}[H]
-\ContinuedFloat\centering
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_angle/positions_90_mean.png}
-\caption{rotacja $90^{\circ}$}
-\label{pic:2d_90_angle_mult}
-\end{subfigure}
-\caption{Średnie obliczonych pozycji, wariant 2D z rotacją}
-\label{pic:2d_angle_mult}
+    \ContinuedFloat\centering
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d_angle/positions_90_mean.png}
+        \caption{rotacja $90^{\circ}$}
+        \label{pic:2d_90_angle_mult}
+    \end{subfigure}
+    \caption{Średnie obliczonych pozycji, wariant 2D z rotacją}
+    \label{pic:2d_angle_mult}
 \end{figure}
 
 Ostatecznie sprawdzono zachowanie systemu wraz ze zmianą liczby węzłów odbiorczych od minimalnej liczby trzech aż do ośmiu. Węzły umiejscowiono na punktach ze zbioru $\{(0.3,0.3), (-0.3,0.3), (-0.3,-0.3), (0.3,-0.3), (0, 0.425), (-0.425, 0), (0, -0.425), (0.425, 0)\}$ oraz dodawano je zgodnie z tą kolejnością. Wyniki przedstawiono na wykresach~\ref{pic:2d_num_mult}. 
 
 \begin{figure}[H]
-\centering
-\begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
-\caption{3 węzły}
-\label{pic:2d_3_num_mult}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_4_mean.png}
-\caption{4 węzły}
-\label{pic:2d_4_num_mult}
-\end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
+        \caption{3 węzły}
+        \label{pic:2d_3_num_mult}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_4_mean.png}
+        \caption{4 węzły}
+        \label{pic:2d_4_num_mult}
+    \end{subfigure}
 \end{figure}
 \begin{figure}[H]
-\ContinuedFloat\centering
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_5_mean.png}
-\caption{5 węzłów}
-\label{pic:2d_5_num_mult}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_6_mean.png}
-\caption{6 węzłów}
-\label{pic:2d_6_num_mult}
-\end{subfigure}
+    \ContinuedFloat\centering
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_5_mean.png}
+        \caption{5 węzłów}
+        \label{pic:2d_5_num_mult}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_6_mean.png}
+        \caption{6 węzłów}
+        \label{pic:2d_6_num_mult}
+    \end{subfigure}
 \end{figure}
 \begin{figure}[H]
-\ContinuedFloat\centering
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_7_mean.png}
-\caption{7 węzłów}
-\label{pic:2d_7_num_mult}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_8_mean.png}
-\caption{8 węzłów}
-\label{pic:2d_8_num_mult}
-\end{subfigure}
-\caption{Średnie obliczonych pozycji, wariant 2D ze zmienną liczbą węzłów}
-\label{pic:2d_num_mult}
+    \ContinuedFloat\centering
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_7_mean.png}
+        \caption{7 węzłów}
+        \label{pic:2d_7_num_mult}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_8_mean.png}
+        \caption{8 węzłów}
+        \label{pic:2d_8_num_mult}
+    \end{subfigure}
+    \caption{Średnie obliczonych pozycji, wariant 2D ze zmienną liczbą węzłów}
+    \label{pic:2d_num_mult}
 \end{figure}
 
 \section{Interpretacja i wnioski}
-

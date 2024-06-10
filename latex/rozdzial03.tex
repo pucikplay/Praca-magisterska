@@ -13,99 +13,101 @@ Współrzędne odbiorników są znane.
 \subsection{Programy węzłów}
 
 \begin{center}
-\captionof{algorithm}{Program nadajnika}\label{alg:source}
-\begin{algorithmic}[1]
-    \State\ $buzz \gets False$
-    \State\ $buzzTime \gets 0$
-    \State\ $lastBuzzTime \gets 0$
-    \State\ $syncTime \gets 0$
+    \captionof{algorithm}{Program nadajnika}\label{alg:source}
+    \begin{algorithmic}[1]
+        \State\ $buzz \gets False$
+        \State\ $buzzTime \gets 0$
+        \State\ $lastBuzzTime \gets 0$
+        \State\ $syncTime \gets 0$
 
-    \Function{onMessage}{$message, topic$}
-        \If{$topic$ is $TOPIC$}
-            \State\ $buzz \gets message$
-        \EndIf
-        \If{$topic$ is $TIME\_TOPIC$}
-            \State\ $syncTime \gets micros()$
-        \EndIf
-    \EndFunction
+        \Function{onMessage}{$message, topic$}
+            \If{$topic$ is $TOPIC$}
+                \State\ $buzz \gets message$
+            \EndIf
+            \If{$topic$ is $TIME\_TOPIC$}
+                \State\ $syncTime \gets micros()$
+            \EndIf
+        \EndFunction
 
-    \Loop
-        \If{$buzz$ and $micros() - lastBuzzTime > BUZZ\_INTERVAL$}
-            \State\ $buzzTime \gets micros() - syncTime$
-            \State\ $publish(buzzTime)$
-            \State\ $lastBuzzTime \gets buzzTime$
-            \State\ $buzzer()$
-        \EndIf
-    \EndLoop
-\end{algorithmic}
-\vspace{5pt}
-\hrule
+        \Loop
+            \If{$buzz$ and $micros() - lastBuzzTime > BUZZ\_INTERVAL$}
+                \State\ $buzzTime \gets micros() - syncTime$
+                \State\ $publish(buzzTime)$
+                \State\ $lastBuzzTime \gets buzzTime$
+                \State\ $buzzer()$
+            \EndIf
+        \EndLoop
+    \end{algorithmic}
+    \vspace{5pt}
+    \hrule
 \end{center}
 %\newpage
 \begin{center}
-\captionof{algorithm}{Program odbiornika}\label{alg:sink}
-\begin{algorithmic}[1]
-    \State\ $micState \gets LOW$
-    \State\ $micTime \gets False$
-    \State\ $lastMicTime \gets 0$
-    \State\ $syncTime \gets 0$
+    \captionof{algorithm}{Program odbiornika}\label{alg:sink}
+    \begin{algorithmic}[1]
+        \State\ $micState \gets LOW$
+        \State\ $micTime \gets False$
+        \State\ $lastMicTime \gets 0$
+        \State\ $syncTime \gets 0$
 
-    \Function{onMessage}{$topic$}
-        \If{$topic$ is $TIME\_TOPIC$}
-            \State\ $syncTime \gets micros()$
-        \EndIf
-    \EndFunction
+        \Function{onMessage}{$topic$}
+            \If{$topic$ is $TIME\_TOPIC$}
+                \State\ $syncTime \gets micros()$
+            \EndIf
+        \EndFunction
 
-    \Function{micInterrupt}{}
-        \State\ $micState \gets HIGH$
-    \EndFunction
+        \Function{micInterrupt}{}
+            \State\ $micState \gets HIGH$
+        \EndFunction
 
-    \Loop
-        \If{$micState$ is $HIGH$ and $micros() - lastMicTime > MIC\_INTERVAL$}
-            \State\ $micTime \gets micros() - syncTime$
-            \State\ $publish(micTime)$
-            \State\ $lastMicTime \gets micTime$
-            \State\ $micState \gets LOW$
-        \EndIf
-    \EndLoop
-\end{algorithmic}
-\vspace{5pt}
-\hrule
+        \Loop
+            \If{$micState$ is $HIGH$ and $micros() - lastMicTime > MIC\_INTERVAL$}
+                \State\ $micTime \gets micros() - syncTime$
+                \State\ $publish(micTime)$
+                \State\ $lastMicTime \gets micTime$
+                \State\ $micState \gets LOW$
+            \EndIf
+        \EndLoop
+    \end{algorithmic}
+    \vspace{5pt}
+    \hrule
 \end{center}
 
 \begin{itemize}
     \item $micros()$ {-} funkcja zwracająca liczbę mikrosekund od uruchomienia urządzenia,
+    \item $buzzer()$ {-} funkcja nadająca sygnał dźwiękowy przy użyciu brzęczyka,
     \item $TOPIC$ {-} nazwa kanału MQTT korespondującego do danego węzła,
-    \item $TIME\_TOPIC$ {-} nazwa kanału MQTT służącego do przesyłania wiadomości o synchronizacji czasu,
+    \item $TIME\_TOPIC$ {-} nazwa ogólnego kanału MQTT służącego do przesyłania wiadomości z poleceniem synchronizacji czasu,
     \item $BUZZ\_INTERVAL$ {-} interwał czasowy pomiędzy sygnałami brzęczyka,
-    \item $MIC\_INTERVAL$ {-} interwał czasowy pomiędzy dwoma oddzielnymi rejestracjami sygnału wysokiego na mikrofonie,
+    \item $MIC\_INTERVAL$ {-} interwał czasowy pomiędzy dwoma oddzielnymi rejestracjami wysokiego poziomu sygnału na mikrofonie,
+    \item \textsc{onMessage} {-} funkcja wywołania zwrotnego wywoływana przy otrzymaniu wiadomości na dowolnym z subskrybowanych tematów,
     \item $publish()$ {-} funkcja publikująca wiadomość na zadanym kanale MQTT.
 \end{itemize}
 
 \subsection{Program serwera}
 
 \begin{center}
-\captionof{algorithm}{Program serwera}\label{alg:server}
-\begin{algorithmic}[1]
-    \State\ $M \gets {\left(A^T A\right)}^{-1} A^T$
-    \Function{$calc\_position$}{}
-        \For{$node$ in $NODES$}
-            \State\ $d \gets (SS / 10^{6}) \cdot time_{node} - time_{source}$
-            \State\ $b_{node} \gets d - \sum_{x \in coords_{node}}{x^2}$
-        \EndFor
-        \State\ return $M \cdot b$
-    \EndFunction
-    \Loop{ $main$}
-        \State\ $sleep(t_1)$
-        \State\ $calc\_position()$
-    \EndLoop
-    \Loop{ $sync\_clock$}{}
-        \State\ $publish(TIME\_TOPIC)$
-        \State\ $sleep(t_2)$
-    \EndLoop
-\end{algorithmic}
-\vspace{5pt}
-\hrule
+    \captionof{algorithm}{Program serwera}\label{alg:server}
+    \begin{algorithmic}[1]
+        \State\ $M \gets {\left(A^T A\right)}^{-1} A^T$
+        \Function{$calc\_position$}{}
+            \For{$node$ in $NODES$}
+                \State\ $d \gets (SS / 10^{6}) \cdot time_{node} - time_{source}$
+                \State\ $b_{node} \gets d - \sum_{x \in coords_{node}}{x^2}$
+            \EndFor
+            \State\ return $M \cdot b$
+        \EndFunction
+        \Loop{ $main$}
+            \State\ $sleep(t_1)$
+            \State\ $calc\_position()$
+        \EndLoop
+        \Loop{ $sync\_clock$}{}
+            \State\ $publish(TIME\_TOPIC)$
+            \State\ $sleep(t_2)$
+        \EndLoop
+    \end{algorithmic}
+    \vspace{5pt}
+    \hrule
 \end{center}
 
 \begin{itemize}
@@ -142,44 +144,52 @@ Pierwsze testy przeprowadzone zostały na systemie operującym w jednym wymiarze
         \draw[-, thin, dotted] (-8,0) -- (8,0);
     \end{tikzpicture}
     \caption{Układ systemu testowego}
-\label{fig:test_setup}
+    \label{fig:test_setup}
 \end{figure}
 
 Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0.5)$ i $(0.5)$, wszystkie węzły były stacjonarne. Nadajnik co $0.5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0.5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Wykonano 5 następujących bezpośrednio po sobie eksprymentów, poniżej przedstawiono wyniki trzech pierwszych, ponieważ są wystarczające do ukazania zachodzącego trendu.
 
 \begin{figure}[H]
-\centering
-\begin{subfigure}{\textwidth}\label{fig:position_0}
-\centering
-    \includegraphics[width=\linewidth]{pics/position/position_0.png}
-\caption{Test 1.}
-\end{subfigure}
+    \centering
+    \begin{subfigure}{\textwidth}\label{fig:position_0}
+        \centering
+        \includegraphics[width=\linewidth]{pics/position/position_0.png}
+        \caption{Test 1.}
+    \end{subfigure}
 \end{figure}
 \begin{figure}[H]
-\ContinuedFloat\centering
-\begin{subfigure}{\textwidth}\label{fig:position_1}
-\centering
-    \includegraphics[width=\linewidth]{pics/position/position_1.png}
-\caption{Test 2.}
-\end{subfigure}
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}\label{fig:position_1}
+        \centering
+        \includegraphics[width=\linewidth]{pics/position/position_1.png}
+        \caption{Test 2.}
+    \end{subfigure}
 \end{figure}
 \begin{figure}[H]
-\ContinuedFloat\centering
-\begin{subfigure}{\textwidth}\label{fig:position_2}
-\centering
-    \includegraphics[width=\linewidth]{pics/position/position_2.png}
-\caption{Test 3.}
-\end{subfigure}
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}\label{fig:position_2}
+        \centering
+        \includegraphics[width=\linewidth]{pics/position/position_2.png}
+        \caption{Test 3.}
+    \end{subfigure}
 \end{figure}
 \begin{figure}[H]
-\ContinuedFloat\centering
-\begin{subfigure}{\textwidth}\label{fig:position_3}
-\centering
-    \includegraphics[width=\linewidth]{pics/position/position_3.png}
-\caption{Test 4.}
-\end{subfigure}
-\caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
-\label{fig:position}
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}\label{fig:position_3}
+        \centering
+        \includegraphics[width=\linewidth]{pics/position/position_3.png}
+        \caption{Test 4.}
+    \end{subfigure}
+\end{figure}
+\begin{figure}[H]
+    \ContinuedFloat\centering
+    \begin{subfigure}{\textwidth}\label{fig:position_4}
+        \centering
+        \includegraphics[width=\linewidth]{pics/position/position_4.png}
+        \caption{Test 5.}
+    \end{subfigure}
+    \caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
+    \label{fig:position}
 \end{figure}
 
 \section{Interpretacja wyników i wnioski}
