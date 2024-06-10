@@ -39,7 +39,7 @@
   \hrulefill\par\offinterlineskip\vskip1pt%
     \textbf{#1#2}#3\offinterlineskip\hrulefill}
 \DeclareCaptionStyle{algori}{singlelinecheck=off,format=algor,labelsep=space}
-\captionsetup[algorithm]{style=algori}
+\captionsetup[algorithm]{style=algori, hypcap=false}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Ustawienia odpowiedzialne za sposób łamania dokumentu
@@ -515,7 +515,7 @@ Kierunek: & {\bfseries \@kierunek}\\
 %%\addcontentsline{toc}{chapter}{Spis treści}
 \setsecnumdepth{section}
 \settocdepth{section}
-\tableofcontents* 
+\tableofcontents*
 \clearpage
 % SPIS RYSUNKÓW (zostanie wygenerowany automatycznie)
 % \pdfbookmark[0]{Spis rysunków}{spisRysunkow.1} % jeśli chcemy mieć w spisie treści, to zamarkować tę linię, a odmarkować linie poniższe

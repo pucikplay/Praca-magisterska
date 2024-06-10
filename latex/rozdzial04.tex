@@ -10,6 +10,30 @@ Pierwszym podejściem do rozwiązania problemu synchronizacji zegarów było zas
 
 Jednym z najbardziej rozpowszechnionych protokołów synchronizacji programowej jest \textit{Network Time Protocol} opisany w pracy~\cite{103043}. Zachowując oznaczenia w niej zastosowane opiszmy w skrócie zasadę działania tego protokołu.
 
+\begin{figure}[H]
+    \centering
+    \resizebox{1\textwidth}{!}{%
+        \begin{tikzpicture}
+            \tikzstyle{every node}=[font=\Huge]
+            \draw [line width=1pt] (10,24.25) -- (36.25,24.25);
+            \draw [line width=1pt] (10,15.5) -- (36.25,15.5);
+            \draw [line width=1pt, ->] (12.5,15.5) -- (18.75,24.25);
+            \draw [line width=1pt, ->] (27.5,24.25) -- (33.75,15.5);
+            \draw [line width=1pt] (20,15.5) -- (20,21.75);
+            \draw [line width=1pt] (26.25,24.25) -- (26.25,18);
+            \draw [line width=1pt, <->] (20,19.75) -- (26.25,19.75)node[pos=0.5, fill=white]{$\theta$};
+            \node [font=\Huge] at (12.5,14.75) {$T_{i-3}$};
+            \node [font=\Huge] at (18.75,25) {$T_{i-2}$};
+            \node [font=\Huge] at (27.5,24.75) {$T_{i-1}$};
+            \node [font=\Huge] at (34,14.75) {$T_i$};
+            \node [font=\Huge] at (23,24.75) {$B$};
+            \node [font=\Huge] at (23,14.75) {$A$};
+        \end{tikzpicture}
+    }%
+    \caption{Pomiar opóźnienia transmisji i przesunięcia zegara}
+    \label{fig:ntp}
+\end{figure}
+
 Na rysunku~\ref{fig:ntp} przestawiono schemat działania protokołu NTP. Urządzenia \textit{A} i \textit{B} wymieniają wiadomości zawierające sygnatury czasowe. Niech $T_{i},\ T_{i-1},\ T_{i-2},\ T_{i-3}$ będą czterema ostatnimi wiadomościami oraz niech $a = T_{i-2} - T_{i-3}$ oraz $b = T_{i-1} - T_i$. Wtedy całkowity czas transmisji $\delta_i$ i przesunięcie zegara $\theta_i$ urządzenia \textit{B} względem urządzenia \textit{A} to
 
 \[\delta_i = a - b\quad \text{oraz}\quad \theta_i = \frac{a+b}{2}\]
@@ -19,30 +43,6 @@ Dodatkowym wnioskiem przedstawionym w powyższej pracy jest własność prawdziw
 \[\theta_i - \frac{\delta_i}{2} \leqslant \theta \leqslant \theta_i + \frac{\delta_i}{2}\]
 
 Jak łatwo zauważyć im krótszy jest czas propagacji tym lepsze przybliżenie dostajemy.
-
-\begin{figure}[H]
-    \centering
-    \resizebox{1\textwidth}{!}{%
-    \begin{tikzpicture}
-        \tikzstyle{every node}=[font=\Huge]
-        \draw [line width=1pt] (10,24.25) -- (36.25,24.25);
-        \draw [line width=1pt] (10,15.5) -- (36.25,15.5);
-        \draw [line width=1pt, ->] (12.5,15.5) -- (18.75,24.25);
-        \draw [line width=1pt, ->] (27.5,24.25) -- (33.75,15.5);
-        \draw [line width=1pt] (20,15.5) -- (20,21.75);
-        \draw [line width=1pt] (26.25,24.25) -- (26.25,18);
-        \draw [line width=1pt, <->] (20,19.75) -- (26.25,19.75)node[pos=0.5, fill=white]{$\theta$};
-        \node [font=\Huge] at (12.5,14.75) {$T_{i-3}$};
-        \node [font=\Huge] at (18.75,25) {$T_{i-2}$};
-        \node [font=\Huge] at (27.5,24.75) {$T_{i-1}$};
-        \node [font=\Huge] at (34,14.75) {$T_i$};
-        \node [font=\Huge] at (23,24.75) {$B$};
-        \node [font=\Huge] at (23,14.75) {$A$};
-    \end{tikzpicture}
-    }%
-    \caption{Pomiar opóźnienia transmisji i przesunięcia zegara}
-    \label{fig:ntp}
-\end{figure}
 
 Na postawie tych informacji podjęto próbę synchronizacji programowej zegarów węzłów w systemie multilateracyjnym. Przy użyciu czterech węzłów przeprowadzono eksperymenty mające na celu próbę ustalenia przesunięć zegarów każdego z urządzeń względem centralnego serwera. Opisany wyżej schemat wymiany czterech wiadomości powtarzano $n$ razy wspólnie dla wszystkich węzłów zapisując obliczone przesunięcia oraz czasy propagacji.
 

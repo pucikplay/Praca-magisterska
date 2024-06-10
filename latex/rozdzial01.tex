@@ -4,9 +4,9 @@ Weźmy punkt $(x, y, z) \in \mathbb{R}^3$ i oznaczmy go $N$, ponadto weźmy zbi�
 
 \begin{equation}\label{eq:base}
     \begin{dcases}
-        {(x - x_1)}^2 + {(y - y_1)}^2 + {(z - z_1)}^2 = {d_1}^2\\
-        {(x - x_2)}^2 + {(y - y_2)}^2 + {(z - z_2)}^2 = {d_2}^2\\
-        \mspace{150mu}\vdots\\
+        {(x - x_1)}^2 + {(y - y_1)}^2 + {(z - z_1)}^2 = {d_1}^2 \\
+        {(x - x_2)}^2 + {(y - y_2)}^2 + {(z - z_2)}^2 = {d_2}^2 \\
+        \mspace{150mu}\vdots                                    \\
         {(x - x_n)}^2 + {(y - y_n)}^2 + {(z - z_n)}^2 = {d_n}^2\,.
     \end{dcases}
 \end{equation}
@@ -35,9 +35,9 @@ Opis aktualnego stanu wiedzy zaczerpnięto z niedawnej pracy przeglądowej~\cite
 W pracy wybrano rozwiązanie przedstawione w pracy~\cite{norrdine2012algebraic}. Przekształćmy wyjściowy układ równań~\ref{eq:base} do postaci
 \begin{equation}
     \begin{dcases}
-        (x^2 + y^2 + z^2) - 2x_1x - 2y_1y - 2z_1z = d_1^2 - x_1^2 - y_1^2 - z_1^2\\
-        (x^2 + y^2 + z^2) - 2x_2x - 2y_2y - 2z_2z = d_2^2 - x_2^2 - y_2^2 - z_2^2\\
-        \mspace{220mu}\vdots\\
+        (x^2 + y^2 + z^2) - 2x_1x - 2y_1y - 2z_1z = d_1^2 - x_1^2 - y_1^2 - z_1^2 \\
+        (x^2 + y^2 + z^2) - 2x_2x - 2y_2y - 2z_2z = d_2^2 - x_2^2 - y_2^2 - z_2^2 \\
+        \mspace{220mu}\vdots                                                      \\
         (x^2 + y^2 + z^2) - 2x_n x - 2y_n y - 2z_n z = d_n^2 - x_n^2 - y_n^2 - z_n^2\,,
     \end{dcases}
 \end{equation}
@@ -45,68 +45,68 @@ a następnie do reprezentacji macierzowej
 \begin{equation}
     \left[
         \begin{matrix}
-            1 & -2x_1 & -2y_1 & -2z_1\\
-            1 & -2x_2 & -2y_2 & -2z_2\\
-            \multicolumn{4}{c}{\vdots}\\
-            1 & -2x_n & -2y_n & -2z_n\\
+            1 & -2x_1 & -2y_1 & -2z_1  \\
+            1 & -2x_2 & -2y_2 & -2z_2  \\
+            \multicolumn{4}{c}{\vdots} \\
+            1 & -2x_n & -2y_n & -2z_n  \\
         \end{matrix}
-    \right]
+        \right]
     \left[
         \begin{matrix}
-            x^2 + y^2 + z^2\\
-            x\\
-            y\\
-            z\\
+            x^2 + y^2 + z^2 \\
+            x               \\
+            y               \\
+            z               \\
         \end{matrix}
-    \right]
+        \right]
     =
     \left[
         \begin{matrix}
-            d_1^2 - x_1^2 - y_1^2 - z_1^2\\
-            d_2^2 - x_2^2 - y_2^2 - z_2^2\\
-            \vdots\\
-            d_n^2 - x_n^2 - y_n^2 - z_n^2\\
+            d_1^2 - x_1^2 - y_1^2 - z_1^2 \\
+            d_2^2 - x_2^2 - y_2^2 - z_2^2 \\
+            \vdots                        \\
+            d_n^2 - x_n^2 - y_n^2 - z_n^2 \\
         \end{matrix}
-    \right]\,,
+        \right]\,,
 \end{equation}
 którą można przedstawić jako
 \begin{equation}
     \mathbf{A} \cdot \mathbf{x} = \mathbf{b}\,,
-\label{eq:matrix}
+    \label{eq:matrix}
 \end{equation}
 gdzie
 \begin{equation}
     \mathbf{A} =
     \left[
         \begin{matrix}
-            1 & -2x_1 & -2y_1 & -2z_1\\
-            1 & -2x_2 & -2y_2 & -2z_2\\
-            \multicolumn{4}{c}{\vdots}\\
-            1 & -2x_n & -2y_n & -2z_n\\
+            1 & -2x_1 & -2y_1 & -2z_1  \\
+            1 & -2x_2 & -2y_2 & -2z_2  \\
+            \multicolumn{4}{c}{\vdots} \\
+            1 & -2x_n & -2y_n & -2z_n  \\
         \end{matrix}
-    \right]\,,
+        \right]\,,
 \end{equation}
 \begin{equation}
     \mathbf{x} =
     \left[
         \begin{matrix}
-            x^2 + y^2 + z^2\\
-            x\\
-            y\\
-            z\\
+            x^2 + y^2 + z^2 \\
+            x               \\
+            y               \\
+            z               \\
         \end{matrix}
-    \right]\,,
+        \right]\,,
 \end{equation}
 \begin{equation}
     \mathbf{b} =
     \left[
         \begin{matrix}
-            d_1^2 - x_1^2 - y_1^2 - z_1^2\\
-            d_2^2 - x_2^2 - y_2^2 - z_2^2\\
-            \vdots\\
-            d_n^2 - x_n^2 - y_n^2 - z_n^2\\
+            d_1^2 - x_1^2 - y_1^2 - z_1^2 \\
+            d_2^2 - x_2^2 - y_2^2 - z_2^2 \\
+            \vdots                        \\
+            d_n^2 - x_n^2 - y_n^2 - z_n^2 \\
         \end{matrix}
-    \right]
+        \right]
 \end{equation}
 
 przy założeniu, że $\mathbf{x} \in E$, gdzie $E = \left\{(x_0, x_1, x_2, x_3)^T \in {\mathbb{R}}^4\ |\ x_0 = {x_1}^2 + {x_2}^2 + {x_3}^2\right\}$.
@@ -138,29 +138,29 @@ Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni
 \begin{equation}
     \left[
         \begin{matrix}
-            1 & -2\mathbf{x^{(1)}}\\
-            1 & -2\mathbf{x^{(2)}}\\
-            \vdots & \vdots\\
-            1 & -2\mathbf{x^{(n)}}\\
+            1      & -2\mathbf{x^{(1)}} \\
+            1      & -2\mathbf{x^{(2)}} \\
+            \vdots & \vdots             \\
+            1      & -2\mathbf{x^{(n)}} \\
         \end{matrix}
-    \right]
+        \right]
     \left[
         \begin{matrix}
-            \sum_{i=1}^{m}{x_i}^2\\
-            x_1\\
-            \vdots\\
+            \sum_{i=1}^{m}{x_i}^2 \\
+            x_1                   \\
+            \vdots                \\
             x_m
         \end{matrix}
-    \right]
+        \right]
     =
     \left[
         \begin{matrix}
-            d_1^2 - \sum_{i=1}^{m}{x_i^{(1)}}^2\\
-            d_2^2 - \sum_{i=1}^{m}{x_i^{(2)}}^2\\
-            \vdots\\
-            d_n^2 - \sum_{i=1}^{m}{x_i^{(n)}}^2\\
+            d_1^2 - \sum_{i=1}^{m}{x_i^{(1)}}^2 \\
+            d_2^2 - \sum_{i=1}^{m}{x_i^{(2)}}^2 \\
+            \vdots                              \\
+            d_n^2 - \sum_{i=1}^{m}{x_i^{(n)}}^2 \\
         \end{matrix}
-    \right]
+        \right]
 \end{equation}
 z analogicznym ograniczeniem $\mathbf{x} \in E$.
 
@@ -188,6 +188,6 @@ z analogicznym ograniczeniem $\mathbf{x} \in E$.
     \label{fig:example}
 \end{figure}
 
-Staramy się ustalić pozycję punktu $N$ na postawie współrzędnych punktów $O_1, O_2, O_3$ oraz odległości $d_1, d_2, d_3$. Wykorzystując równanie~\ref{eq:lls} podstawiamy znane wartości otrzymując $\mathbf{x}$ zawierający szukane współrzędne. 
+Staramy się ustalić pozycję punktu $N$ na postawie współrzędnych punktów $O_1, O_2, O_3$ oraz odległości $d_1, d_2, d_3$. Wykorzystując równanie~\ref{eq:lls} podstawiamy znane wartości otrzymując $\mathbf{x}$ zawierający szukane współrzędne.
 
 Jak łatwo zauważyć pierwsza część lewej strony równości zależy jedynie od macierzy $\mathbf{A}$, która nie zawiera zmiennych związanych z węzłem źródłowym, co pozwala, przy założeniu stacjonarności odbiorników, na wcześniejsze i jednorazowe przeprowadzenie kosztownych przekształceń tej macierzy. W tej sytuacji jednorazowe obliczenie rozwiązania wymaga jedynie obliczenia wektora $\mathbf{b}$ oraz iloczynu skalarnego.

@@ -3,33 +3,33 @@
 Niemal wszystkie prace adresujace temat multilateracji opierają się na systemach urządzeń działających w zakresie fal elektromagnetycznych. W tej pracy poświęcimy uwagę systemowi działającemu w domenie fal dźwiękowych, jak ten aspekt wpływa na skuteczność i dokładność rozwiązania problemu multilateracji.
 
 \begin{center}
-\begin{tikzpicture}
-  % Styles for nodes
-  \tikzstyle{server}=[draw, rectangle, minimum width=8cm, minimum height=3cm, fill=blue!10]
-  \tikzstyle{inner}=[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, fill=green!10]
-  \tikzstyle{node}=[draw, ellipse, minimum width=2cm, minimum height=1cm, fill=red!10]
-  \tikzstyle{line}=[draw, -]
+  \begin{tikzpicture}
+    % Styles for nodes
+    \tikzstyle{server}=[draw, rectangle, minimum width=8cm, minimum height=3cm, fill=blue!10]
+    \tikzstyle{inner}=[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, fill=green!10]
+    \tikzstyle{node}=[draw, ellipse, minimum width=2cm, minimum height=1cm, fill=red!10]
+    \tikzstyle{line}=[draw, -]
 
-  % Main server
-  \node[server] (server) at (0, 0) {};
-  \node at (0, 1.1) {Sewer}; % Server label moved above the server node
+    % Main server
+    \node[server] (server) at (0, 0) {};
+    \node at (0, 1.1) {Sewer}; % Server label moved above the server node
 
-  % Inner nodes
-  \node[inner] (calc) at (-1.8, -.2) {Serwer obliczeniowy};
-  \node[inner] (broker) at (2.2, -.2) {Broker};
+    % Inner nodes
+    \node[inner] (calc) at (-1.8, -.2) {Serwer obliczeniowy};
+    \node[inner] (broker) at (2.2, -.2) {Broker};
 
-  % Connect inner nodes
-  \path[line] (calc) -- (broker);
+    % Connect inner nodes
+    \path[line] (calc) -- (broker);
 
-  % External nodes
-  \node[node] (sender) at (-7, 1.5) {Nadajnik};
-  \node[node] (receiver) at (-7, -1.5) {Odbiornik};
+    % External nodes
+    \node[node] (sender) at (-7, 1.5) {Nadajnik};
+    \node[node] (receiver) at (-7, -1.5) {Odbiornik};
 
-  % Connect external nodes to server
-  \path[line] (sender) -- node[above]{wifi} (server);
-  \path[line] (server) -- node[above]{wifi} (receiver);
+    % Connect external nodes to server
+    \path[line] (sender) -- node[above]{wifi} (server);
+    \path[line] (server) -- node[above]{wifi} (receiver);
 
-\end{tikzpicture}
+  \end{tikzpicture}
 \end{center}
 
 \section{Broker MQTT}
@@ -44,7 +44,7 @@ Centralnym urządzeniem systemu jest serwer obliczeniowy kumulujący dane otrzym
 
 Każdy z węzłów oparty jest o mikrokontroler ESP8266-01s zaprogramowany przy użyciu Arduino IDE w języku \texttt{C++}. W systemie występują dwa rodzaje węzłów:
 \begin{itemize}
-    \item nadajnik,
-    \item odbiornik.
+  \item nadajnik,
+  \item odbiornik.
 \end{itemize}
 Nadajnik jest wyposażony jest w przełącznik cewkowy sterowany przez mikrokontroler, który służy do kontrolowania brzęczyka zasilanego napięciem $12V$. Wybrano brzęczyk o głośności $90dB$ w celu zmaksymalizowania zasięgu działania systemu. Odbiornik jest natomiast wyposażony w mikrofon elektretowy, którego sygnał wzmacniany jest przez wzmacniacz operacyjny. Sygnał analogowy jest ostatecznie zmieniany na sygnał binarny na podstawie odniesienia to określonego poziomu napięcia. Czułość mikrofonu dostrajana jest ręcznie poprzez potencjometr.

@@ -13,7 +13,7 @@ Współrzędne odbiorników są znane.
 \subsection{Programy węzłów}
 
 \begin{center}
-    \captionof{algorithm}{Program nadajnika}\label{alg:source}
+    \captionof{algorithm}{Program nadajnika}
     \begin{algorithmic}[1]
         \State\ $buzz \gets False$
         \State\ $buzzTime \gets 0$
@@ -21,29 +21,30 @@ Współrzędne odbiorników są znane.
         \State\ $syncTime \gets 0$
 
         \Function{onMessage}{$message, topic$}
-            \If{$topic$ is $TOPIC$}
-                \State\ $buzz \gets message$
-            \EndIf
-            \If{$topic$ is $TIME\_TOPIC$}
-                \State\ $syncTime \gets micros()$
-            \EndIf
+        \If{$topic$ is $TOPIC$}
+        \State\ $buzz \gets message$
+        \EndIf
+        \If{$topic$ is $TIME\_TOPIC$}
+        \State\ $syncTime \gets micros()$
+        \EndIf
         \EndFunction
 
         \Loop
-            \If{$buzz$ and $micros() - lastBuzzTime > BUZZ\_INTERVAL$}
-                \State\ $buzzTime \gets micros() - syncTime$
-                \State\ $publish(buzzTime)$
-                \State\ $lastBuzzTime \gets buzzTime$
-                \State\ $buzzer()$
-            \EndIf
+        \If{$buzz$ and $micros() - lastBuzzTime > BUZZ\_INTERVAL$}
+        \State\ $buzzTime \gets micros() - syncTime$
+        \State\ $publish(buzzTime)$
+        \State\ $lastBuzzTime \gets buzzTime$
+        \State\ $buzzer()$
+        \EndIf
         \EndLoop
     \end{algorithmic}
     \vspace{5pt}
     \hrule
+    \label{alg:source}
 \end{center}
 %\newpage
 \begin{center}
-    \captionof{algorithm}{Program odbiornika}\label{alg:sink}
+    \captionof{algorithm}{Program odbiornika}
     \begin{algorithmic}[1]
         \State\ $micState \gets LOW$
         \State\ $micTime \gets False$
@@ -51,26 +52,27 @@ Współrzędne odbiorników są znane.
         \State\ $syncTime \gets 0$
 
         \Function{onMessage}{$topic$}
-            \If{$topic$ is $TIME\_TOPIC$}
-                \State\ $syncTime \gets micros()$
-            \EndIf
+        \If{$topic$ is $TIME\_TOPIC$}
+        \State\ $syncTime \gets micros()$
+        \EndIf
         \EndFunction
 
         \Function{micInterrupt}{}
-            \State\ $micState \gets HIGH$
+        \State\ $micState \gets HIGH$
         \EndFunction
 
         \Loop
-            \If{$micState$ is $HIGH$ and $micros() - lastMicTime > MIC\_INTERVAL$}
-                \State\ $micTime \gets micros() - syncTime$
-                \State\ $publish(micTime)$
-                \State\ $lastMicTime \gets micTime$
-                \State\ $micState \gets LOW$
-            \EndIf
+        \If{$micState$ is $HIGH$ and $micros() - lastMicTime > MIC\_INTERVAL$}
+        \State\ $micTime \gets micros() - syncTime$
+        \State\ $publish(micTime)$
+        \State\ $lastMicTime \gets micTime$
+        \State\ $micState \gets LOW$
+        \EndIf
         \EndLoop
     \end{algorithmic}
     \vspace{5pt}
     \hrule
+    \label{alg:sink}
 \end{center}
 
 \begin{itemize}
@@ -87,27 +89,28 @@ Współrzędne odbiorników są znane.
 \subsection{Program serwera}
 
 \begin{center}
-    \captionof{algorithm}{Program serwera}\label{alg:server}
+    \captionof{algorithm}{Program serwera}
     \begin{algorithmic}[1]
         \State\ $M \gets {\left(A^T A\right)}^{-1} A^T$
         \Function{$calc\_position$}{}
-            \For{$node$ in $NODES$}
-                \State\ $d \gets (SS / 10^{6}) \cdot time_{node} - time_{source}$
-                \State\ $b_{node} \gets d - \sum_{x \in coords_{node}}{x^2}$
-            \EndFor
-            \State\ return $M \cdot b$
+        \For{$node$ in $NODES$}
+        \State\ $d \gets (SS / 10^{6}) \cdot time_{node} - time_{source}$
+        \State\ $b_{node} \gets d - \sum_{x \in coords_{node}}{x^2}$
+        \EndFor
+        \State\ return $M \cdot b$
         \EndFunction
         \Loop{ $main$}
-            \State\ $sleep(t_1)$
-            \State\ $calc\_position()$
+        \State\ $sleep(t_1)$
+        \State\ $calc\_position()$
         \EndLoop
         \Loop{ $sync\_clock$}{}
-            \State\ $publish(TIME\_TOPIC)$
-            \State\ $sleep(t_2)$
+        \State\ $publish(TIME\_TOPIC)$
+        \State\ $sleep(t_2)$
         \EndLoop
     \end{algorithmic}
     \vspace{5pt}
     \hrule
+    \label{alg:server}
 \end{center}
 
 \begin{itemize}
@@ -133,14 +136,14 @@ Pierwsze testy przeprowadzone zostały na systemie operującym w jednym wymiarze
     \centering
     \begin{tikzpicture}[pointnode/.style={circle, fill=black}, node distance=5cm, minimum size=5mm]
         \node[pointnode,
-              label=above:{Nadajnik},
-              label=below:{$0$}] (N) {};
+        label=above:{Nadajnik},
+        label=below:{$0$}] (N) {};
         \node[pointnode,
-              label=above:{Odbiornik 1.},
-              label=below:{$-0.5$}] (O1) [left=of N] {};
+        label=above:{Odbiornik 1.},
+        label=below:{$-0.5$}] (O1) [left=of N] {};
         \node[pointnode,
-              label=above:{Odbiornik 2.},
-              label=below:{$0.5$}] (O2) [right=of N] {};
+        label=above:{Odbiornik 2.},
+        label=below:{$0.5$}] (O2) [right=of N] {};
         \draw[-, thin, dotted] (-8,0) -- (8,0);
     \end{tikzpicture}
     \caption{Układ systemu testowego}
