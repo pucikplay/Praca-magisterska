@@ -1,22 +1,25 @@
 \chapter{Sprzęt systemowy}\label{chap:hardware}
 
-Niemal wszystkie prace adresujace temat multilateracji opierają się na systemach urządzeń działających w zakresie fal elektromagnetycznych. W tej pracy poświęcimy uwagę systemowi działającemu w domenie fal dźwiękowych, jak ten aspekt wpływa na skuteczność i dokładność rozwiązania problemu multilateracji.
+Niemal wszystkie prace odnoszące się do tematu multilateracji opierają się na systemach urządzeń działających w zakresie fal elektromagnetycznych. W tej pracy poświęcimy uwagę systemowi działającemu w domenie fal dźwiękowych i sprawdzimy, jak ten aspekt wpływa na skuteczność i dokładność rozwiązania problemu multilateracji.
 
-\begin{center}
-  \begin{tikzpicture}
-    % Styles for nodes
-    \tikzstyle{server}=[draw, rectangle, minimum width=8cm, minimum height=3cm, fill=blue!10]
-    \tikzstyle{inner}=[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, fill=green!10]
-    \tikzstyle{node}=[draw, ellipse, minimum width=2cm, minimum height=1cm, fill=red!10]
-    \tikzstyle{line}=[draw, -]
+Na poniższym rysunku przedstawiono schematycznie elementy systemu testowego. Składa się on z kilku głównych elementów, które pozwolą wygenerować dane testowe i sprawdzić skuteczność metod przedstawionych w poprzednim rozdziale.
 
-    % Main server
-    \node[server] (server) at (0, 0) {};
-    \node at (0, 1.1) {Sewer}; % Server label moved above the server node
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+  % Styles for nodes
+  \tikzstyle{server}=[draw, rectangle, minimum width=8cm, minimum height=3cm, fill=blue!10]
+  \tikzstyle{inner}=[draw, rectangle, minimum width=2.5cm, minimum height=1.5cm, fill=green!10]
+  \tikzstyle{node}=[draw, ellipse, minimum width=2cm, minimum height=1cm, fill=red!10]
+  \tikzstyle{line}=[draw, -]
 
-    % Inner nodes
-    \node[inner] (calc) at (-1.8, -.2) {Serwer obliczeniowy};
-    \node[inner] (broker) at (2.2, -.2) {Broker};
+  % Main server
+  \node[server] (server) at (0, 0) {};
+  \node at (0, 1.1) {Serwer}; % Server label moved above the server node
+
+  % Inner nodes
+  \node[inner] (calc) at (-1.8, -.2) {Serwer obliczeniowy};
+  \node[inner] (broker) at (2.2, -.2) {Broker MQTT};
 
     % Connect inner nodes
     \path[line] (calc) -- (broker);
@@ -29,8 +32,10 @@ Niemal wszystkie prace adresujace temat multilateracji opierają się na systema
     \path[line] (sender) -- node[above]{wifi} (server);
     \path[line] (server) -- node[above]{wifi} (receiver);
 
-  \end{tikzpicture}
-\end{center}
+\end{tikzpicture}
+\caption{Topologia systemu}
+\label{pic:sys_topology}
+\end{figure}
 
 \section{Broker MQTT}
 
@@ -40,11 +45,13 @@ Urządzenia systemowe porozumiewają się przy uzyciu protokołu MQTT. Każdy z 
 
 Centralnym urządzeniem systemu jest serwer obliczeniowy kumulujący dane otrzymane z sensorów do rozwiązania problemu multilateracji. Do implementacji serwera zdecydowano się użyć języka \texttt{python} ze względu na dostępność bibiotek oferujących narzędzia potrzebne do działania serwera, takie jak pakiet \texttt{paho} oferujący klienta MQTT czy pakiet matematyczny \texttt{numpy}. Ponadto prostota składni tego języka pozwoliła na szybkie wdrażanie modyfikacji działania kolejnych aspektów serwera. Serwer hostowany jest na tej samej maszynie co broker MQTT.
 
-\section{Węzeł}
+\section{Węzły}
 
 Każdy z węzłów oparty jest o mikrokontroler ESP8266-01s zaprogramowany przy użyciu Arduino IDE w języku \texttt{C++}. W systemie występują dwa rodzaje węzłów:
 \begin{itemize}
   \item nadajnik,
   \item odbiornik.
 \end{itemize}
-Nadajnik jest wyposażony jest w przełącznik cewkowy sterowany przez mikrokontroler, który służy do kontrolowania brzęczyka zasilanego napięciem $12V$. Wybrano brzęczyk o głośności $90dB$ w celu zmaksymalizowania zasięgu działania systemu. Odbiornik jest natomiast wyposażony w mikrofon elektretowy, którego sygnał wzmacniany jest przez wzmacniacz operacyjny. Sygnał analogowy jest ostatecznie zmieniany na sygnał binarny na podstawie odniesienia to określonego poziomu napięcia. Czułość mikrofonu dostrajana jest ręcznie poprzez potencjometr.
+Nadajnik jest wyposażony jest w przełącznik cewkowy sterowany przez mikrokontroler, który służy do kontrolowania brzęczyka zasilanego napięciem $12V$. Wybrano brzęczyk o głośności $90dB$ w celu zmaksymalizowania zasięgu działania systemu. Odbiornik jest natomiast wyposażony w mikrofon elektretowy, którego sygnał wzmacniany jest przez wzmacniacz operacyjny. Sygnał analogowy jest ostatecznie zmieniany na sygnał binarny na podstawie odniesienia to określonego poziomu napięcia. Czułość mikrofonu dostrajana jest ręcznie poprzez potencjometr. 
+
+W systemie wykorzystano jeden nadajnik oraz zmienną liczbę odbiorników. Podstawą przeprowadzonych eksperymentów była próba określenia pozycji nadajnika względem odbiorników wyłącznie przy wykorzystaniu sygnałów dźwiękowych (impulsów) nadajnika.

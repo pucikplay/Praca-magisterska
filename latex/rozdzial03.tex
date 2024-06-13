@@ -4,11 +4,11 @@ Po przygotowaniu komponentów systemu wstępnie zaimplementowano program rozwią
 
 \section{Opis działania}
 
-Program zaimplementowano na podstawie rozwiązania aproksymacyjnego \ref{eq:lls} postaci
+Programy dla urządzeń w systemie zaimplementowano na podstawie rozwiązania aproksymacyjnego \ref{eq:lls} postaci
 \begin{equation}
     \hat{\mathbf{x}} = {\left(\mathbf{A}^T\mathbf{A}\right)}^{-1}\mathbf{A}^T\mathbf{b}
 \end{equation}
-Współrzędne odbiorników są znane.
+Poniżej przedstawiono je w formie pseudokodów. Współrzędne odbiorników, a zatem macierz $\mathbf{A}$ są znane i stałe dla każdej konfiguracji ustawienia odbiorników.
 
 \subsection{Programy węzłów}
 
@@ -85,6 +85,8 @@ Współrzędne odbiorników są znane.
     \item \textsc{onMessage} {-} funkcja wywołania zwrotnego wywoływana przy otrzymaniu wiadomości na dowolnym z subskrybowanych tematów,
     \item $publish()$ {-} funkcja publikująca wiadomość na zadanym kanale MQTT.
 \end{itemize}
+
+W celu zminimalizowania opóźnień funkcja \textsc{micInterrupt} została zaimplementowana przy użyciu przerwania sprzętowego. Jest wywoływana przy zmianie stanu pinu, do którego podłączony jest mikrofon z niskiego na wysoki.
 
 \subsection{Program serwera}
 
@@ -173,7 +175,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
     \begin{subfigure}{\textwidth}\label{fig:position_2}
         \centering
         \includegraphics[width=\linewidth]{pics/position/position_2.png}
-        \caption{Test 3.}
+        \caption{Test 3. Diagram po prawej stanowi powiększenie zaznaczonego obszaru diagramu po lewej.}
     \end{subfigure}
 \end{figure}
 \begin{figure}[H]
@@ -181,7 +183,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
     \begin{subfigure}{\textwidth}\label{fig:position_3}
         \centering
         \includegraphics[width=\linewidth]{pics/position/position_3.png}
-        \caption{Test 4.}
+        \caption{Test 4. Diagramy po prawej stanowią powiększenie odpowiednich obszarów diagramu po lewej.}
     \end{subfigure}
 \end{figure}
 \begin{figure}[H]
@@ -189,7 +191,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
     \begin{subfigure}{\textwidth}\label{fig:position_4}
         \centering
         \includegraphics[width=\linewidth]{pics/position/position_4.png}
-        \caption{Test 5.}
+        \caption{Test 5. Diagramy po prawej stanowią powiększenie odpowiednich obszarów diagramu po lewej.}
     \end{subfigure}
     \caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
     \label{fig:position}

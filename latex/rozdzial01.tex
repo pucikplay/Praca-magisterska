@@ -1,7 +1,6 @@
 \chapter{Sformułowanie problemu}\label{chap:problem}
 
 Weźmy punkt $(x, y, z) \in \mathbb{R}^3$ i oznaczmy go $N$, ponadto weźmy zbiór $n$ punktów $\left\{(x_i, y_i, z_i): i \in [n]\right\} \subset \mathbb{R}^3$, który oznaczmy $\mathcal{O}$, a punkty należące do zbioru odpowiednio $O_i$. Niech $d_i$ będzie odległością $d(N, O_i)$. Znając współrzędne punktów $O_i$ oraz odległości $d_i$ chcemy znaleźć $(x, y, z)$. Można to osiągnąć rozwiązując układ równań
-
 \begin{equation}\label{eq:base}
     \begin{dcases}
         {(x - x_1)}^2 + {(y - y_1)}^2 + {(z - z_1)}^2 = {d_1}^2 \\
@@ -13,7 +12,7 @@ Weźmy punkt $(x, y, z) \in \mathbb{R}^3$ i oznaczmy go $N$, ponadto weźmy zbi�
 
 \section{Aktualny stan wiedzy}
 
-W dostępnej literaturze obejmującą temat multilateracji i systemów multilateracyjnych opisane są trzy główne podejścia:
+W dostępnej literaturze obejmującej temat multilateracji i systemów multilateracyjnych opisane są trzy główne podejścia:
 
 \begin{itemize}
     \item iteracyjne,
@@ -21,14 +20,11 @@ W dostępnej literaturze obejmującą temat multilateracji i systemów multilate
     \item liniowe.
 \end{itemize}
 
-Metoda iteracyjna dąży do minimalizacji błędu przybliżonego rozwiązania układu równań~\ref{eq:base}. Typowymi narzędziami w niej wykorzystywanymi są: metoda najszybszego spadku~\cite{doi:10.1137/0111030}, metoda Newtona oraz szereg Taylora~\cite{4101619}. Praca~\cite{4101619} zasuguje na szczególną uwagę ze względu na skupienie się na zastosowaniu metody do użytków lokalizacyjnych, w przeciwieństwie do ogólnego podejścia do problemu optymalizacyjnego. Największymi problemami metod iteracyjnych są niepewność zbiegania do rozwiązania optymalnego a także złożoność obliczeniowa, która wpływa negatywnie na czas działania.
+Metoda iteracyjna dąży do minimalizacji błędu przybliżonego rozwiązania układu równań~\ref{eq:base}. Typowymi narzędziami w niej wykorzystywanymi są: metoda najszybszego spadku~\cite{doi:10.1137/0111030}, metoda Newtona oraz szereg Taylora~\cite{4101619}. Praca~\cite{4101619} zasuguje na szczególną uwagę ze względu na skupienie się na zastosowaniu metody do celów lokalizacji, w przeciwieństwie do ogólnego podejścia do problemu optymalizacyjnego. Największymi problemami metod iteracyjnych są niepewność zbiegania do rozwiązania optymalnego a także złożoność obliczeniowa, która wpływa negatywnie na czas działania.
 
-Metoda algebraiczna zaproponowana w pracy~\cite{4104017}, w której pochylono się na algebraicznym rozwiązaniu układów równań w systemie GPS, ma znaczącą przewagę nad metodami iteracyjnymi otrzymywania dwóch możliwych rozwiązań natychmiastowo, z ktorych można następnie wybrać bardziej odpowiadające. Dodatkowo ta metoda daje możliwość operowania na pomiarach z arbitralnej liczby punktów, w przeciwieństwie do metod y zaproponowanej w pracy~\cite{article}, w której skupiono się na implementacji modelu VHDL pozycjonującego na postawie odczytów z czterech satelitów.
+Metoda algebraiczna zaproponowana w pracy~\cite{4104017}, w której pochylono się na algebraicznym rozwiązaniu układów równań w systemie GPS, ma znaczącą przewagę nad metodami iteracyjnymi otrzymywania dwóch możliwych rozwiązań natychmiastowo, z ktorych można następnie wybrać bardziej odpowiadające. Dodatkowo ta metoda daje możliwość operowania na pomiarach z arbitralnej liczby punktów, w przeciwieństwie do metody zaproponowanej w pracy~\cite{article}, w której skupiono się na implementacji modelu VHDL pozycjonującego na postawie odczytów z czterech satelitów.
 
-Wyżej wymienione metody, choć są wciąż używane, nie pojawiają się w pracach z ostatnich lat. Większość rozwiązań prezentowanych w ostatnich dekadach opiera się na układzie równań liniowych z dodatkową zmienną ze względu na nieliniowość problemu. Pierwsze tego typu rozwiązanie zaprezentowano w pracy~\cite{301830}, w którym zmienna nieliniowa była niwelowana przez odejmowanie od siebie kolejnych równań. Inny wariant przestawiono w pracy~\cite{1018778}, który zredagowano w czytelniejszej formie w pracy~\cite{norrdine2012algebraic}. Właśnie ta praca była inspiracją do niniejszej pracy.
-
-Opis aktualnego stanu wiedzy zaczerpnięto z niedawnej pracy przeglądowej~\cite{10419087}.
-
+Wyżej wymienione metody, choć są wciąż używane, nie pojawiają się w pracach z ostatnich lat. Większość rozwiązań prezentowanych w ostatnich dekadach opiera się na układzie równań liniowych z dodatkową zmienną ze względu na nieliniowość problemu. Pierwsze tego typu rozwiązanie zaprezentowano w pracy~\cite{301830}, w którym zmienna nieliniowa była niwelowana przez odejmowanie od siebie kolejnych równań. Inny wariant przestawiono w pracy~\cite{1018778}, który zredagowano w czytelniejszej formie w pracy~\cite{norrdine2012algebraic}. Właśnie ta praca była inspiracją do niniejszej pracy. Niedawno opublikowana praca przeglądowa~\cite{10419087} zawiera szeroki opis innych metod wykorzystywanych do rozwiązania omawianego tutaj zagadnienia.
 
 \section{Obrane rozwiązanie}
 
@@ -106,10 +102,14 @@ gdzie
             \vdots                        \\
             d_n^2 - x_n^2 - y_n^2 - z_n^2 \\
         \end{matrix}
-        \right]
+    \right]\,,
 \end{equation}
-
-przy założeniu, że $\mathbf{x} \in E$, gdzie $E = \left\{(x_0, x_1, x_2, x_3)^T \in {\mathbb{R}}^4\ |\ x_0 = {x_1}^2 + {x_2}^2 + {x_3}^2\right\}$.
+\noindent
+przy założeniu, że $\mathbf{x} \in E$, gdzie
+\begin{equation}
+    E = \left\{(x_0, x_1, x_2, x_3)^T \in {\mathbb{R}}^4\ |\ x_0 = {x_1}^2 + {x_2}^2 + {x_3}^2\right\}
+    \label{eq:constraint}
+\end{equation}
 
 \subsection{Liniowa metoda najmniejszych kwadratów}
 
@@ -117,11 +117,11 @@ Aby rozwiązać powyższe równanie liniowe obrano liniową metodę najmniejszyc
 \begin{equation}
     \mathbf{A} \cdot \mathbf{x} = \mathbf{b}\,,
 \end{equation}
-gdzie $\mathbf{A} \in \mathbb{R}^{n\times m}$, $\mathbf{b} \in \mathbb{R}^n$ są znane będzie taki $\mathbf{x} \in \mathbb{R}^m$, który minimalizuje
+gdzie $\mathbf{A} \in \mathbb{R}^{n\times m}$, $\mathbf{b} \in \mathbb{R}^n$ są znane, będzie taki $\hat{\mathbf{x}} \in \mathbb{R}^m$, który minimalizuje
 \begin{equation}
-    \sum_{i=1}^{n}{\left|\sum_{j=1}^{m}{A_{ij}x_j} - b_i\right|^2} = ||\mathbf{A}\mathbf{x} - \mathbf{b}||^2
+    \sum_{i=1}^{n}{\left|\sum_{j=1}^{m}{A_{ij}x_j} - b_i\right|^2} = ||\mathbf{A}\hat{\mathbf{x}} - \mathbf{b}||^2
 \end{equation}
-Taki $\mathbf{x}$ obliczamy przy użyciu powszechnie znanego w kontekście najmniejszych kwadratów \textit{równania normalnego} postaci
+Taki $\hat{\mathbf{x}}$ obliczamy przy użyciu powszechnie znanego w kontekście najmniejszych kwadratów \textit{równania normalnego} postaci
 \begin{equation}
     \mathbf{A}^T\mathbf{A}\hat{\mathbf{x}} = \mathbf{A}^T\mathbf{b}
 \end{equation}
@@ -129,12 +129,10 @@ lub po przekształceniu
 \begin{equation}\label{eq:lls}
     \hat{\mathbf{x}} = {\left(\mathbf{A}^T\mathbf{A}\right)}^{-1}\mathbf{A}^T\mathbf{b}
 \end{equation}
-
 Jeśli żadna trójka odbiorników nie jest współliniowa ($\rank\mathbf{A} = m$) oraz pomiarów jest więcej niż wymiarów $(n > m)$ możemy zagwarantować odwracalność $\mathbf{A}$, a co za tym idzie istnienie $\hat{\mathbf{x}}$.
 
-\subsubsection{Rozwiązanie ogólne}
-
-Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni $m$-wymiarowej i $n$ odbiorników:
+\subsubsection{Forma ogólna}
+Zaletą reprezentacji problemu~\ref{eq:matrix} zawartą w obranym rozwiązaniu jest łatwość rozszerzenia obliczeń na dowolną $m$-wymiarową przestrzeń oraz $n$-odbiorników:
 \begin{equation}
     \left[
         \begin{matrix}
@@ -162,32 +160,108 @@ Uogólniona forma równania macierzowego problemu multilateracji dla przestrzeni
         \end{matrix}
         \right]
 \end{equation}
-z analogicznym ograniczeniem $\mathbf{x} \in E$.
+z analogicznym do~\ref{eq:constraint} ograniczeniem $\mathbf{x} \in E$.
 
-\section{Przykładowy egzemplarz problemu}
+\section{Przykład problemu}
 
 \begin{figure}[!h]
     \centering
     \begin{tikzpicture}
-        \coordinate (O1) at (0,2);
-        \coordinate (O2) at (2,0);
-        \coordinate (O3) at (8,3);
-        \coordinate (N) at (3,5);
+        \coordinate (O1) at (0,0);
+        \coordinate (O2) at (6,0);
+        \coordinate (O3) at (6,6);
+        \coordinate (O4) at (0,6);
+        \coordinate (N) at (0.75,4.5);
         \filldraw[black] (O1) circle (2pt) node[left]{$O_1$};
         \filldraw[black] (O2) circle (2pt) node[below]{$O_2$};
         \filldraw[black] (O3) circle (2pt) node[right]{$O_3$};
-        \filldraw[black] (N) circle (2pt) node[above right]{$N$};
-        \draw[black] (O1) -- node[above left]{$d_1$} (N);
+        \filldraw[black] (N) circle (2pt) node[above left]{$N$};
+        \draw[black] (O1) -- node[right]{$d_1$} (N);
         \draw[black] (O2) -- node[left]{$d_2$} (N);
         \draw[black] (O3) -- node[above]{$d_3$} (N);
         \draw[loosely dashed, thin] (O1) -- (O2);
-        \draw[loosely dashed, thin] (O1) -- (O3);
         \draw[loosely dashed, thin] (O2) -- (O3);
+        \draw[loosely dashed, thin] (O3) -- (O4);
+        \draw[loosely dashed, thin] (O4) -- (O1);
     \end{tikzpicture}
     \caption{Egzemplarz problemu multilateracji}
     \label{fig:example}
 \end{figure}
 
-Staramy się ustalić pozycję punktu $N$ na postawie współrzędnych punktów $O_1, O_2, O_3$ oraz odległości $d_1, d_2, d_3$. Wykorzystując równanie~\ref{eq:lls} podstawiamy znane wartości otrzymując $\mathbf{x}$ zawierający szukane współrzędne.
+Staramy się ustalić pozycję punktu $N$ na postawie współrzędnych punktów $O_1, O_2, O_3$ oraz odległości $d_1, d_2, d_3$. Wykorzystując równanie~\ref{eq:lls}, podstawiamy znane wartości, otrzymując $\mathbf{x}$ zawierający szukane współrzędne. 
 
-Jak łatwo zauważyć pierwsza część lewej strony równości zależy jedynie od macierzy $\mathbf{A}$, która nie zawiera zmiennych związanych z węzłem źródłowym, co pozwala, przy założeniu stacjonarności odbiorników, na wcześniejsze i jednorazowe przeprowadzenie kosztownych przekształceń tej macierzy. W tej sytuacji jednorazowe obliczenie rozwiązania wymaga jedynie obliczenia wektora $\mathbf{b}$ oraz iloczynu skalarnego.
+Jak łatwo zauważyć, pierwsza część lewej strony równości zależy jedynie od macierzy $\mathbf{A}$, która nie zawiera zmiennych związanych z węzłem źródłowym, co pozwala, przy założeniu niezmienności pozycji odbiorników, na wcześniejsze i jednorazowe przeprowadzenie kosztownych przekształceń tej macierzy. W tej sytuacji jednorazowe obliczenie rozwiązania wymaga jedynie obliczenia wektora $\mathbf{b}$ oraz iloczynu skalarnego.
+
+Przyjmijmy wartości dla odbiorników $O_1(0;0), O_2(1;0), O_3(1;1)$ oraz załóżmy, że punkt $N$ znajduje się na pozycji $\left(0,125;0,75\right)$. Odległości $d_1, d_2, d_3$ wynoszą odpowiednio $\sqrt{0,578125}, \sqrt{1,328125}$ i $\sqrt{0,828125}$. Wprowadźmy teraz błąd pomiaru poprzez zaokrąglenie długości do $0,05$. Nasze odległości $d_1', d_2', d_3'$ wynoszą $0,75; 1,15$ oraz $0,9$. Dla tych danych macierz $\mathbf{A}$ ma postać
+\begin{equation*}
+    \mathbf{A} =
+    \left[
+        \begin{matrix}
+            1 & 0 & 0\\
+            1 & -2 & 0\\
+            1 & -2 & -2\\
+        \end{matrix}
+    \right]\,,
+\end{equation*}
+a wektor $\mathbf{b}$
+
+\begin{equation*}
+    \mathbf{b} =
+    \left[
+        \begin{matrix}
+            0,5625\\
+            0,3225\\
+            -1,19\\
+        \end{matrix}
+    \right]\,.
+\end{equation*}
+Idąc dalej prawa część równania~\ref{eq:lls} przyjmie postać
+\begin{equation*}
+    {\left(\mathbf{A}^T\mathbf{A}\right)}^{-1}\mathbf{A}^T\mathbf{b} =
+    {\left(
+    \left[
+        \begin{matrix}
+            1 & 1 & 1\\
+            0 & -2 & -2\\
+            0 & 0 & -2\\
+        \end{matrix}
+    \right]
+    \cdot
+    \left[
+        \begin{matrix}
+            1 & 0 & 0\\
+            0,5 & -0,5 & 0\\
+            0 & 0,5 & -0,5\\
+        \end{matrix}
+    \right]
+    \right)}^{-1}
+    \cdot
+    \left[
+        \begin{matrix}
+            1 & 1 & 1\\
+            0 & -2 & -2\\
+            0 & 0 & -2\\
+        \end{matrix}
+    \right]
+    \cdot
+    \left[
+        \begin{matrix}
+            0,5625\\
+            0,3225\\
+            -1,19\\
+        \end{matrix}
+    \right]\,,
+\end{equation*}
+co daje nam rozwiązanie aproksymacyjne
+\begin{equation*}
+    \hat{\mathbf{x}} =
+    \left[
+    \begin{matrix}
+        0,5625\\
+        0,12\\
+        0,75625\\
+    \end{matrix}
+    \right]
+\end{equation*}
+Z niego odczytujemy współrzędne odbiornika $(0,12;0,75625)$, które są bliskie rzeczywistej pozycji $N$.
+

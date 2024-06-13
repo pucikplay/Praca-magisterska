@@ -2,7 +2,7 @@
 
 Synchronizacja czasu jest jednym z podstawowych problemów systemów opartych o wiele urządzeń posiadających własne zegary. Wiedza o dokładnym czasie zachodzących w sieci zdarzeń jest niezbędna do szybkiego przesyłu danych, koordynacji procesów czy aktualizacji systemu plików. W przypadku niniejszej pracy dokładne określenie czasu zachodzących zdarzeń jest kluczowe do wiarygodnego określenia odległości pomiędzy węzłami na podstawie interwału czasowego pomiędzy nadaniem a odbiorem sygnału dźwiękowego.
 
-\section{Synchronizacja programowa}
+\section{Synchronizacja programowa}\label{sec:prog_sync}
 
 Pierwszym podejściem do rozwiązania problemu synchronizacji zegarów było zastosowanie synchronizacji programowej~\cite{6066334}, w której urządzenie-host utrzymuje wysokiej rozdzielczości licznik czasowy i wysyła sygnały o jego wartości pozostałym węzłom w sieci. Na podstawie tych informacji każdy z węzłów oblicza różnicę w zegarach i wprowadza odpowiednie przesunięcie własnego licznika.
 
@@ -36,13 +36,13 @@ Jednym z najbardziej rozpowszechnionych protokołów synchronizacji programowej 
 
 Na rysunku~\ref{fig:ntp} przestawiono schemat działania protokołu NTP. Urządzenia \textit{A} i \textit{B} wymieniają wiadomości zawierające sygnatury czasowe. Niech $T_{i},\ T_{i-1},\ T_{i-2},\ T_{i-3}$ będą czterema ostatnimi wiadomościami oraz niech $a = T_{i-2} - T_{i-3}$ oraz $b = T_{i-1} - T_i$. Wtedy całkowity czas transmisji $\delta_i$ i przesunięcie zegara $\theta_i$ urządzenia \textit{B} względem urządzenia \textit{A} to
 
-\[\delta_i = a - b\quad \text{oraz}\quad \theta_i = \frac{a+b}{2}\]
+\[\delta_i = a - b\quad \text{oraz}\quad \theta_i = \frac{a+b}{2}.\]
 
 Dodatkowym wnioskiem przedstawionym w powyższej pracy jest własność prawdziwego przesunięcia względem aktualnie obliczonego:
 
-\[\theta_i - \frac{\delta_i}{2} \leqslant \theta \leqslant \theta_i + \frac{\delta_i}{2}\]
+\[\theta_i - \frac{\delta_i}{2} \leqslant \theta \leqslant \theta_i + \frac{\delta_i}{2}.\]
 
-Jak łatwo zauważyć im krótszy jest czas propagacji tym lepsze przybliżenie dostajemy.
+Jak łatwo zauważyć, im krótszy jest czas propagacji tym lepsze przybliżenie dostajemy.
 
 Na postawie tych informacji podjęto próbę synchronizacji programowej zegarów węzłów w systemie multilateracyjnym. Przy użyciu czterech węzłów przeprowadzono eksperymenty mające na celu próbę ustalenia przesunięć zegarów każdego z urządzeń względem centralnego serwera. Opisany wyżej schemat wymiany czterech wiadomości powtarzano $n$ razy wspólnie dla wszystkich węzłów zapisując obliczone przesunięcia oraz czasy propagacji.
 
@@ -51,14 +51,14 @@ W celu poprawy czytelności wyniki przesunięć zostały znormalizowane poprzez 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{pics/ntp_sync/offsets.png}
-    \caption{Wyniki pomiarów przesunięć zegarów}
+    \caption{Wyniki pomiarów przesunięć zegarów.  Diagram po prawej stanowi powiększenie zaznaczonego obszarów diagramu po lewej.}
     \label{pic:offsets_ntp}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{pics/ntp_sync/prop_times.png}
-    \caption{Wyniki pomiarów czasów propagacji}
+    \caption{Wyniki pomiarów czasów propagacji.  Diagram po prawej stanowi powiększenie zaznaczonego obszarów diagramu po lewej.}
     \label{pic:prop_times}
 \end{figure}
 
@@ -89,7 +89,7 @@ Biorąc pod uwagę zauważoną nieprzewidywalność i rozrzut czasów propagacji
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{pics/time_deltas/time_deltas.png}
-    \caption{Wyniki pomiarów przesunięć zegarów}
+    \caption{Wyniki pomiarów przesunięć zegarów.   Diagram po prawej stanowi powiększenie zaznaczonego obszarów diagramu po lewej.}
     \label{pic:offsets_deltas}
 \end{figure}
 
@@ -104,11 +104,11 @@ Wykresy przesunięć wygenerowane na podstawie tych testów na pierwszy rzut oka
 
 \section{Synchronizacja sprzętowa}
 
-TODO
+Alternatywną metodą do synchronizacji programowej jest synchronizacja sprzętowa. Ze względu na konieczność wyposażenia węzłów w odpowiednie sensory potrzebne do pełnienia tego zadania opcja programowa jest często bardziej atrakcyjnym wyborem, jednakże w przypadku systemu proponowanego w tej pracy mikrofony, w które są wyposażone węzły odbiorcze, wraz z brzęczykiem węzła nadawczego mogą pełnić tę rolę.
 
 \subsection{Synchronizacja z użyciem mikrofonów}\label{sec:mic_sync}
 
-Innym pomysłem na synchronizację zegarów w węzłach było użycie mikrofonów, w które węzły odbiorcze są wyposażone. Potrzebujmy znać jedynie przesunięcie naszego zegara względem zegara w węźle nadawczym dlatego wystarczającym będzie porównanie czasu nadania i odebrania sygnału dźwiękowego. Ponadto ten rodzaj synchronizacji w przeciwieństwie do synchronizacji programowej, która uzgadniała ze sobą jedynie zegary na podstawie wymienianych wiadomości, wlicza w czas transmisji wszelkie nie wzięte wcześniej pod uwagę opóźnienia, takie jak:
+Jedyną potrzebną do obliczeń odległości informacją jest przesunięcie naszego zegara względem zegara w węźle nadawczym, dlatego wystarczającym będzie porównanie czasu nadania i odebrania sygnału dźwiękowego. Ponadto ten rodzaj synchronizacji w przeciwieństwie do synchronizacji programowej, która uzgadniała ze sobą jedynie zegary na podstawie wymienianych wiadomości, wlicza w czas transmisji wszelkie nie wzięte wcześniej pod uwagę opóźnienia, takie jak:
 
 \begin{itemize}
     \item Czas pomiędzy wysłaniem wiadomości o nadaniu sygnału a zamknięciem kontaktora i poruszeniem membraną brzęczyka,
@@ -120,7 +120,7 @@ Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{pics/mic_sync/offsets.png}
-    \caption{Wyniki pomiarów przesunięć zegarów}
+    \caption{Wyniki pomiarów przesunięć zegarów.  Diagram po prawej stanowi powiększenie zaznaczonego obszarów diagramu po lewej.}
     \label{pic:mic_sync}
 \end{figure}
 
@@ -131,7 +131,7 @@ Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na 
     \label{pic:stddev_mic}
 \end{figure}
 
-Łatwo zauważyć, ża udało się zmniejszyć odchylenia obliczonych przesunięć zegara aż o dwa rzędy wielkości. Taka dokładność daje znacznie lepsze przybliżenie rzeczywistej odległości między węzłami, ponieważ w czasie $40 \mu s$ dźwięk pokona jedynie $\frac{40}{10000000}s \cdot 343 \frac{m}{s} \approx 0,014m$. Mając tak dokładne odległości będziemy mogli wprowadzić je do modelu multilateracyjnego.
+Łatwo zauważyć, że udało się zmniejszyć odchylenia obliczonych przesunięć zegara aż o dwa rzędy wielkości. Taka dokładność daje znacznie lepsze przybliżenie rzeczywistej odległości między węzłami, ponieważ w czasie $40 \mu s$ dźwięk pokona jedynie $\frac{40}{10000000}s \cdot 343 \frac{m}{s} \approx 0,014m$. Mając tak dokładne odległości będziemy mogli wprowadzić je do modelu multilateracyjnego.
 
 \subsection{Porównanie metod}
 
@@ -166,7 +166,7 @@ Porównajmy teraz dokładność obliczanych odległości na podstawie interwału
         \caption{synchronizacja mikrofonowa~\ref{sec:mic_sync}}
         \label{pic:mic_sync_dist}
     \end{subfigure}
-    \caption{Wyniki pomiarów odległości z użyciem rozpatrywanych synchronizacji}
+    \caption{Wyniki pomiarów odległości z użyciem rozpatrywanych synchronizacji. Na prawych diagramach wrysowano proste, które w przybliżeniu odpowiadają współczynnikowi skalowania obliczonych odległości.}
     \label{fig:sync_test}
 \end{figure}
 
