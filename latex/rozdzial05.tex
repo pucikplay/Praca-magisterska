@@ -8,7 +8,7 @@ Aby otrzymać poprawne wyniki algorytmu multilateracji dane wejściowe, w naszym
 
 W wynikach eksperymentów porównawczych metod synchronizacji czasu węzłów przeprowadzonych w rozdziale~\ref{chap:time_sync}.\ zaobserwowaliśmy skalowanie wyników na pierwszy rzut oka zachowujące się liniowo. Przyjrzyjmy się teraz dokładnie temu zjawisku. W tym i kolejnych przypadkach będziemy używać już jedynie synchronizacji sprzętowej z użyciem mikrofonów ze względu na brak konieczności dodatkowej kalibracji przesunięcia punktu 0.
 
-Prawdopodobnym powodem skalowania obliczanych odległości może być odczyt zmiany sygnału mikrofonowego odczytywanego przez mikrokontroler. Poniższe wykresy są wynikiem czterech kolejnych eksperymentów, w których jedyną zmienną była czułość zintegrowanego wzmacniacza mikrofonu. Wzmacniacz ten nie pozwala na precyzyjną regulację, a jedynie na zmianę rezystancji wbudowanego potencjometru. Ponieważ przedział czułości odpowiadający wykrywaniu sygnału węzła nadającego przy jednoczesnym zminimalizowaniu fałszywych aktywacji jest niewielki (około $\frac{1}{8}$ obrotu potencjometru) cztery zbadane przypadki nie dzielą równo badanego zakresu. Rozpoczynając od największej możliwej czułości przy każdym kolejnym eksperymencie zmniejszano ją póki pozwalała wciąż na wykrywanie sygnału z badanych odległości.
+Prawdopodobnym powodem skalowania obliczanych odległości może być odczyt zmiany sygnału mikrofonowego odczytywanego przez mikrokontroler. Poniższe wykresy są wynikiem czterech kolejnych eksperymentów, w których jedyną zmienną była czułość zintegrowanego wzmacniacza mikrofonu. Wzmacniacz ten nie pozwala na precyzyjną regulację, a jedynie na zmianę rezystancji wbudowanego potencjometru. Ponieważ przedział czułości odpowiadający wykrywaniu sygnału węzła nadającego przy jednoczesnym zminimalizowaniu fałszywych aktywacji jest niewielki (około $\frac{1}{8}$ obrotu potencjometru) cztery zbadane przypadki nie dzielą równo badanego zakresu. Rozpoczynając od największej możliwej czułości przy każdym kolejnym eksperymencie zmniejszano ją, póki pozwalała wciąż na wykrywanie sygnału z badanych odległości.
 
 \begin{figure}[H]
     \centering
@@ -45,7 +45,7 @@ Prawdopodobnym powodem skalowania obliczanych odległości może być odczyt zmi
         \caption{pomiar 4.}
         \label{pic:slope_test_3}
     \end{subfigure}
-    \caption{Pomiar obliczanych odległości}
+    \caption{Pomiar obliczanych odległości.   Diagram po prawej stanowi powiększenie zaznaczonego obszaru diagramu po lewej.}
     \label{fig:slope_test}
 \end{figure}
 
@@ -93,24 +93,24 @@ Na wykresach można zauważyć trendy związane ze zmniejszającą się czułoś
 
 Podobne efekty zaobserwowano kiedy brzęczyk nie był kierowany bezpośrednio w kierunku odbiornika.
 
-\section{Ewaluacja działania systemu}
+\section{Ocena działania systemu}
 
-W celu ewaluacji działania przeprowadzono szereg eksperymentów testujących działanie systemu multilateracyjnego w zaproponowanych scenariuszach. Bazując na uprzednich obserwacjach rozszerzono program serwera obliczeniowego tak, aby bezpośrednio przed multilateracją przeprowadzone były synchronizacja czasu oraz korekcja odległości. Zasada działania obu typów węzłów pozostała niezmieniona.
+W celu oceny działania tak skonstruowanego systemu multilateracyjnego przeprowadzono szereg eksperymentów testujących jego działanie   w zaproponowanych scenariuszach. Bazując na uprzednich obserwacjach, rozszerzono program serwera obliczeniowego tak, aby bezpośrednio przed multilateracją przeprowadzone były synchronizacja czasu oraz korekcja odległości. Zasada działania obu typów węzłów pozostała niezmieniona.
 
 \subsection{Wyniki}
 
-Wyniki eksperymentów przedstawiono na  poniższych wykresach. Mniejsze punkty o wyblakłym kolorze reprezentują badane punkty, w których umieszczony był węzeł nadawczy, natomiast większe, nasyconym kolorze odpowiadające im punkty będące uśrednionym wynikiem 25 powtórzeń polecenia lokalizacji w systemie. Wykresy należące do tej samej grupy zachowują skalę w celu łatwiejszego porównania. Dodatkowo, dla przypadku jednowymiarowego, dołączono wybrane wykresy zawierające osobne pomiary każdego z punktów, które składały się na wynik uśredniony.
+Wyniki eksperymentów przedstawiono na  poniższych wykresach. Mniejsze punkty o wyblakłym kolorze reprezentują badane punkty, w których umieszczony był węzeł nadawczy, natomiast większe, o nasyconym kolorze to odpowiadające im punkty będące uśrednionym wynikiem 25 powtórzeń polecenia lokalizacji w systemie. Wykresy należące do tej samej grupy zachowują skalę w celu łatwiejszego porównania. Dodatkowo, dla przypadku jednowymiarowego, dołączono wybrane wykresy zawierające osobne pomiary każdego z punktów, które składały się na wynik uśredniony.
 
-\subsubsection{Eksperymeny jednowymiarowe}
+\subsubsection{Eksperymeny jednowymiarowe}\label{sec:1d}
 
-Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jednowymiarowego, aby sprawdzić czy dokładność i stabilność pomiarów w systemie została poprawiona. Tak samo jak pierwotnie nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0.5)$ i $(0.5)$, wszystkie węzły były stacjonarne. Nadajnik co $0.5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0.5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Następnie zbadano dokładność aproksymacji dla punktów ze zbioru $\{(-0.5, -0.25, 0.25, 0.5)\}$, jak również powtórzono wszystkie pomiary z użyciem dwóch dodatkowych węzłów umiejscowionych w punktach $(-0.25)$ i $(0.25)$. Wyniki przedstawiono na wykresach~\ref{fig:1d_mult_separate} oraz~\ref{fig:1d_mult}.
+Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jednowymiarowego, aby sprawdzić czy dokładność i stabilność pomiarów w systemie została poprawiona. Tak samo jak pierwotnie nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0,5)$ i $(0,5)$, wszystkie węzły były stacjonarne. Nadajnik co $0,5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0,5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Następnie zbadano dokładność aproksymacji dla punktów ze zbioru $\{(-0,5; -0,25; 0,25; 0,5)\}$, jak również powtórzono wszystkie pomiary z użyciem dwóch dodatkowych węzłów umiejscowionych w punktach $(-0,25)$ i $(0,25)$. Wyniki przedstawiono na wykresach~\ref{fig:1d_mult_separate} oraz~\ref{fig:1d_mult}.
 
 \begin{figure}[H]
     \centering
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0]_2.png}
-        \caption{punkt (0), 2 węzły}
+        \caption{Punkt w pozycji (0), 2 węzły}
         \label{pic:1d_mult_[0]_2}
     \end{subfigure}
 \end{figure}
@@ -119,7 +119,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0]_4.png}
-        \caption{punkt (0), 4 węzły}
+        \caption{Punkt w pozycji (0), 4 węzły}
         \label{pic:1d_mult_[0]_4}
     \end{subfigure}
 \end{figure}
@@ -128,7 +128,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0.25]_2.png}
-        \caption{punkt (0.25), 2 węzły}
+        \caption{Punkt w pozycji (0,25), 2 węzły}
         \label{pic:1d_mult_[0.25]_2}
     \end{subfigure}
 \end{figure}
@@ -137,7 +137,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0.25]_4.png}
-        \caption{punkt (0.25), 4 węzły}
+        \caption{Punkt w pozycji  (0,25), 4 węzły}
         \label{pic:1d_mult_[0.25]_4}
     \end{subfigure}
 \end{figure}
@@ -146,7 +146,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[-0.5]_2.png}
-        \caption{punkt (-0.5), 2 węzły}
+        \caption{Punkt w pozycji  (-0,5), 2 węzły}
         \label{pic:1d_mult_[-0.5]_2}
     \end{subfigure}
 \end{figure}
@@ -155,7 +155,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[-0.5]_4.png}
-        \caption{punkt (-0.5), 4 węzły}
+        \caption{Punkt w pozycji  (-0,5), 4 węzły}
         \label{pic:1d_mult_[-0.5]_4}
     \end{subfigure}
     \caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
@@ -180,15 +180,16 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \label{fig:1d_mult}
 \end{figure}
 
-\subsubsection{Eksperymeny dwuwymiarowe}
+\subsubsection{Eksperymenty dwuwymiarowe}
 
-Następnie sprawdzono system w wariancie dwuwymiarowym. Zby zachować podobną maksymalną odległość pomiędzy odbiornikami zdecydowano na umiejscowienie czterech węzłów na wierzchołkach kwadratu o boku $0.6$ symetrycznego względem puntu $(0,0)$, a więc na punktach o współrzędnych $(\pm0.3, \pm0.3)$. Zbadano dokładność lokalizacji w trzech grupach punktów:
+Następnie sprawdzono system w wariancie dwuwymiarowym. Aby zachować podobną maksymalną odległość pomiędzy odbiornikami, zdecydowano na umiejscowienie czterech węzłów na wierzchołkach kwadratu o boku $0,6$ symetrycznie względem puntu $(0;0)$, a więc na punktach o współrzędnych $(\pm0,3; \pm0,3)$. Zbadano dokładność lokalizacji w trzech grupach punktów:
+
 \begin{itemize}
-    \item $\{(0,0), (0.3,0.3), (-0.3,0.3), (-0.3,-0.3), (0.3,-0.3)\}$
-    \item $\{(0,0), (0,0.3), (0,-0.3), (-0.3,0), (0.3,0)\}$
-    \item $\{(0,0), (0.15,0.15), (-0.15,0.15), (-0.15,-0.15), (0.15,-0.15)\}$
+    \item $\{(0;0), (0,3;0,3), (-0,3;0,3), (-0,3;-0,3), (0,3;-0,3)\}$
+    \item $\{(0;0), (0;0,3), (0;-0,3), (-0,3;0), (0,3;0)\}$
+    \item $\{(0;0), (0,15;0,15), (-0,15;0,15), (-0,15;-0,15), (0,15;-0,15)\}$
 \end{itemize}
-Wyniki przedstawiono na wykresach~\ref{pic:2d_mult}.
+Wyniki przedstawiono na wykresach~\ref{fig:2d_mult}.
 
 \begin{figure}[H]
     \centering
@@ -214,10 +215,10 @@ Wyniki przedstawiono na wykresach~\ref{pic:2d_mult}.
         \label{pic:2d_3_mult}
     \end{subfigure}
     \caption{Średnie obliczonych pozycji, wariant 2D}
-    \label{pic:2d_mult}
+    \label{fig:2d_mult}
 \end{figure}
 
-Następnie w celu ewaluacji wpływu charakterystyki otoczenia na działanie systemu przeprowadzono trzy następujące bezpośrednio po sobie eksperymenty zachowując ustaloną na początku synchronizację zegarów i stałe korekcji odległości. Sprawdzono dokładność estymacji tego samego zbioru punktów wyjściowo oraz po rotacji całego układu o $45^{\circ}$ i $90^{\circ}$ zgodnie z ruchem wskazówek zegara. Wyniki przedstawiono na wykresach~\ref{pic:2d_angle_mult}. 
+Następnie w celu ewaluacji wpływu charakterystyki otoczenia na działanie systemu przeprowadzono trzy następujące bezpośrednio po sobie eksperymenty zachowując ustaloną na początku synchronizację zegarów i stałe korekcji odległości. Sprawdzono dokładność estymacji tego samego zbioru punktów wyjściowo oraz po rotacji całego układu o $45^{\circ}$ i $90^{\circ}$ zgodnie z ruchem wskazówek zegara. Wyniki przedstawiono na wykresach~\ref{fig:2d_angle_mult}. 
 
 \begin{figure}[H]
     \centering
@@ -243,10 +244,10 @@ Następnie w celu ewaluacji wpływu charakterystyki otoczenia na działanie syst
         \label{pic:2d_90_angle_mult}
     \end{subfigure}
     \caption{Średnie obliczonych pozycji, wariant 2D z rotacją}
-    \label{pic:2d_angle_mult}
+    \label{fig:2d_angle_mult}
 \end{figure}
 
-Ostatecznie sprawdzono zachowanie systemu wraz ze zmianą liczby węzłów odbiorczych od minimalnej liczby trzech aż do ośmiu. Węzły umiejscowiono na punktach ze zbioru $\{(0.3,0.3), (-0.3,0.3), (-0.3,-0.3), (0.3,-0.3), (0, 0.425), (-0.425, 0), (0, -0.425), (0.425, 0)\}$ oraz dodawano je zgodnie z tą kolejnością. Wyniki przedstawiono na wykresach~\ref{pic:2d_num_mult}. 
+Ostatecznie sprawdzono zachowanie systemu wraz ze zmianą liczby węzłów odbiorczych od minimalnej liczby trzech aż do ośmiu. Węzły umiejscowiono na punktach ze zbioru $\{(0,3;0,3), (-0,3;0,3), (-0,3;-0,3), (0,3;-0,3), (0; 0,425), (-0,425; 0), (0; -0,425), (0,425; 0)\}$ oraz dodawano je zgodnie z tą kolejnością. Wyniki przedstawiono na wykresach~\ref{fig:2d_num_mult}. 
 
 \begin{figure}[H]
     \centering
@@ -293,7 +294,16 @@ Ostatecznie sprawdzono zachowanie systemu wraz ze zmianą liczby węzłów odbio
         \label{pic:2d_8_num_mult}
     \end{subfigure}
     \caption{Średnie obliczonych pozycji, wariant 2D ze zmienną liczbą węzłów}
-    \label{pic:2d_num_mult}
+    \label{fig:2d_num_mult}
 \end{figure}
 
 \section{Interpretacja i wnioski}
+
+Rozpoczynając od porównania wyników eksperymentu zerowego~\ref{chap:experiment_zero} z wynikami przypadku jednowymiarowego~\ref{sec:1d} można od razu zauważyć poprawę zarówno dokładności jak i stabilności pomiarów. W pierwszej kolejności zwróćmy uwagę na znacznie zmniejszenie przesunięcia obliczanych lokalizacji nadajnika względem jego prawdziwego położenia, które wynika z zastosowania synchronizacji sprzętowej~\ref{sec:mic_sync} biorącej pod uwagę wszelkie opóźnienia pomijane w przypadku synchronizacji sprzętowej~\ref{sec:prog_sync}. Ponadto dokładność wyników multilateracji nie ulega gwałtownemu spadkowi wraz z upływem czasu (wyjątkiem w poprawionych eksperymentach jest~\ref{pic:1d_mult_[-0.5]_4}, w którym zauważalna jest nagła zmiana średniej lokalizowanych punktów, czego przyczyną mogło być prawdopodobnie zmiana warunków otoczenia eksperymentu). Ostateczne wyniki multilateracji jednowymiarowej przedstawione na rysunku~\ref{fig:1d_mult} wskazują na zadowalającą (w zależności od zastosowań) dokładność pomiaru położenia nadajnika.
+
+Przypadek jednowymiarowy jest jednak na tyle zdegenerowany, że do jego rozwiązania nie jest konieczne użycie metod multilateracyjnych, dlatego decydującym o użyteczności systemu było testowanie w wariancie dwuwymiarowym. Wyniki pierwszych testów~\ref{fig:2d_mult} nie były obiecujące {-} układ punktów względem siebie był w przybliżeniu zachowany, jednak punkty zwracane przez system znajdują się czasami w znacznej odległości od ich rzeczywistych położeń. Kolejne dwie serie testów, przeprowadzone w celu sprawdzenia jakie aspekty wpływają pozytywnie, a jakie negatywnie na dokładność lokalizacji wykazały dwie zależności:
+\begin{itemize}
+    \item podatność systemu na zmiany charakterystyki sonicznej otocznia~\ref{fig:2d_angle_mult};
+    \item wzrost dokładności lokalizacji wraz ze wzrostem liczby węzłów odbiorczych~\ref{fig:2d_num_mult}.
+\end{itemize}
+Pierwsza z zależności jest wyraźnie widoczna, ponieważ wraz z obrotem błąd lokalizacji rośnie, jak również położenie punktów względem siebie ulega zmianie do tego stopnia, że trudno odgadnąć jaki kształt tworzyły w rzeczywistości. Druga zależność nie jest tak wydatna jak poprzednia, ponieważ błąd lokalizacji każdego z punktów nie jest ściśle malejący, czasem większa liczba węzłów nadawczych nie pomaga, a może nawet przeszkadzać (kolejny dodany węzeł mógł mieć niepoprawnie ustawioną czułość wzmacniacza, co znacznie wpłynęłoby na wyniki przy małej liczbie węzłów). Po zwiększeniu liczby do 7 i 8 widać zalety skali w takim systemie {-} nawet jeśli jakiś któraś z raportowanych odległości jest obarczona znaczącym błędem rozwiązanie aproksymacyjne minimalizujące sumę kwadratów błędów będzie bliższe punktowi, na który wskazują odległości podane przez pozostałe węzły.
