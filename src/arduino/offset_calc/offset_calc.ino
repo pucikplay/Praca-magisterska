@@ -6,8 +6,8 @@
 #define BOARD_ID "3"
 #define TIME_TOPIC "offset"
 
-const char* ssid = "DECO_E4";
-const char* password = "ADFE9625C9C271143ECEA74A53";
+const char* ssid = "ssid";
+const char* password = "password";
 
 WiFiClient espClient;
 PubSubClient client(espClient);

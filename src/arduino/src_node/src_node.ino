@@ -7,8 +7,8 @@
 #define BOARD_ID "source"
 #define TOPIC "src"
 
-const char* ssid = "DECO_E4";
-const char* password = "ADFE9625C9C271143ECEA74A53";
+const char* ssid = "ssid";
+const char* password = "password";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
