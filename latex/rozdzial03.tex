@@ -42,7 +42,7 @@ Poniżej przedstawiono je w formie pseudokodów. Współrzędne odbiorników, a 
     \hrule
     \label{alg:source}
 \end{center}
-%\newpage
+\newpage
 \begin{center}
     \captionof{algorithm}{Program odbiornika}
     \begin{algorithmic}[1]
@@ -158,7 +158,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
     \centering
     \begin{subfigure}{\textwidth}\label{fig:position_0}
         \centering
-        \includegraphics[width=\linewidth]{pics/position/position_0.png}
+        \includegraphics[width=0.95\linewidth]{pics/position/position_0.png}
         \caption{Test 1.}
     \end{subfigure}
 \end{figure}
@@ -166,7 +166,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
     \ContinuedFloat\centering
     \begin{subfigure}{\textwidth}\label{fig:position_1}
         \centering
-        \includegraphics[width=\linewidth]{pics/position/position_1.png}
+        \includegraphics[width=0.95\linewidth]{pics/position/position_1.png}
         \caption{Test 2.}
     \end{subfigure}
 \end{figure}
@@ -174,7 +174,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
     \ContinuedFloat\centering
     \begin{subfigure}{\textwidth}\label{fig:position_2}
         \centering
-        \includegraphics[width=\linewidth]{pics/position/position_2.png}
+        \includegraphics[width=0.95\linewidth]{pics/position/position_2.png}
         \caption{Test 3. Diagram po prawej stanowi powiększenie zaznaczonego obszaru diagramu po lewej.}
     \end{subfigure}
 \end{figure}
@@ -182,7 +182,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
     \ContinuedFloat\centering
     \begin{subfigure}{\textwidth}\label{fig:position_3}
         \centering
-        \includegraphics[width=\linewidth]{pics/position/position_3.png}
+        \includegraphics[width=0.95\linewidth]{pics/position/position_3.png}
         \caption{Test 4. Diagramy po prawej stanowią powiększenie odpowiednich obszarów diagramu po lewej.}
     \end{subfigure}
 \end{figure}
@@ -190,7 +190,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
     \ContinuedFloat\centering
     \begin{subfigure}{\textwidth}\label{fig:position_4}
         \centering
-        \includegraphics[width=\linewidth]{pics/position/position_4.png}
+        \includegraphics[width=0.95\linewidth]{pics/position/position_4.png}
         \caption{Test 5. Diagramy po prawej stanowią powiększenie odpowiednich obszarów diagramu po lewej.}
     \end{subfigure}
     \caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
@@ -199,7 +199,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
 
 \section{Interpretacja wyników i wnioski}
 
-Już na pierwszym z wykresów widać, że wartości wyjściowe algorytmu są niestabilne, współrzędna nadajnika wacha się w przedziale $(-0.98, -0.8)$, a także co jakiś czas następują nagłe przeskoki między następującymi po sobie wartościami. Coraz większa rozbieżność następuje wraz z upływem czasu. Już w drugim teście różnica ekstremalnych odchyleń jest większa niż odległość między nadajnikami, a dokładność jest absolutnie niezadowalająca. Kolejne testy jedynie utwierdzają te obserwacje.
+Już na pierwszym z wykresów widać, że wartości wyjściowe algorytmu są niestabilne, współrzędna nadajnika waha się w przedziale $(-0,98; -0,8)$, a także co jakiś czas następują nagłe przeskoki między następującymi po sobie wartościami. Coraz większa rozbieżność następuje wraz z upływem czasu. Już w drugim teście różnica ekstremalnych odchyleń jest większa niż odległość między nadajnikami, a dokładność jest absolutnie niezadowalająca. Kolejne testy jedynie utwierdzają te obserwacje.
 
 Na niską dokładność i stabilność wyników może mieć wpływ wiele czynników takich jak:
 

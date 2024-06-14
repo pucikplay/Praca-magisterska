@@ -1,4 +1,18 @@
 \chapter*{Podsumowanie}\label{chap:podsumowanie}
 \addcontentsline{toc}{chapter}{Podsumowanie}
 
-Cel pracy, którym było zaprojektowanie i zaimplementowanie systemu multilateracyjnego działającego w domenie fal dźwiękowych, został wypełniony. Opisany w powyższej pracy system jest zdolny śledzić pozycję nadajnika sygnałów dźwiękowych w podzbiorze przestrzeni dwuwymiarowej obejmowanym ograniczonym przez zasięg mikrofonów w węzłach odbiorczych. TODO: dokończyć
+Cel pracy niniejszej pracy było zaprojektowanie i zaimplementowanie systemu multilateracyjnego działającego w domenie fal dźwiękowych. W ramach pracy dokonano wyboru metody multilateracji najlepiej nadającej się do tego zastosowania, jak również przeprowadzono szereg testów wykazujących nieprawidłowości działania, które były rektyfikowane. Podczas eksperymentów ukazano znaczenie wpływu zastosowanej metody synchronizacji zegarów urządzeń w systemie, jak również interesujące skalowanie estymowanej na podstawie różnic zegarów odległości wynikającej z zastosowanych w mikrofonach wzmacniaczy operacyjnych.
+
+Wnioski z przeprowadzonych badań wskazują, że system multilateracyjny oparty o szeroko dostępne moduły mikrofonowe jest zdolny śledzić pozycję nadajnika sygnałów dźwiękowych w podzbiorze przestrzeni dwuwymiarowej obejmowanym ograniczonym zasięgiem tychże mikrofonów w węzłach odbiorczych. Uzyskane wyniki są istotne z punktu widzenia systemów lokalizacji bazujących na falach dźwiękowych, szczególnie w kontekście ich zastosowań w technologii IoT. Wykazano, że dostępne komercyjnie moduły mikrofonowe mogą być wykorzystane do tworzenia efektywnych i stosunkowo tanich systemów lokalizacji.
+
+Dalszymi krokami rozwoju systemu, których nie podjęto ze względu na ograniczony budżet czasowy mogłyby być:
+
+\begin{itemize}
+    \item rozszerzenie do i ewaluacja działania w przestrzeni trójwymiarowej,
+    \item bardziej wnikliwe testy i badania roli urządzeń przetwarzających sygnał dźwiękowy na cyfrowy; inwestygacja wpływu typu rodzaju mikrofonu, wzmacniacza czy przetwornika ADC (\textit{ang.\ analog to digital}) na estymację odległości,
+    \item stworzenie lepszego algorytmu korekcji estymowanej odległości względem rzeczywistej,
+    \item ewentualne dostosowywanie algorytmów synchronizacji zegarów do przyszłych zastosowań,
+    \item próba minimalizacji wpływu charakterystyki dźwiękowej otoczenia na dokładność wyników.
+\end{itemize}
+
+Podsumowując, zaprojektowany i zaimplementowany system multilateracyjny działający w domenie fal dźwiękowych udowodnił swoją skuteczność w śledzeniu pozycji nadajnika w dwuwymiarowej przestrzeni, otwierając tym samym drogę do dalszych badań i udoskonaleń, które mogą znacząco poszerzyć jego zastosowanie w różnych dziedzinach.
