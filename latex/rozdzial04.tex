@@ -4,7 +4,7 @@ Synchronizacja czasu jest jednym z podstawowych problemów systemów opartych o 
 
 \section{Synchronizacja programowa}\label{sec:prog_sync}
 
-Pierwszym podejściem do rozwiązania problemu synchronizacji zegarów było zastosowanie synchronizacji programowej~\cite{6066334}, w której urządzenie-host utrzymuje wysokiej rozdzielczości licznik czasowy i wysyła sygnały o jego wartości pozostałym węzłom w sieci. Na podstawie tych informacji każdy z węzłów oblicza różnicę w zegarach i wprowadza odpowiednie przesunięcie własnego licznika.
+Pierwszym podejściem do rozwiązania problemu synchronizacji zegarów było zastosowanie synchronizacji programowej~\cite{6066334}, w której urządzenie-host utrzymuje wysokiej rozdzielczości licznik czasowy i~wysyła sygnały o jego wartości pozostałym węzłom w sieci. Na podstawie tych informacji każdy z węzłów oblicza różnicę w zegarach i~wprowadza odpowiednie przesunięcie własnego licznika.
 
 \subsection{Algorytm synchronizacji NTP}\label{sec:ntp_sync}
 
@@ -107,18 +107,18 @@ Wykresy przesunięć wygenerowane na podstawie tych testów na pierwszy rzut oka
 
 \section{Synchronizacja sprzętowa}
 
-Alternatywną metodą do synchronizacji programowej jest synchronizacja sprzętowa. Ze względu na konieczność wyposażenia węzłów w odpowiednie sensory potrzebne do pełnienia tego zadania, opcja programowa jest często bardziej atrakcyjnym wyborem, jednakże w przypadku systemu proponowanego w tej pracy mikrofony, w które są wyposażone węzły odbiorcze (wraz z brzęczykiem węzła nadawczego) mogą pełnić tę rolę.
+Alternatywną metodą do synchronizacji programowej jest synchronizacja sprzętowa. Ze względu na konieczność wyposażenia węzłów w~odpowiednie sensory potrzebne do pełnienia tego zadania, opcja programowa jest często bardziej atrakcyjnym wyborem, jednakże w przypadku systemu proponowanego w~tej pracy mikrofony, w które są wyposażone węzły odbiorcze (wraz z brzęczykiem węzła nadawczego) mogą pełnić tę rolę.
 
 \subsection{Synchronizacja z użyciem mikrofonów}\label{sec:mic_sync}
 
-Jedyną potrzebną do obliczeń odległości informacją jest przesunięcie naszego zegara względem zegara w węźle nadawczym, dlatego wystarczającym będzie porównanie czasu nadania i odebrania sygnału dźwiękowego. Ponadto ten rodzaj synchronizacji, w przeciwieństwie do synchronizacji programowej, która uzgadniała ze sobą jedynie zegary na podstawie wymienianych wiadomości, wlicza w czas transmisji wszelkie nie wzięte wcześniej pod uwagę opóźnienia, takie jak:
+Jedyną potrzebną do obliczeń odległości informacją jest przesunięcie naszego zegara względem zegara w~węźle nadawczym, dlatego wystarczającym będzie porównanie czasu nadania i odebrania sygnału dźwiękowego. Ponadto ten rodzaj synchronizacji, w przeciwieństwie do synchronizacji programowej, która uzgadniała ze sobą jedynie zegary na podstawie wymienianych wiadomości, wlicza w czas transmisji wszelkie nie wzięte wcześniej pod uwagę opóźnienia, takie jak:
 
 \begin{itemize}
     \item czas pomiędzy wysłaniem wiadomości o nadaniu sygnału a zamknięciem kontaktora i poruszeniem membraną brzęczyka,
     \item czas pomiędzy odebraniem sygnału przez mikrofon a zmianą stanu zmiennej na to wskazującej.
 \end{itemize}
 
-Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na wykresach~\ref{pic:mic_sync}. W celu zwiększenia czytelności odrzucono pierwszy z pomiarów oraz przesunięto wyniki o wartość średnią.
+Przeprowadzono testy tego typu synchronizacji, których wyniki przedstawiono na wykresach~\ref{pic:mic_sync}. W~celu zwiększenia czytelności odrzucono pierwszy z pomiarów oraz przesunięto wyniki o wartość średnią.
 
 \begin{figure}[H]
     \centering
@@ -173,4 +173,4 @@ Porównajmy teraz dokładność obliczanych odległości na podstawie interwału
     \label{fig:sync_test}
 \end{figure}
 
-Na wykresach widać, że wszystkie trzy algorytmy synchronizacji po normalizacji dają wyniki o podobnej dokładności, adekwatnej do użycia w danych wejściowych multilateracji. Ciekawą jest natomiast obserwacja skalowania obliczonych odległości. Widzimy, że w przypadku~\ref{pic:ntp_sync_dist} oraz~\ref{pic:mic_sync_dist} otrzymane wartości leżą blisko trzykrotności rzeczywistej badanej odległości, natomiast w~\ref{pic:time_deltas_dist} blisko dwukrotności. W kolejnym rozdziale pochylimy się nad możliwymi przyczynami i rozwiązaniem tego zachowania.
+Na wykresach widać, że wszystkie trzy algorytmy synchronizacji po normalizacji dają wyniki o podobnej dokładności, adekwatnej do użycia w danych wejściowych multilateracji. Ciekawą jest natomiast obserwacja skalowania obliczonych odległości. Widzimy, że w przypadku~\ref{pic:ntp_sync_dist} oraz~\ref{pic:mic_sync_dist} otrzymane wartości leżą blisko trzykrotności rzeczywistej badanej odległości, natomiast w~\ref{pic:time_deltas_dist} blisko dwukrotności. W~kolejnym rozdziale pochylimy się nad możliwymi przyczynami i rozwiązaniem tego zachowania.

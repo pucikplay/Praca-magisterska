@@ -130,7 +130,7 @@ W programie serwera zaimplementowano funkcję rozwiązującą równanie~\ref{eq:
 
 \section{Ewaluacja działania systemu}
 
-Pierwsze testy przeprowadzone zostały na systemie operującym w jednym wymiarze (to jest wszystkie węzły są współliniowe) w celu jak największego uproszczenia, pozwalającego na szybsze wykrywanie i rektyfikację błędów. Wszystkie odległości będą podawane w metrach.
+Pierwsze testy przeprowadzone zostały na systemie operującym w jednym wymiarze (to jest wszystkie węzły są współliniowe) w celu jak największego uproszczenia, pozwalającego na szybsze wykrywanie i~rektyfikację błędów. Wszystkie odległości będą podawane w metrach.
 
 \subsection{Struktura systemu testowego}
 
@@ -152,7 +152,7 @@ Pierwsze testy przeprowadzone zostały na systemie operującym w jednym wymiarze
     \label{fig:test_setup}
 \end{figure}
 
-Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0,5)$ i $(0,5)$, wszystkie węzły były stacjonarne. Nadajnik co $0,5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0,5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Wykonano 5 następujących bezpośrednio po sobie eksprymentów. Na poniższych wykresach (\ref{fig:position}) przedstawiono ich wyniki.
+Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0,5)$ i~$(0,5)$, wszystkie węzły były stacjonarne. Nadajnik co $0,5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0,5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Wykonano 5 następujących bezpośrednio po sobie eksprymentów. Na poniższych wykresach (\ref{fig:position}) przedstawiono ich wyniki.
 
 \begin{figure}[H]
     \centering
@@ -199,7 +199,7 @@ Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpo
 
 \section{Interpretacja wyników i wnioski}
 
-Już na pierwszym z wykresów widać, że wartości wyjściowe algorytmu są niestabilne, współrzędna nadajnika waha się w przedziale $(-0,98; -0,8)$, a także co jakiś czas następują nagłe przeskoki między następującymi po sobie wartościami. Coraz większa rozbieżność następuje wraz z upływem czasu. Już w drugim teście różnica ekstremalnych odchyleń jest większa niż odległość między nadajnikami, a dokładność jest absolutnie niezadowalająca. Kolejne testy jedynie utwierdzają te obserwacje.
+Już na pierwszym z wykresów widać, że wartości wyjściowe algorytmu są niestabilne, współrzędna nadajnika waha się w przedziale $(-0,98; -0,8)$, a także co jakiś czas następują nagłe przeskoki między następującymi po sobie wartościami. Coraz większa rozbieżność następuje wraz z upływem czasu. Już w~drugim teście różnica ekstremalnych odchyleń jest większa niż odległość między nadajnikami, a dokładność jest absolutnie niezadowalająca. Kolejne testy jedynie utwierdzają te obserwacje.
 
 Na niską dokładność i stabilność wyników może mieć wpływ wiele czynników takich jak:
 
@@ -212,4 +212,4 @@ Na niską dokładność i stabilność wyników może mieć wpływ wiele czynnik
 
 Obserwując skoki pomiędzy sąsiadującymi obserwacjami położenia, rozdzielającymi okresy względnej stabilności i mając na uwadze statyczność otoczenia systemu, możemy śmiało wysnuć wniosek, że tak nagła zmiana średniej obliczanej wartości może wynikać najprawdopodobniej z błędnej synchronizacji czasu. Wygląda na to, że sygnał wysyłany przez serwer obliczeniowy nie jest odbierany we wszystkich węzłach równocześnie. 
 
-Następny rozdział będzie poświęcony badaniu i tworzeniu algorytmu synchronizacji zegarów w węzłach.
+Następny rozdział będzie poświęcony badaniu i tworzeniu algorytmu synchronizacji zegarów w~węzłach.
