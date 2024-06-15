@@ -45,7 +45,7 @@ Prawdopodobnym powodem skalowania obliczanych odległości może być odczyt zmi
         \caption{pomiar 4.}
         \label{pic:slope_test_3}
     \end{subfigure}
-    \caption{Pomiar obliczanych odległości.   Diagram po prawej stanowi powiększenie zaznaczonego obszaru diagramu po lewej.}
+    \caption[Pomiar obliczanych odległości]{Pomiar obliczanych odległości. Diagram po prawej stanowi powiększenie zaznaczonego obszaru diagramu po lewej.}
     \label{fig:slope_test}
 \end{figure}
 
@@ -94,15 +94,8 @@ Na wykresach można zauważyć trendy związane ze zmniejszającą się czułoś
 Podobne efekty zaobserwowano kiedy brzęczyk nie był kierowany bezpośrednio w kierunku odbiornika.
 
 \section{Ocena działania systemu}
-\color{blue}
-- każdy kolor to inny punkt testowy o koordynatach podanych w legendzie 
 
 W celu oceny działania tak skonstruowanego systemu multilateracyjnego przeprowadzono szereg eksperymentów testujących jego działanie   w zaproponowanych scenariuszach. Bazując na uprzednich obserwacjach, rozszerzono program serwera obliczeniowego tak, aby bezpośrednio przed multilateracją przeprowadzone były synchronizacja czasu oraz korekcja odległości. Zasada działania obu typów węzłów pozostała niezmieniona.
-
-Czyli np. obrazek pokazuje....
-
-\color{black}
-
 
 \subsection{Wyniki}
 
@@ -117,7 +110,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0]_2.png}
-        \caption{Punkt w pozycji (0), 2 węzły}
+        \caption{Punkt w pozycji (0), 2 mikrofony}
         \label{pic:1d_mult_[0]_2}
     \end{subfigure}
 \end{figure}
@@ -126,7 +119,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0]_4.png}
-        \caption{Punkt w pozycji (0), 4 węzły}
+        \caption{Punkt w pozycji (0), 4 mikrofony}
         \label{pic:1d_mult_[0]_4}
     \end{subfigure}
 \end{figure}
@@ -135,7 +128,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0.25]_2.png}
-        \caption{Punkt w pozycji (0,25), 2 węzły}
+        \caption{Punkt w pozycji (0,25), 2 mikrofony}
         \label{pic:1d_mult_[0.25]_2}
     \end{subfigure}
 \end{figure}
@@ -144,7 +137,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[0.25]_4.png}
-        \caption{Punkt w pozycji  (0,25), 4 węzły}
+        \caption{Punkt w pozycji  (0,25), 4 mikrofony}
         \label{pic:1d_mult_[0.25]_4}
     \end{subfigure}
 \end{figure}
@@ -153,7 +146,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[-0.5]_2.png}
-        \caption{Punkt w pozycji  (-0,5), 2 węzły}
+        \caption{Punkt w pozycji  (-0,5), 2 mikrofony}
         \label{pic:1d_mult_[-0.5]_2}
     \end{subfigure}
 \end{figure}
@@ -162,7 +155,7 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/position_[-0.5]_4.png}
-        \caption{Punkt w pozycji  (-0,5), 4 węzły}
+        \caption{Punkt w pozycji  (-0,5), 4 mikrofony}
         \label{pic:1d_mult_[-0.5]_4}
     \end{subfigure}
     \caption{Wykres obliczonej pozycji odbiornika w zależności od czasu}
@@ -174,16 +167,16 @@ Ewaluację rozpoczęto, tak jak podczas eksperymentu zerowego, od przypadku jedn
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/positions_2_mean.png}
-        \caption{2 węzły}
+        \caption{2 mikrofony}
         \label{pic:1d_2_mult}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_1d/positions_4_mean.png}
-        \caption{4 węzły}
+        \caption{4 mikrofony}
         \label{pic:1d_4_mult}
     \end{subfigure}
-    \caption{Średnie obliczonych pozycji, wariant 1D}
+    \caption[Wyniki eksperymentu dla wersji 1D]{Średnie obliczonych pozycji, wariant 1D. Małe, blade kropki to kolejne punkty testowe, w których umieszczano nadajnik, a duże kropki to średnie wyników zwracanych przez system multilateracyjny, każdy kolor to inny punkt testowy o koordynatach podanych w legendzie.}
     \label{fig:1d_mult}
 \end{figure}
 
@@ -221,7 +214,7 @@ Wyniki przedstawiono na wykresach~\ref{fig:2d_mult}.
         \caption{zestaw punktów 3.}
         \label{pic:2d_3_mult}
     \end{subfigure}
-    \caption[Wyniki eksperymentu dla wersji 2D]{Średnie obliczonych pozycji, wariant 2D ...}
+    \caption[Wyniki eksperymentu dla wersji 2D]{Średnie obliczonych pozycji, wariant 2D. Małe, blade kropki to kolejne punkty testowe, w których umieszczano nadajnik, a duże kropki to średnie wyników zwracanych przez system multilateracyjny, każdy kolor to inny punkt testowy o koordynatach podanych w legendzie.}
     \label{fig:2d_mult}
 \end{figure}
 
@@ -250,7 +243,7 @@ Następnie w celu ewaluacji wpływu charakterystyki otoczenia na działanie syst
         \caption{rotacja $90^{\circ}$}
         \label{pic:2d_90_angle_mult}
     \end{subfigure}
-    \caption{Średnie obliczonych pozycji, wariant 2D z rotacją}
+    \caption[Wyniki eksperymentu dla wersji 2D z rotacją]{Średnie obliczonych pozycji, wariant 2D z rotacją. Małe, blade kropki to kolejne punkty testowe, w których umieszczano nadajnik, a duże kropki to średnie wyników zwracanych przez system multilateracyjny, każdy kolor to inny punkt testowy o koordynatach podanych w legendzie.}
     \label{fig:2d_angle_mult}
 \end{figure}
 
@@ -261,13 +254,13 @@ Ostatecznie sprawdzono zachowanie systemu wraz ze zmianą liczby węzłów odbio
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_3_mean.png}
-        \caption{3 węzły}
+        \caption{3 mikrofony}
         \label{pic:2d_3_num_mult}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_4_mean.png}
-        \caption{4 węzły}
+        \caption{4 mikrofony}
         \label{pic:2d_4_num_mult}
     \end{subfigure}
 \end{figure}
@@ -276,13 +269,13 @@ Ostatecznie sprawdzono zachowanie systemu wraz ze zmianą liczby węzłów odbio
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_5_mean.png}
-        \caption{5 węzłów}
+        \caption{5 mikrofonów}
         \label{pic:2d_5_num_mult}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_6_mean.png}
-        \caption{6 węzłów}
+        \caption{6 mikrofonów}
         \label{pic:2d_6_num_mult}
     \end{subfigure}
 \end{figure}
@@ -291,30 +284,26 @@ Ostatecznie sprawdzono zachowanie systemu wraz ze zmianą liczby węzłów odbio
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_7_mean.png}
-        \caption{7 węzłów}
+        \caption{7 mikrofonów}
         \label{pic:2d_7_num_mult}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
         \centering
         \includegraphics[width=\linewidth]{pics/mult_lat_2d_num/positions_8_mean.png}
-        \caption{8 węzłów}
+        \caption{8 mikrofonów}
         \label{pic:2d_8_num_mult}
     \end{subfigure}
-    \caption{Średnie obliczonych pozycji, wariant 2D ze zmienną liczbą węzłów}
+    \caption[Wyniki eksperymentu dla wersji 2D ze zmienną liczbą mikrofonów]{Średnie obliczonych pozycji, wariant 2D ze zmienną liczbą mikrofonów. Małe, blade kropki to kolejne punkty testowe, w których umieszczano nadajnik, a duże kropki to średnie wyników zwracanych przez system multilateracyjny, każdy kolor to inny punkt testowy o koordynatach podanych w legendzie.}
     \label{fig:2d_num_mult}
 \end{figure}
 
 \section{Interpretacja i wnioski}
 
-\color{blue}
-trzeba poprawić takie rzeczy jak: ``synchronizacji sprzętowej 4.1'', czy ``wyniki pierwszych testów 5.5'' -- myślę, że na początku można to zrobić słownie (``... z rozdziału 4.1''), a potem już tylko: ``(5.5)''
-\color{black}
+Rozpoczynając od porównania wyników eksperymentu zerowego z rodziału~\ref{chap:experiment_zero} z wynikami przypadku jednowymiarowego (sekcja \ref{sec:1d}), można od razu zauważyć poprawę zarówno dokładności jak i stabilności pomiarów. W pierwszej kolejności zwróćmy uwagę na znacznie zmniejszenie przesunięcia obliczanych lokalizacji nadajnika względem jego prawdziwego położenia, które wynika z zastosowania synchronizacji sprzętowej, opisanej w sekcji~\ref{sec:mic_sync}, biorącej pod uwagę wszelkie opóźnienia pomijane w przypadku synchronizacji sprzętowej (sekcja \ref{sec:prog_sync}). Ponadto dokładność wyników multilateracji nie ulega gwałtownemu spadkowi wraz z upływem czasu (wyjątkiem w poprawionych eksperymentach jest przypadek przedstawiony na wykresie~\ref{pic:1d_mult_[-0.5]_4}, w którym zauważalna jest nagła zmiana średniej lokalizowanych punktów, czego przyczyną mogło być prawdopodobnie zmiana warunków otoczenia eksperymentu). Ostateczne wyniki multilateracji jednowymiarowej przedstawione na rysunku~\ref{fig:1d_mult} wskazują na zadowalającą (w zależności od zastosowań) dokładność pomiaru położenia nadajnika.
 
-Rozpoczynając od porównania wyników eksperymentu zerowego~\ref{chap:experiment_zero} z wynikami przypadku jednowymiarowego~\ref{sec:1d}, można od razu zauważyć poprawę zarówno dokładności jak i stabilności pomiarów. W pierwszej kolejności zwróćmy uwagę na znacznie zmniejszenie przesunięcia obliczanych lokalizacji nadajnika względem jego prawdziwego położenia, które wynika z zastosowania synchronizacji sprzętowej( rozdział~\ref{sec:mic_sync}) biorącej pod uwagę wszelkie opóźnienia pomijane w przypadku synchronizacji sprzętowej ~(\ref{sec:prog_sync}). Ponadto dokładność wyników multilateracji nie ulega gwałtownemu spadkowi wraz z upływem czasu (wyjątkiem w poprawionych eksperymentach jest~\ref{pic:1d_mult_[-0.5]_4}, w którym zauważalna jest nagła zmiana średniej lokalizowanych punktów, czego przyczyną mogło być prawdopodobnie zmiana warunków otoczenia eksperymentu). Ostateczne wyniki multilateracji jednowymiarowej przedstawione na rysunku~\ref{fig:1d_mult} wskazują na zadowalającą (w zależności od zastosowań) dokładność pomiaru położenia nadajnika.
-
-Przypadek jednowymiarowy jest jednak na tyle zdegenerowany, że do jego rozwiązania nie jest konieczne użycie metod multilateracyjnych, dlatego decydującym o użyteczności systemu było testowanie w wariancie dwuwymiarowym. Wyniki pierwszych testów~\ref{fig:2d_mult} nie były obiecujące {-} układ punktów względem siebie był w przybliżeniu zachowany, jednak punkty zwracane przez system znajdują się czasami w znacznej odległości od ich rzeczywistych położeń. Kolejne dwie serie testów, przeprowadzone w celu sprawdzenia jakie aspekty wpływają pozytywnie, a jakie negatywnie na dokładność lokalizacji wykazały dwie zależności:
+Przypadek jednowymiarowy jest jednak na tyle zdegenerowany, że do jego rozwiązania nie jest konieczne użycie metod multilateracyjnych, dlatego decydującym o użyteczności systemu było testowanie w wariancie dwuwymiarowym. Wyniki pierwszych testów (\ref{fig:2d_mult}) nie były obiecujące {-} układ punktów względem siebie był w przybliżeniu zachowany, jednak punkty zwracane przez system znajdują się czasami w znacznej odległości od ich rzeczywistych położeń. Kolejne dwie serie testów, przeprowadzone w celu sprawdzenia jakie aspekty wpływają pozytywnie, a jakie negatywnie na dokładność lokalizacji wykazały dwie zależności:
 \begin{itemize}
-    \item podatność systemu na zmiany charakterystyki sonicznej otocznia~\ref{fig:2d_angle_mult};
-    \item wzrost dokładności lokalizacji wraz ze wzrostem liczby węzłów odbiorczych~\ref{fig:2d_num_mult}.
+    \item podatność systemu na zmiany charakterystyki sonicznej otocznia (\ref{fig:2d_angle_mult});
+    \item wzrost dokładności lokalizacji wraz ze wzrostem liczby węzłów odbiorczych (\ref{fig:2d_num_mult}).
 \end{itemize}
-Pierwsza z zależności jest wyraźnie widoczna, ponieważ wraz z obrotem \color{blue}czego?\color{black} błąd lokalizacji rośnie, jak również położenie punktów względem siebie ulega zmianie do tego stopnia, że trudno odgadnąć jaki kształt tworzyły w rzeczywistości. Druga zależność nie jest tak wydatna jak poprzednia, ponieważ błąd lokalizacji każdego z punktów nie jest ściśle malejący, czasem większa liczba węzłów nadawczych nie pomaga, a może nawet przeszkadzać (kolejny dodany węzeł mógł mieć niepoprawnie ustawioną czułość wzmacniacza, co znacznie wpłynęłoby na wyniki przy małej liczbie węzłów). Po zwiększeniu liczby do 7 i 8 widać zalety skali w takim systemie {-} nawet jeśli jakiś któraś z raportowanych odległości jest obarczona znaczącym błędem, rozwiązanie aproksymacyjne minimalizujące sumę kwadratów błędów będzie bliższe punktowi, na który wskazują odległości podane przez pozostałe węzły.
+Pierwsza z zależności jest wyraźnie widoczna, ponieważ wraz z obrotem układu węzłów względem otoczenia błąd lokalizacji rośnie, jak również położenie punktów względem siebie ulega zmianie do tego stopnia, że trudno odgadnąć jaki kształt tworzyły w rzeczywistości. Druga zależność nie jest tak wydatna jak poprzednia, ponieważ błąd lokalizacji każdego z punktów nie jest ściśle malejący, czasem większa liczba węzłów nadawczych nie pomaga, a może nawet przeszkadzać (kolejny dodany węzeł mógł mieć niepoprawnie ustawioną czułość wzmacniacza, co znacznie wpłynęłoby na wyniki przy małej liczbie węzłów). Po zwiększeniu liczby do 7 i 8 widać zalety skali w takim systemie {-} nawet jeśli jakiś któraś z raportowanych odległości jest obarczona znaczącym błędem, rozwiązanie aproksymacyjne minimalizujące sumę kwadratów błędów będzie bliższe punktowi, na który wskazują odległości podane przez pozostałe węzły.
