@@ -23,8 +23,8 @@ def plot_offsets(df, name, ylim, normalize):
     for i in range(NODES_NO):
         df.plot(x='row_number', y=labels[i], color=colors[i], label=f"Węzeł {i}", kind='scatter', s=5, ax=ax[1])
     # plt.title("Przesunięcie zegarów")
-    ax[1].set_xlabel("Numer testu")
-    ax[1].set_ylabel("Czas [us]")
+    ax[1].set_xlabel("")
+    ax[1].set_ylabel("")
     ax[1].legend(loc='upper right')
 
     y_min, y_max = ylim
@@ -55,8 +55,8 @@ def plot_prop_times(df, name, ylim):
     for i in range(NODES_NO):
         df.plot(x='row_number', y=labels[i], color=colors[i], label=f"Węzeł {i}", kind='scatter', s=5, ax=ax[1])
     # plt.title("Czas propagacji")
-    ax[1].set_xlabel("Numer testu")
-    ax[1].set_ylabel("Czas [us]")
+    ax[1].set_xlabel("")
+    ax[1].set_ylabel("")
     ax[1].legend()
 
     y_min, y_max = ylim

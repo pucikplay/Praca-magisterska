@@ -60,8 +60,8 @@ def plot_dists_cmp(df, name, ylim, slope):
         df_T.plot(x='index', y=y, color='red', kind='scatter', s=10, ax=ax[1])
 
     # plt.title("Obliczone odległości")
-    ax[1].set_xlabel("Rzeczywista odległość")
-    ax[1].set_ylabel("Obliczona odległość")
+    ax[1].set_xlabel("")
+    ax[1].set_ylabel("")
     ax[1].get_legend().remove()
     ax[1].legend()
 
