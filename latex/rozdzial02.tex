@@ -39,7 +39,7 @@ Na poniższym rysunku przedstawiono schematycznie elementy systemu testowego. Sk
 
 \section{Broker MQTT}
 
-Urządzenia systemowe porozumiewają się przy uzyciu protokołu MQTT. Każdy z węzłów oraz serwer łączą się z centralnym brokerem, który przekierowuje wiadomości opatrzone tematem do klientów subsrybujących dany temat. Broker jest oparty o otwarty projekt \textit{Mosquitto}.
+Urządzenia systemowe porozumiewają się przy użyciu protokołu MQTT. Każdy z węzłów oraz serwer łączą się z centralnym brokerem, który przekierowuje wiadomości opatrzone tematem do klientów subsrybujących dany temat. Broker jest oparty o otwarty projekt \textit{Mosquitto}.
 
 \section{Serwer obliczeniowy}
 
@@ -52,6 +52,6 @@ Każdy z węzłów oparty jest o mikrokontroler ESP8266-01s zaprogramowany przy 
   \item nadajnik,
   \item odbiornik.
 \end{itemize}
-Nadajnik jest wyposażony jest w przełącznik cewkowy sterowany przez mikrokontroler, który służy do kontrolowania brzęczyka zasilanego napięciem $12V$. Wybrano brzęczyk o głośności $90dB$ w celu zmaksymalizowania zasięgu działania systemu. Odbiornik jest natomiast wyposażony w mikrofon elektretowy, którego sygnał wzmacniany jest przez wzmacniacz operacyjny. Sygnał analogowy jest ostatecznie zmieniany na sygnał binarny na podstawie odniesienia to określonego poziomu napięcia. Czułość mikrofonu dostrajana jest ręcznie poprzez potencjometr. 
+Nadajnik wyposażony jest w przełącznik cewkowy sterowany przez mikrokontroler, który służy do kontrolowania brzęczyka zasilanego napięciem $12V$. Wybrano brzęczyk o głośności $90dB$ w celu zmaksymalizowania zasięgu działania systemu. Odbiornik jest natomiast wyposażony w mikrofon elektretowy, którego sygnał wzmacniany jest przez wzmacniacz operacyjny. Sygnał analogowy jest ostatecznie zmieniany na sygnał binarny na podstawie odniesienia do określonego poziomu napięcia. Czułość mikrofonu dostrajana jest ręcznie poprzez potencjometr. 
 
 W systemie wykorzystano jeden nadajnik oraz zmienną liczbę odbiorników. Podstawą przeprowadzonych eksperymentów była próba określenia pozycji nadajnika względem odbiorników wyłącznie przy wykorzystaniu sygnałów dźwiękowych (impulsów) nadajnika.

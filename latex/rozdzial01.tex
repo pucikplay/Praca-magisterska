@@ -22,13 +22,13 @@ W dostępnej literaturze obejmującej temat multilateracji i systemów multilate
 
 Metoda iteracyjna dąży do minimalizacji błędu przybliżonego rozwiązania układu równań~\ref{eq:base}. Typowymi narzędziami w niej wykorzystywanymi są: metoda najszybszego spadku~\cite{doi:10.1137/0111030}, metoda Newtona oraz szereg Taylora~\cite{4101619}. Praca~\cite{4101619} zasuguje na szczególną uwagę ze względu na skupienie się na zastosowaniu metody do celów lokalizacji, w przeciwieństwie do ogólnego podejścia do problemu optymalizacyjnego. Największymi problemami metod iteracyjnych są niepewność zbiegania do rozwiązania optymalnego a także złożoność obliczeniowa, która wpływa negatywnie na czas działania.
 
-Metoda algebraiczna zaproponowana w pracy~\cite{4104017}, w której pochylono się na algebraicznym rozwiązaniu układów równań w systemie GPS, ma znaczącą przewagę nad metodami iteracyjnymi otrzymywania dwóch możliwych rozwiązań natychmiastowo, z ktorych można następnie wybrać bardziej odpowiadające. Dodatkowo ta metoda daje możliwość operowania na pomiarach z arbitralnej liczby punktów, w przeciwieństwie do metody zaproponowanej w pracy~\cite{article}, w której skupiono się na implementacji modelu VHDL pozycjonującego na postawie odczytów z czterech satelitów.
+Metoda algebraiczna zaproponowana w pracy~\cite{4104017}, w której pochylono się nad algebraicznym rozwiązaniu układów równań w systemie GPS, ma znaczącą przewagę nad metodami iteracyjnymi otrzymywania dwóch możliwych rozwiązań natychmiastowo, z ktorych można następnie wybrać bardziej odpowiadające. Dodatkowo, ta metoda daje możliwość operowania na pomiarach z arbitralnej liczby punktów, w przeciwieństwie do metody zaproponowanej w pracy~\cite{article}, w której skupiono się na implementacji modelu VHDL pozycjonującego na postawie odczytów z czterech satelitów.
 
-Wyżej wymienione metody, choć są wciąż używane, nie pojawiają się w pracach z ostatnich lat. Większość rozwiązań prezentowanych w ostatnich dekadach opiera się na układzie równań liniowych z dodatkową zmienną ze względu na nieliniowość problemu. Pierwsze tego typu rozwiązanie zaprezentowano w pracy~\cite{301830}, w którym zmienna nieliniowa była niwelowana przez odejmowanie od siebie kolejnych równań. Inny wariant przestawiono w pracy~\cite{1018778}, który zredagowano w czytelniejszej formie w pracy~\cite{norrdine2012algebraic}. Właśnie ta praca była inspiracją do niniejszej pracy. Niedawno opublikowana praca przeglądowa~\cite{10419087} zawiera szeroki opis innych metod wykorzystywanych do rozwiązania omawianego tutaj zagadnienia.
+Wyżej wymienione metody, choć są wciąż używane, nie pojawiają się w publikacjach z ostatnich lat. Większość rozwiązań prezentowanych w ostatnich dekadach opiera się na układzie równań liniowych z dodatkową zmienną ze względu na nieliniowość problemu. Pierwsze tego typu rozwiązanie zaprezentowano w pracy~\cite{301830}. Zmienna nieliniowa była tam niwelowana przez odejmowanie od siebie kolejnych równań. Inny wariant przestawiono w czasopiśmie~\cite{1018778}, który zredagowano w czytelniejszej formie w pracy~\cite{norrdine2012algebraic}. Właśnie ta publikacja była inspiracją do niniejszej pracy. Niedawno opublikowany przegląd tematu~\cite{10419087} zawiera szeroki opis innych metod wykorzystywanych do rozwiązania omawianego tutaj zagadnienia.
 
 \section{Obrane rozwiązanie}
 
-W pracy wybrano rozwiązanie przedstawione w pracy~\cite{norrdine2012algebraic}. Przekształćmy wyjściowy układ równań~\ref{eq:base} do postaci
+Wytypowano rozwiązanie przedstawione w publikacji~\cite{norrdine2012algebraic}. Przekształćmy wyjściowy układ równań~\ref{eq:base} do postaci
 \begin{equation}
     \begin{dcases}
         (x^2 + y^2 + z^2) - 2x_1x - 2y_1y - 2z_1z = d_1^2 - x_1^2 - y_1^2 - z_1^2 \\
@@ -107,7 +107,7 @@ gdzie
 \noindent
 przy założeniu, że $\mathbf{x} \in E$, gdzie
 \begin{equation}
-    E = \left\{(x_0, x_1, x_2, x_3)^T \in {\mathbb{R}}^4\ |\ x_0 = {x_1}^2 + {x_2}^2 + {x_3}^2\right\}
+    E = \left\{(x_0, x_1, x_2, x_3)^T \in {\mathbb{R}}^4\ |\ x_0 = {x_1}^2 + {x_2}^2 + {x_3}^2\right\}\,.
     \label{eq:constraint}
 \end{equation}
 
@@ -119,7 +119,7 @@ Aby rozwiązać powyższe równanie liniowe obrano liniową metodę najmniejszyc
 \end{equation}
 gdzie $\mathbf{A} \in \mathbb{R}^{n\times m}$, $\mathbf{b} \in \mathbb{R}^n$ są znane, będzie taki $\hat{\mathbf{x}} \in \mathbb{R}^m$, który minimalizuje
 \begin{equation}
-    \sum_{i=1}^{n}{\left|\sum_{j=1}^{m}{A_{ij}x_j} - b_i\right|^2} = ||\mathbf{A}\hat{\mathbf{x}} - \mathbf{b}||^2
+    \sum_{i=1}^{n}{\left|\sum_{j=1}^{m}{A_{ij}x_j} - b_i\right|^2} = ||\mathbf{A}\hat{\mathbf{x}} - \mathbf{b}||^2\,.
 \end{equation}
 Taki $\hat{\mathbf{x}}$ obliczamy przy użyciu powszechnie znanego w kontekście najmniejszych kwadratów \textit{równania normalnego} postaci
 \begin{equation}
@@ -127,7 +127,7 @@ Taki $\hat{\mathbf{x}}$ obliczamy przy użyciu powszechnie znanego w kontekście
 \end{equation}
 lub po przekształceniu
 \begin{equation}\label{eq:lls}
-    \hat{\mathbf{x}} = {\left(\mathbf{A}^T\mathbf{A}\right)}^{-1}\mathbf{A}^T\mathbf{b}
+    \hat{\mathbf{x}} = {\left(\mathbf{A}^T\mathbf{A}\right)}^{-1}\mathbf{A}^T\mathbf{b}\,.
 \end{equation}
 Jeśli żadna trójka odbiorników nie jest współliniowa ($\rank\mathbf{A} = m$) oraz pomiarów jest więcej niż wymiarów $(n > m)$ możemy zagwarantować odwracalność $\mathbf{A}$, a co za tym idzie istnienie $\hat{\mathbf{x}}$.
 
@@ -261,7 +261,7 @@ co daje nam rozwiązanie aproksymacyjne
         0,12\\
         0,75625\\
     \end{matrix}
-    \right]
+    \right]\,.
 \end{equation*}
 Z niego odczytujemy współrzędne odbiornika $(0,12;0,75625)$, które są bliskie rzeczywistej pozycji $N$.
 

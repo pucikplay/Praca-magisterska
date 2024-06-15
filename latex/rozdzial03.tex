@@ -1,6 +1,6 @@
 \chapter{Eksperyment zerowy}\label{chap:experiment_zero}
 
-Po przygotowaniu komponentów systemu wstępnie zaimplementowano program rozwiązujący problem multilateracji, aby zbadać czy problem nie jest zbyt trywialny, aby opisać go w pracy, lub przeciwnym razie, na podstawie wyników eksperymentu, zastanowić się jakie przeszkody stoją na drodze do rozwiązania o zadowalającej precyzji.
+Po przygotowaniu komponentów systemu, wstępnie zaimplementowano program rozwiązujący zagadnienie multilateracji, aby zbadać czy problem nie jest zbyt trywialny, aby opisać go w pracy, lub przeciwnym razie, na podstawie wyników eksperymentu, zastanowić się jakie przeszkody stoją na drodze do rozwiązania o zadowalającej precyzji.
 
 \section{Opis działania}
 
@@ -86,7 +86,7 @@ Poniżej przedstawiono je w formie pseudokodów. Współrzędne odbiorników, a 
     \item $publish()$ {-} funkcja publikująca wiadomość na zadanym kanale MQTT.
 \end{itemize}
 
-W celu zminimalizowania opóźnień funkcja \textsc{micInterrupt} została zaimplementowana przy użyciu przerwania sprzętowego. Jest wywoływana przy zmianie stanu pinu, do którego podłączony jest mikrofon z niskiego na wysoki.
+W celu zminimalizowania opóźnień funkcja \textsc{micInterrupt} została zaimplementowana przy użyciu przerwania sprzętowego. Jest wywoływana przy zmianie stanu pinu (do którego podłączony jest mikrofon) z niskiego na wysoki.
 
 \subsection{Program serwera}
 
@@ -142,17 +142,17 @@ Pierwsze testy przeprowadzone zostały na systemie operującym w jednym wymiarze
         label=below:{$0$}] (N) {};
         \node[pointnode,
         label=above:{Odbiornik 1.},
-        label=below:{$-0.5$}] (O1) [left=of N] {};
+        label=below:{$-0,5$}] (O1) [left=of N] {};
         \node[pointnode,
         label=above:{Odbiornik 2.},
-        label=below:{$0.5$}] (O2) [right=of N] {};
+        label=below:{$0,5$}] (O2) [right=of N] {};
         \draw[-, thin, dotted] (-8,0) -- (8,0);
     \end{tikzpicture}
     \caption{Układ systemu testowego}
     \label{fig:test_setup}
 \end{figure}
 
-Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0.5)$ i $(0.5)$, wszystkie węzły były stacjonarne. Nadajnik co $0.5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0.5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Wykonano 5 następujących bezpośrednio po sobie eksprymentów, poniżej przedstawiono wyniki trzech pierwszych, ponieważ są wystarczające do ukazania zachodzącego trendu.
+Nadajnik umiejscowiono w punkcie $(0)$, natomiast dwa odbiorniki w punktach odpowiednio $(-0,5)$ i $(0,5)$, wszystkie węzły były stacjonarne. Nadajnik co $0,5$ $s$ nadawał sygnał o długości $10$ $ms$, a serwer co $0,5$ $s$ zwracał wynik zagadnienia multilateracji na podstawie ostatnio otrzymanych danych. Wykonano 5 następujących bezpośrednio po sobie eksprymentów. Na poniższych wykresach (\ref{fig:position}) przedstawiono ich wyniki.
 
 \begin{figure}[H]
     \centering
@@ -210,4 +210,6 @@ Na niską dokładność i stabilność wyników może mieć wpływ wiele czynnik
     \item niska jakość rozwiązania aproksymacyjnego.
 \end{itemize}
 
-Obserwując skoki pomiędzy sąsiadującymi obserwacjami położenia rozdzielającymi okresy względnej stabilności i mając na uwadze statyczność otoczenia systemu możemy śmiało wysnuć wniosek, że tak nagła zmiana średniej obliczanej wartości może wynikać najprawdopodobniej z błędnej synchronizacji czasu. Wygląda na to, że sygnał wysyłany przez serwer obliczeniowy nie jest odbierany we wszystkich węzłach równocześnie. Następny rozdział będzie poświęcony badaniu i tworzeniu algorytmu synchronizacji zegarów w węzłach.
+Obserwując skoki pomiędzy sąsiadującymi obserwacjami położenia, rozdzielającymi okresy względnej stabilności i mając na uwadze statyczność otoczenia systemu, możemy śmiało wysnuć wniosek, że tak nagła zmiana średniej obliczanej wartości może wynikać najprawdopodobniej z błędnej synchronizacji czasu. Wygląda na to, że sygnał wysyłany przez serwer obliczeniowy nie jest odbierany we wszystkich węzłach równocześnie. 
+
+Następny rozdział będzie poświęcony badaniu i tworzeniu algorytmu synchronizacji zegarów w węzłach.
