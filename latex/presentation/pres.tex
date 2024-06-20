@@ -1,0 +1,60 @@
+\documentclass{beamer}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{items}[default]
+\setbeamercovered{dynamic}
+\setlength{\unitlength}{1cm}
+\setbeamertemplate{footline}[frame number]
+
+\usepackage{setspace}
+\usepackage{polski}
+\usepackage{graphics}
+\usepackage{mathtools} 
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,snakes,positioning,calc}
+\DeclareMathOperator{\rank}{rank}
+\usetheme{Frankfurt}
+\usecolortheme{seahorse} %crane
+\useinnertheme{circles}
+\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{float}
+%\pgfpagesuselayout{4 on 1 with notes}[a4paper,border shrink=3mm]
+
+
+\title{Mechanizm multilateracji w rozproszonej sieci sensorów audio}
+
+\author{
+	\textbf{Gabriel Budziński}
+	\newline \newline
+	Praca napisana pod kierunkiem \textbf{dra inż. Przemysława Błaśkiewicza}
+}
+
+\begin{document}
+
+\begin{frame}[plain]{}
+	\titlepage
+\end{frame}
+
+\section{Multilateracja}
+\input{slides/multilateration.tex}
+\input{slides/transformation.tex}
+\input{slides/solution.tex}
+\section{Synchronizacja czasu}
+\input{slides/time_sync.tex}
+\input{slides/ntp_sync.tex}
+\input{slides/deltas_sync.tex}
+\input{slides/mic_sync.tex}
+\input{slides/close.tex}
+\section{Ewaluacja działania}
+\input{slides/mult_lat.tex}
+
+\appendix
+\begin{frame}
+\begin{center}
+	Dziękuję za uwagę.
+\end{center}
+\end{frame}
+
+\end{document}

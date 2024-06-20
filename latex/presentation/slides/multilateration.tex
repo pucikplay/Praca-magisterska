@@ -1,0 +1,32 @@
+\begin{frame}
+    \begin{block}{Multiateracja}
+        Weźmy punkt $(x, y) \in \mathbb{R}^2$ i oznaczmy go $N$, ponadto weźmy zbiór $n$ punktów $\left\{(x_i, y_i): i \in [n]\right\} \subset \mathbb{R}^2$, który oznaczmy $\mathcal{O}$, a punkty należące do zbioru odpowiednio $O_i$. Niech $d_i$ będzie odległością $d(N, O_i)$. Znając współrzędne punktów $O_i$ oraz odległości $d_i$ chcemy znaleźć $(x, y)$.
+        % \begin{equation}
+        %     \begin{dcases}
+        %         {(x - x_1)}^2 + {(y - y_1)}^2 = {d_1}^2 \\
+        %         {(x - x_2)}^2 + {(y - y_2)}^2 = {d_2}^2 \\
+        %         {(x - x_n)}^2 + {(y - y_n)}^2 = {d_n}^2\,.
+        %     \end{dcases}
+        % \end{equation}
+    \end{block}
+    \begin{figure}[!h]
+        \begin{tikzpicture}[scale=0.80]
+            \coordinate (O1) at (0,0);
+            \coordinate (O2) at (6,0);
+            \coordinate (O3) at (6,6);
+            \coordinate (O4) at (0,6);
+            \coordinate (N) at (0.75,4.5);
+            \filldraw[black] (O1) circle (2pt) node[left]{$O_1$};
+            \filldraw[black] (O2) circle (2pt) node[right]{$O_2$};
+            \filldraw[black] (O3) circle (2pt) node[right]{$O_3$};
+            \filldraw[black] (N) circle (2pt) node[above left]{$N$};
+            \draw[black] (O1) -- node[right]{$d_1$} (N);
+            \draw[black] (O2) -- node[left]{$d_2$} (N);
+            \draw[black] (O3) -- node[above]{$d_3$} (N);
+            \draw[loosely dashed, thin] (O1) -- (O2);
+            \draw[loosely dashed, thin] (O2) -- (O3);
+            \draw[loosely dashed, thin] (O3) -- (O4);
+            \draw[loosely dashed, thin] (O4) -- (O1);
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}

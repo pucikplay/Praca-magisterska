@@ -1,0 +1,16 @@
+\begin{frame}
+    \begin{block}{Rozwiązanie}
+        Obrano rozwiązanie aproksymacyjne w sensie najmniejszych kwadratów:
+        \begin{equation*}
+            \sum_{i=1}^{n}{\left|\sum_{j=1}^{m}{A_{ij}x_j} - b_i\right|^2} = ||\mathbf{A}\hat{\mathbf{x}} - \mathbf{b}||^2\,,
+        \end{equation*}
+        które otrzymujemy poprzez rozwiązania normalnego
+        \begin{equation*}
+            \mathbf{A}^T\mathbf{A}\hat{\mathbf{x}} = \mathbf{A}^T\mathbf{b}
+        \end{equation*}
+    \end{block}
+
+    \begin{block}{Istnienie rozwiązania}
+        Zakładając, że żadna trójka odbiorników nie jest współliniowa ($\rank\mathbf{A} = m$), co daje odwracalność $\mathbf{A}$ i istnienie $\hat{\mathbf{x}}$.
+    \end{block}
+\end{frame}
