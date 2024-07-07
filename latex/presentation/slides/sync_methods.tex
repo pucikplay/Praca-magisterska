@@ -1,0 +1,36 @@
+\begin{frame}
+    \begin{block}{Synchronizacja NTP}
+        \begin{figure}[H]
+            \centering
+            \resizebox{0.7\textwidth}{!}{%
+                \begin{tikzpicture}
+                    \tikzstyle{every node}=[font=\Huge]
+                    \draw [line width=1pt] (10,24.25) -- (36.25,24.25);
+                    \draw [line width=1pt] (10,15.5) -- (36.25,15.5);
+                    \draw [line width=1pt, ->] (12.5,15.5) -- (18.75,24.25);
+                    \draw [line width=1pt, ->] (27.5,24.25) -- (33.75,15.5);
+                    \draw [line width=1pt] (20,15.5) -- (20,21.75);
+                    \draw [line width=1pt] (26.25,24.25) -- (26.25,18);
+                    \draw [line width=1pt, <->] (20,19.75) -- (26.25,19.75)node[pos=0.5, fill=white]{$\theta$};
+                    \node [font=\Huge] at (12.5,14.75) {$T_{i-3}$};
+                    \node [font=\Huge] at (18.75,25) {$T_{i-2}$};
+                    \node [font=\Huge] at (27.5,24.75) {$T_{i-1}$};
+                    \node [font=\Huge] at (34,14.75) {$T_i$};
+                    \node [font=\Huge] at (23,24.75) {$B$};
+                    \node [font=\Huge] at (23,14.75) {$A$};
+                \end{tikzpicture}
+            }%
+        \end{figure}
+        $a = T_{i-2} - T_{i-3}$, $b = T_{i-1} - T_i$, $\delta_i = a - b$, $ \theta_i = \frac{a+b}{2}$
+        \[\theta_i - \frac{\delta_i}{2} \leqslant \theta \leqslant \theta_i + \frac{\delta_i}{2}.\]
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \begin{block}{Synchronizacja pomiaru przesunięć}
+        Węzeł wysyła $n$ wiadomości zawierających aktualną wartość zegara, która po odebraniu przez serwer jest porównywana z zegarem w nim dostępnym.
+    \end{block}
+    \begin{block}{Synchronizacja mikrofonowa}
+        Nadajnik umieszczany jest w odległości $0$ od odbiornika. Nadajemy $n$ sygnałów dźwiękowych i porównujemy czas nadania i odbioru.
+    \end{block}
+\end{frame}
